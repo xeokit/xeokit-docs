@@ -1,0 +1,5 @@
+{
+  "files.associations": {
+    "**/templating/components/*.md": "nunjucks"
+  }
+}

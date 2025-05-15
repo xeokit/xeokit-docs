@@ -21,3 +21,6 @@ yarn-error.log*
 
 # templating
 templating/output
+
+content-generators/sdk/inputs
+content-generators/sdk/outputs

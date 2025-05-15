@@ -5,7 +5,7 @@ import { copyExamples } from "./sdk/copy-examples.js";
 import { renderMarkdown } from "./sdk/render-markdown.js";
 
 function generateSdkContent(rootDir: string = __dirname) {
-  // copyExamples();
+  copyExamples();
   renderMarkdown();
 }
 

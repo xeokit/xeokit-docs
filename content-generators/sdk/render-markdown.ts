@@ -48,6 +48,19 @@ function _processFile(inputFilePath: string) {
     console.warn(chalk.yellow(`⚠️ JSON file not found: ${inputJsonFilePath}`));
   }
 
+  // Add src content to RENDER_CONTEXT
+  const inputSrcFilePath = path.join(SDK_EXAMPLES_INPUT_DIR, relativePath.replace('template.md', 'main.ts'));
+  if (fs.existsSync(inputSrcFilePath)) {
+    const inputSrcContent = fs.readFileSync(inputSrcFilePath, 'utf8');
+    console.log(inputSrcFilePath)
+    RENDER_CONTEXT['lifeExampleUrl'] = inputSrcFilePath;
+    RENDER_CONTEXT['srcCodeUrl'] = inputSrcFilePath;
+    RENDER_CONTEXT['srcContent'] = inputSrcContent;
+  }
+  else {
+    console.warn(chalk.yellow(`⚠️ HTML file not found: ${inputSrcFilePath}`));
+  }
+
   console.log(chalk.yellow(`Processing file: ${RENDER_CONTEXT}`));
 
   // Render with Nunjucks

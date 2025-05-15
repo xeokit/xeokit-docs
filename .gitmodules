@@ -1,0 +1,6 @@
+[submodule "sdk"]
+	path = _submodules/sdk
+	url = ../../sdk.git
+[submodule "xeokit-sdk"]
+	path = _submodules/xeokit-sdk
+	url = ../xeokit-sdk.git

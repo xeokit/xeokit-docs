@@ -1,4 +1,4 @@
-<XeoSourceDownloadButton filePath="/xeokit/examples/load-xkt-file.html" />
+<XeoSourceDownloadButton filePath="{{ srcCodeUrl }}" />
 
 ```html
 {{ htmlContent | safe}}

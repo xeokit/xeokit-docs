@@ -1,7 +1,7 @@
-<XeoOpenInNewTabButton filePath="/xeokit/examples/load-xkt-file.html" />
+<XeoOpenInNewTabButton filePath="{{ lifeExampleUrl }}" />
 
 <BrowserOnly>
 {() => (
- <XeoInteractiveExample filePath="/xeokit/examples/load-xkt-file.html" />
+ <XeoInteractiveExample filePath="{{ lifeExampleUrl }}" />
 )}
 </BrowserOnly>

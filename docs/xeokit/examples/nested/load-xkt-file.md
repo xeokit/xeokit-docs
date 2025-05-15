@@ -21,15 +21,15 @@ How to load file xkt with xeokit-sdk
 
 <CodePen codePenId="KwwwrRN" />
 
-<XeoOpenInNewTabButton filePath="/xeokit/examples/load-xkt-file.html" />
+<XeoOpenInNewTabButton filePath="/xeokit/examples/nested/load-xkt-file.html" />
 
 <BrowserOnly>
 {() => (
- <XeoInteractiveExample filePath="/xeokit/examples/load-xkt-file.html" />
+ <XeoInteractiveExample filePath="/xeokit/examples/nested/load-xkt-file.html" />
 )}
 </BrowserOnly>
 
-<XeoSourceDownloadButton filePath="/xeokit/examples/load-xkt-file.html" />
+<XeoSourceDownloadButton filePath="/xeokit/examples/nested/load-xkt-file.html" />
 
 ```html
 <!doctype html>

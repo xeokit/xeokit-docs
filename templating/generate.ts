@@ -33,6 +33,10 @@ function processDirectory(currentDir) {
   });
 }
 
+function prepareHTMLFilePath(inputHtmlFilePath) {
+  return inputHtmlFilePath.replace('/home/dabomian/Dev/creoox/xeokit-docs/templating/input', '/xeokit/examples');
+}
+
 function renderMarkdownFile(inputMdFilePath) {
   // Read Markdown content
   const inputMdContent = fs.readFileSync(inputMdFilePath, 'utf8');
@@ -51,6 +55,9 @@ function renderMarkdownFile(inputMdFilePath) {
   const inputHtmlFilePath = inputMdFilePath.replace('.md', '.html')
   if (fs.existsSync(inputHtmlFilePath)) {
     const inputHtmlContent = fs.readFileSync(inputHtmlFilePath, 'utf8');
+    console.log(prepareHTMLFilePath(inputHtmlFilePath))
+    RENDER_CONTEXT['lifeExampleUrl'] = prepareHTMLFilePath(inputHtmlFilePath);
+    RENDER_CONTEXT['srcCodeUrl'] = prepareHTMLFilePath(inputHtmlFilePath);
     RENDER_CONTEXT['htmlContent'] = inputHtmlContent;
   }
   else {

@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import nunjucks from 'nunjucks';
 import chalk from 'chalk';
+import { processDirectoryRecursively } from '../shared/proces-dir-recursively.js';
 import { SDK_EXAMPLES_INPUT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants.js';
 
 
@@ -11,17 +12,7 @@ const env = new nunjucks.Environment([
   new nunjucks.FileSystemLoader('templates'),
 ])
 
-function processDirectoryRecursively(source: string, fileCallback: Function) {
-  const items = fs.readdirSync(source);
-  items.forEach(item => {
-    const fullPath = path.join(source, item);
-    const stat = fs.statSync(fullPath);
-    if (stat.isDirectory()) {
-      processDirectoryRecursively(fullPath, fileCallback); // Recurse into subfolders
-    } else if (stat.isFile()) {
-      fileCallback(fullPath); // Process file
-    }})
-}
+
 
 function _processFile(inputFilePath: string) {
   // if not .md file, return
@@ -52,7 +43,6 @@ function _processFile(inputFilePath: string) {
   const inputSrcFilePath = path.join(SDK_EXAMPLES_INPUT_DIR, relativePath.replace('template.md', 'main.ts'));
   if (fs.existsSync(inputSrcFilePath)) {
     const inputSrcContent = fs.readFileSync(inputSrcFilePath, 'utf8');
-    console.log(inputSrcFilePath)
     RENDER_CONTEXT['lifeExampleUrl'] = inputSrcFilePath;
     RENDER_CONTEXT['srcCodeUrl'] = inputSrcFilePath;
     RENDER_CONTEXT['srcContent'] = inputSrcContent;
@@ -60,8 +50,6 @@ function _processFile(inputFilePath: string) {
   else {
     console.warn(chalk.yellow(`⚠️ HTML file not found: ${inputSrcFilePath}`));
   }
-
-  console.log(chalk.yellow(`Processing file: ${RENDER_CONTEXT}`));
 
   // Render with Nunjucks
   const inputFileContent = fs.readFileSync(inputFilePath, 'utf8');

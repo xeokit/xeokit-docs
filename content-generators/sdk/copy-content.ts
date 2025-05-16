@@ -7,7 +7,27 @@ import { processDirectoryRecursively } from '../shared/proces-dir-recursively.js
 
 
 function _copyFile(inputFilePath: string) {
-  console.log(path.dirname(inputFilePath));
+  console.log(inputFilePath);
+  // want copy content.md into example one level down
+  const parentPath = path.dirname(inputFilePath);
+  const parentDirName = path.basename(parentPath);
+  const grandParentPath = path.dirname(parentPath);
+  const relativeDirPath = path.relative(SDK_EXAMPLES_OUTPUT_DIR, grandParentPath);
+  const contentDirPath = path.join(SDK_EXAMPLES_CONTENT_DIR, relativeDirPath);
+
+  if (!fs.existsSync(contentDirPath)) {
+    fs.mkdirSync(contentDirPath, { recursive: true });
+  }
+
+  // want to copy content.md with folder name
+  const contentFilePath = path.join(contentDirPath, parentDirName + '.md');
+
+  fs.copyFileSync(inputFilePath, contentFilePath);
+  // console.log(relativePath);
+  // console.log(relativeDirPath);
+  // console.log(path.dirname(inputFilePath));
+  // console.log(SDK_EXAMPLES_OUTPUT_DIR);
+  // console.log(SDK_EXAMPLES_CONTENT_DIR);
 
 }
 
@@ -21,7 +41,7 @@ export function copyContent() {
   fs.mkdirSync(contentDir, { recursive: true });
 
 
-  console.log(`Copying content from ${SDK_EXAMPLES_OUTPUT_DIR} to ${contentDir}`);
+  // console.log(`Copying content from ${outputDir} to ${contentDir}`);
   processDirectoryRecursively(outputDir, (inputFilePath: string) => {
     _copyFile(inputFilePath);
   })

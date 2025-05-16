@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "antfu.pnpm-catalog-lens",
+    "arktypeio.arkdark",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+  ]
+}

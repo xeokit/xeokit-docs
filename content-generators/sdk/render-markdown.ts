@@ -5,14 +5,13 @@ import chalk from 'chalk';
 import { processDirectoryRecursively } from '../shared/proces-dir-recursively.js';
 import { SDK_EXAMPLES_INPUT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants.js';
 
+import { docSdkExamplesHost } from '../shared/config.js';
 
 const RENDER_CONTEXT = { /* Add global Nunjucks variables here */ };
 
 const env = new nunjucks.Environment([
   new nunjucks.FileSystemLoader('templates'),
 ])
-
-
 
 function _processFile(inputFilePath: string) {
   // if not .md file, return
@@ -42,9 +41,8 @@ function _processFile(inputFilePath: string) {
   const inputSrcFilePath = path.join(SDK_EXAMPLES_INPUT_DIR, relativePath.replace('template.md', 'main.ts'));
   if (fs.existsSync(inputSrcFilePath)) {
     const inputSrcContent = fs.readFileSync(inputSrcFilePath, 'utf8');
-    const lifeExampleUrl = `http://localhost:5173/src/${relativePath.replace('template.md', 'index.html')}`;
+    const lifeExampleUrl = `${docSdkExamplesHost}/src/${relativePath.replace('template.md', 'index.html')}`;
 
-    console.log(lifeExampleUrl)
     RENDER_CONTEXT['lifeExampleUrl'] = lifeExampleUrl;
     RENDER_CONTEXT['srcCodeUrl'] = inputSrcFilePath;
     RENDER_CONTEXT['srcContent'] = inputSrcContent;

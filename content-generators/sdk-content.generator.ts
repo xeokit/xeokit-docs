@@ -1,14 +1,14 @@
 import chalk from "chalk";
 
 import { ROOT_DIR } from "./shared/constants";
-import { copyContent } from "./sdk/copy-content.js";
-import { copyExamples } from "./sdk/copy-examples.js";
-import { renderMarkdown } from "./sdk/render-markdown.js";
+import { copyContent } from "./sdk/copy-content";
+import { copyExamples } from "./sdk/copy-examples";
+import { renderMarkdown } from "./sdk/render-markdown";
 
-function generateSdkContent(rootDir: string = __dirname) {
+function generateSdkContent() {
   copyExamples();
   renderMarkdown();
   copyContent();
 }
 
-generateSdkContent(ROOT_DIR)
+generateSdkContent()

@@ -217,7 +217,12 @@ const config: Config = {
               type: 'docSidebar',
               label: 'sdk',
               sidebarId: 'sdkExamples',
-            }
+            },
+            {
+              label: "sdk-playground",
+              href: "https://stackblitz.com/edit/vitejs-vite-pqcbgvmu?file=index.html&terminal=dev",
+              target: "_blank",
+            },
           ]
         },
 

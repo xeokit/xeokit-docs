@@ -8,9 +8,9 @@ export default function XeoOpenInNewTabButton({ filePath }: XeoOpenInNewTabButto
   return (
     <a
       target="_blank"
-      href="/xeokit/examples/load-xkt-file.html"
+      href={filePath}
       rel="noopener noreferrer"
-      className="button button--secondary"
+      className="button button--secondary margin-vert--sm"
     >
       <span>Open in New Tab</span>
     </a>

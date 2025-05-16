@@ -1,1 +1,0 @@
-<CodePen codePenId="{{ jsonContent.codepenId }}" />

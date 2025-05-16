@@ -9,7 +9,7 @@ export default function XeoSourceDownloadButton({ filePath }: XeoSourceDownloadB
     <a
       href={filePath}
       download="xeokit-example.html"
-      className="button button--primary"
+      className="button button--primary margin-vert--sm"
     >
       <span>Download HTML Source</span>
     </a>

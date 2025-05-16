@@ -1,4 +1,4 @@
-<XeoSourceDownloadButton filePath="{{ srcCodeUrl }}" />
+<!-- <XeoSourceDownloadButton filePath="{{ srcCodeUrl }}" /> -->
 
 ```ts
 {{ srcContent | safe}}

@@ -6,11 +6,9 @@ tags:
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import XeoHtmlFileViewer from '@site/src/components/examples/XeoHtmlFileViewer';
 import XeoInteractiveExample from '@site/src/components/examples/XeoInteractiveExample';
 import XeoSourceDownloadButton from '@site/src/components/examples/XeoSourceDownloadButton'
 import XeoOpenInNewTabButton from '@site/src/components/examples/XeoOpenInNewTabButton'
-import { CodePen, Gist } from 'mdx-embed';
 
 # .bim loader
 
@@ -38,18 +36,15 @@ This example demonstrates XeoKit's component-based architecture and the separati
 
 ## Interactive Demo
 
-
-<CodePen codePenId="KwwwrRN" />
-
-<XeoOpenInNewTabButton filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/loaders/dotbim/main.ts" />
+<XeoOpenInNewTabButton filePath="http://localhost:5173/src/loaders/dotbim/index.html" />
 
 <BrowserOnly>
 {() => (
- <XeoInteractiveExample filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/loaders/dotbim/main.ts" />
+ <XeoInteractiveExample filePath="http://localhost:5173/src/loaders/dotbim/index.html" />
 )}
 </BrowserOnly>
 
-<XeoSourceDownloadButton filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/loaders/dotbim/main.ts" />
+<!-- <XeoSourceDownloadButton filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/loaders/dotbim/main.ts" /> -->
 
 ```ts
 
@@ -144,7 +139,6 @@ fetch(model).then(response => {
 
 
 ```
-
 
 ## Other
 

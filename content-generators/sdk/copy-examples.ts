@@ -1,8 +1,10 @@
 import path from 'path';
+import chalk from 'chalk';
 import fs from 'fs';
 import { SDK_EXAMPLES_DIR, SDK_EXAMPLES_INPUT_DIR } from '../shared/constants.js';
 
 export function copyExamples() {
+  console.log(chalk.blue('ⓘ copyExamples...'));
   const examplesDir = SDK_EXAMPLES_DIR;
   const inputDir = SDK_EXAMPLES_INPUT_DIR;
 

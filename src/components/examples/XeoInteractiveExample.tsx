@@ -6,7 +6,7 @@ interface XeoInteractiveExampleProps {
 
 export default function XeoInteractiveExample({ filePath }:XeoInteractiveExampleProps ): ReactNode {
   return (
-    <div>
+    <div className='margin-vert--sm'>
       <div style={{ position: 'relative', height: '500px' }}>
         <iframe
           src={filePath}
@@ -30,9 +30,9 @@ export default function XeoInteractiveExample({ filePath }:XeoInteractiveExample
           scrollbarGutter: stable
         }
 
-        /* Ensure the iframe itself remains interactive */ 
-        iframe { 
-          pointer-events: auto; 
+        /* Ensure the iframe itself remains interactive */
+        iframe {
+          pointer-events: auto;
         }
       `}</style>
     </div>

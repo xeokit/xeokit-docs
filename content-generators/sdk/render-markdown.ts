@@ -27,7 +27,6 @@ function _processFile(inputFilePath: string) {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-  console.log(chalk.yellow(`Processing file: ${relativePath}`));
 
   // Add json content to RENDER_CONTEXT
   const inputJsonFilePath = path.join(SDK_EXAMPLES_INPUT_DIR, relativePath.replace('template.md', 'context.json'));
@@ -39,11 +38,14 @@ function _processFile(inputFilePath: string) {
     console.warn(chalk.yellow(`⚠️ JSON file not found: ${inputJsonFilePath}`));
   }
 
-  // Add src content to RENDER_CONTEXT
+  // Add other fields to RENDER_CONTEXT
   const inputSrcFilePath = path.join(SDK_EXAMPLES_INPUT_DIR, relativePath.replace('template.md', 'main.ts'));
   if (fs.existsSync(inputSrcFilePath)) {
     const inputSrcContent = fs.readFileSync(inputSrcFilePath, 'utf8');
-    RENDER_CONTEXT['lifeExampleUrl'] = inputSrcFilePath;
+    const lifeExampleUrl = `http://localhost:5173/src/${relativePath.replace('template.md', 'index.html')}`;
+
+    console.log(lifeExampleUrl)
+    RENDER_CONTEXT['lifeExampleUrl'] = lifeExampleUrl;
     RENDER_CONTEXT['srcCodeUrl'] = inputSrcFilePath;
     RENDER_CONTEXT['srcContent'] = inputSrcContent;
   }
@@ -60,6 +62,7 @@ function _processFile(inputFilePath: string) {
 }
 
 export function renderMarkdown() {
+  console.log(chalk.blue('ⓘ renderMarkdown...'));
   const inputDir = SDK_EXAMPLES_INPUT_DIR;
   const outputDir = SDK_EXAMPLES_OUTPUT_DIR;
 

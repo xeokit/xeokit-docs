@@ -6,11 +6,9 @@ tags:
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import XeoHtmlFileViewer from '@site/src/components/examples/XeoHtmlFileViewer';
 import XeoInteractiveExample from '@site/src/components/examples/XeoInteractiveExample';
 import XeoSourceDownloadButton from '@site/src/components/examples/XeoSourceDownloadButton'
 import XeoOpenInNewTabButton from '@site/src/components/examples/XeoOpenInNewTabButton'
-import { CodePen, Gist } from 'mdx-embed';
 
 # .ifc loader
 
@@ -44,18 +42,15 @@ This example showcases XeoKit's ability to handle both the geometric and semanti
 
 ## Interactive Demo
 
-
-<CodePen codePenId="KwwwrRN" />
-
-<XeoOpenInNewTabButton filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/IFCLoader_IfcOpenHouse4/main.ts" />
+<XeoOpenInNewTabButton filePath="http://localhost:5173/src/IFCLoader_IfcOpenHouse4/index.html" />
 
 <BrowserOnly>
 {() => (
- <XeoInteractiveExample filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/IFCLoader_IfcOpenHouse4/main.ts" />
+ <XeoInteractiveExample filePath="http://localhost:5173/src/IFCLoader_IfcOpenHouse4/index.html" />
 )}
 </BrowserOnly>
 
-<XeoSourceDownloadButton filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/IFCLoader_IfcOpenHouse4/main.ts" />
+<!-- <XeoSourceDownloadButton filePath="/home/dabomian/Dev/creoox/xeokit-docs/content-generators/sdk/inputs/IFCLoader_IfcOpenHouse4/main.ts" /> -->
 
 ```ts
 import * as xeokit from "@xeokit/sdk"
@@ -189,7 +184,6 @@ fetch(model)
 
 
 ```
-
 
 ## Other
 

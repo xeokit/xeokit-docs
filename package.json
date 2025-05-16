@@ -15,7 +15,6 @@
     "doc:typecheck": "tsc",
     "demos:plugin-demo:openapi:generate": "docusaurus gen-api-docs all",
     "demos:plugin-demo:typedoc:generate": "docusaurus generate-typedoc",
-    "demos:template:prepare": "cd templating && tsx generate.ts",
     "doc:sdk:generate": "cd content-generators && tsx sdk-content.generator.ts"
   },
   "dependencies": {

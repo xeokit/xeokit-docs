@@ -44,6 +44,7 @@
     "@stylistic/eslint-plugin-js": "catalog:lint",
     "@stylistic/eslint-plugin-ts": "catalog:lint",
     "@types/nunjucks": "catalog:script",
+    "@types/react": "catalog:docusaurus-base",
     "arktype": "catalog:script",
     "chalk": "catalog:script",
     "dotenv-cli": "catalog:script",
@@ -66,6 +67,7 @@
     ]
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=22.0",
+    "pnpm": ">=10"
   }
 }

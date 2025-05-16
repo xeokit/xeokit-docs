@@ -7,7 +7,7 @@ import stylisticTs from '@stylistic/eslint-plugin-ts'
 export default tseslint.config(
 
   {
-    files: ['**/content-generators/**/*.ts'],
+    files: ['**/content-generators/**/*.ts', '**/src/**/*.tsx'],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -47,6 +47,7 @@ export default tseslint.config(
   },
   {
     ignores: [
+      '**/demo-typedoc/',
       '**/_submodules/',
       '**/dist/',
       '**/temp/',

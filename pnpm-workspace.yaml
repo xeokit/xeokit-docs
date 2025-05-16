@@ -1,5 +1,5 @@
 packages:
-  - /
+  - 'placeholder/*'
 
 catalogs:
   docusaurus-base:
@@ -9,6 +9,7 @@ catalogs:
     "@docusaurus/tsconfig": "3.7.0"
     "@docusaurus/types": "3.7.0"
     "@mdx-js/react": "^3.0.0"
+    "@types/react": "^19.1.4"
     "clsx": "^2.0.0"
     "prism-react-renderer": "^2.3.0"
     "react": "^19.0.0"

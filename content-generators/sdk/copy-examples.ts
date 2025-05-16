@@ -28,6 +28,7 @@ export function copyExamples() {
       if (path.extname(src) === '.ts' || path.extname(src) === '.md' || path.extname(src) === '.json') {
         return true;
       }
+      return false;
     }
   })
 }

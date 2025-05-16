@@ -1,13 +1,20 @@
-import { SDK_EXAMPLES_INPUT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants.js';
+import { SDK_EXAMPLES_INPUT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants';
 import chalk from 'chalk';
-import { docSdkExamplesHost } from '../shared/config.js';
+import { config } from '../shared/config';
 import fs from 'fs';
 import nunjucks from 'nunjucks';
 import path from 'path';
-import { processDirectoryRecursively } from '../shared/proces-dir-recursively.js';
+import { processDirectoryRecursively } from '../shared/proces-dir-recursively';
 
+type RenderContext = {
+  jsonContent?: object;
+  lifeExampleUrl?: string;
+  srcCodeUrl?: string;
+  srcContent?: string;
+  [key: string]: unknown;
+};
 
-const RENDER_CONTEXT = { /* Add global Nunjucks variables here */ };
+const RENDER_CONTEXT: RenderContext = { /* Add global Nunjucks variables here */ };
 
 const env = new nunjucks.Environment([
   new nunjucks.FileSystemLoader('templates'),
@@ -41,7 +48,7 @@ function _processFile(inputFilePath: string) {
   const inputSrcFilePath = path.join(SDK_EXAMPLES_INPUT_DIR, relativePath.replace('template.md', 'main.ts'));
   if (fs.existsSync(inputSrcFilePath)) {
     const inputSrcContent = fs.readFileSync(inputSrcFilePath, 'utf8');
-    const lifeExampleUrl = `${docSdkExamplesHost}/src/${relativePath.replace('template.md', 'index.html')}`;
+    const lifeExampleUrl = `${config.sdk.examplesHost}/src/${relativePath.replace('template.md', 'index.html')}`;
 
     RENDER_CONTEXT['lifeExampleUrl'] = lifeExampleUrl;
     RENDER_CONTEXT['srcCodeUrl'] = inputSrcFilePath;

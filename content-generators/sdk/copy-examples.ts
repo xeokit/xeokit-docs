@@ -1,7 +1,7 @@
-import path from 'path';
+import { SDK_EXAMPLES_DIR, SDK_EXAMPLES_INPUT_DIR } from '../shared/constants.js';
 import chalk from 'chalk';
 import fs from 'fs';
-import { SDK_EXAMPLES_DIR, SDK_EXAMPLES_INPUT_DIR } from '../shared/constants.js';
+import path from 'path';
 
 export function copyExamples() {
   console.log(chalk.blue('ⓘ copyExamples...'));
@@ -15,7 +15,7 @@ export function copyExamples() {
 
   fs.cpSync(examplesDir, inputDir, {
     recursive: true,
-    filter: (src, dest) => {
+    filter: (src) => {
       // if is directory, copy it
       if (fs.statSync(src).isDirectory()) {
         return true;

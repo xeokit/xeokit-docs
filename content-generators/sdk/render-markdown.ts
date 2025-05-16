@@ -1,11 +1,11 @@
-import path from 'path';
+import { SDK_EXAMPLES_INPUT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants.js';
+import chalk from 'chalk';
+import { docSdkExamplesHost } from '../shared/config.js';
 import fs from 'fs';
 import nunjucks from 'nunjucks';
-import chalk from 'chalk';
+import path from 'path';
 import { processDirectoryRecursively } from '../shared/proces-dir-recursively.js';
-import { SDK_EXAMPLES_INPUT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants.js';
 
-import { docSdkExamplesHost } from '../shared/config.js';
 
 const RENDER_CONTEXT = { /* Add global Nunjucks variables here */ };
 

@@ -1,4 +1,9 @@
 {
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit"
+  },
   "files.associations": {
     "**/templating/components/*.md": "nunjucks"
   }

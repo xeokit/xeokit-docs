@@ -15,7 +15,9 @@
     "doc:typecheck": "tsc",
     "demos:plugin-demo:openapi:generate": "docusaurus gen-api-docs all",
     "demos:plugin-demo:typedoc:generate": "docusaurus generate-typedoc",
-    "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts"
+    "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts",
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
@@ -39,13 +41,17 @@
     "@docusaurus/tsconfig": "catalog:docusaurus-base",
     "@docusaurus/types": "catalog:docusaurus-base",
     "@eslint/js": "catalog:lint",
+    "@stylistic/eslint-plugin-js": "catalog:lint",
+    "@stylistic/eslint-plugin-ts": "catalog:lint",
     "@types/nunjucks": "catalog:script",
     "arktype": "catalog:script",
     "chalk": "catalog:script",
     "dotenv-cli": "catalog:script",
+    "eslint": "catalog:lint",
     "nunjucks": "catalog:script",
     "tsx": "catalog:script",
-    "typescript": "catalog:docusaurus-base"
+    "typescript": "catalog:docusaurus-base",
+    "typescript-eslint": "catalog:lint"
   },
   "browserslist": {
     "production": [

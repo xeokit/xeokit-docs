@@ -1,7 +1,7 @@
-import path from 'path';
-import fs from 'fs';
-import chalk from 'chalk';
 import { SDK_EXAMPLES_CONTENT_DIR, SDK_EXAMPLES_OUTPUT_DIR } from '../shared/constants.js';
+import chalk from 'chalk';
+import fs from 'fs';
+import path from 'path';
 import { processDirectoryRecursively } from '../shared/proces-dir-recursively.js';
 
 function _copyFile(inputFilePath: string) {

@@ -1,7 +1,11 @@
-import type {ReactNode} from 'react';
 import clsx from 'clsx';
+import FlexibilitySvg from '@site/static/img/features/computer-sourcecode.svg';
+import FreedomSvg from '@site/static/img/features/computer-gear.svg';
 import Heading from '@theme/Heading';
+import PowerSvg from '@site/static/img/features/xeokit_viewer.svg';
+import type { ReactNode } from 'react';
 import styles from './styles.module.css';
+
 
 type FeatureItem = {
   title: string;
@@ -12,7 +16,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Power',
-    Svg: require('@site/static/img//features/xeokit_viewer.svg').default,
+    Svg: PowerSvg,
     description: (
       <>
         Visualize complex, federated AEC models at full-precision, in all major browsers, including mobile.
@@ -21,7 +25,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Flexibility',
-    Svg: require('@site/static/img/features/computer-sourcecode.svg').default,
+    Svg: FlexibilitySvg,
     description: (
       <>
         A complete JavaScript graphics toolkit for building BIM and AEC viewing applications.
@@ -30,7 +34,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Freedom',
-    Svg: require('@site/static/img/features/computer-gear.svg').default,
+    Svg: FreedomSvg,
     description: (
       <>
         Open-source components to build your own product, your way. Keep everything on your own servers.
@@ -39,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">

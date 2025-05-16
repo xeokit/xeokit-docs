@@ -1,5 +1,18 @@
 {
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit"
+  },
   "files.associations": {
     "**/templating/components/*.md": "nunjucks"
-  }
+  },
+  // allow autocomplete for ArkType expressions like "string | num"
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  // prioritize ArkType's "type" for autoimports
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": [
+    "^(node:)?os$"
+  ],
 }

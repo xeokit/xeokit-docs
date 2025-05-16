@@ -1,11 +1,11 @@
-import type {ReactNode} from 'react';
+import Layout from '@theme/Layout';
+import type { ReactNode } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import XeoIframe from '@site/src/components/XeoIframe';
-import Layout from '@theme/Layout';
 
 export default function Hello(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
-  
+  const { siteConfig } = useDocusaurusContext();
+
   return (
     <Layout
       title={`xeokit-sdk - ${siteConfig.title}`}

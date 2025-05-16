@@ -1,5 +1,6 @@
 # Dependencies
 /node_modules
+.eslintcache
 
 # Production
 /build
@@ -19,5 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# templating
-templating/output
+# env files
+.env
+
+# content-generators
+content-generators/sdk/inputs
+content-generators/sdk/outputs

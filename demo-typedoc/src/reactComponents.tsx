@@ -1,11 +1,11 @@
-import { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 
 /**
  * The props type for {@link CardA}.
  */
 export interface CardAProps {
-    /** The theme of the card. Defaults to `primary`. */
-    variant: "primary" | "secondary" | "success" | "danger" | "light" | "dark";
+  /** The theme of the card. Defaults to `primary`. */
+  variant: "primary" | "secondary" | "success" | "danger" | "light" | "dark";
 }
 
 /**
@@ -40,7 +40,7 @@ export interface CardAProps {
  * @category Component
  */
 export function CardA({ children, variant = "primary" }: PropsWithChildren<CardAProps>): ReactElement {
-    return <div className={`card card-${variant}`}>{children}</div>;
+  return <div className={`card card-${variant}`}>{children}</div>;
 }
 
 /**
@@ -72,48 +72,48 @@ export function CardA({ children, variant = "primary" }: PropsWithChildren<CardA
  * @category Component
  */
 export function CardB({
-    children,
-    variant = "primary",
+  children,
+  variant = "primary",
 }: PropsWithChildren<{
-    /** The theme of the card. Defaults to `primary`. */
-    variant: "primary" | "secondary" | "success" | "danger" | "light" | "dark";
+  /** The theme of the card. Defaults to `primary`. */
+  variant: "primary" | "secondary" | "success" | "danger" | "light" | "dark";
 }>): ReactElement {
-    return <div className={`card card-${variant}`}>{children}</div>;
+  return <div className={`card card-${variant}`}>{children}</div>;
 }
 
 /** The props type of {@link EasyFormDialog | `EasyFormDialog`}. */
 export interface EasyFormDialogProps {
-    /** The title of the dialog. Can be a JSX element. */
-    title: React.ReactNode;
+  /** The title of the dialog. Can be a JSX element. */
+  title: React.ReactNode;
 
-    /** The text of the submit button. */
-    submitButtonText: string;
+  /** The text of the submit button. */
+  submitButtonText: string;
 
-    /** The CSS class of the submit button. */
-    submitButtonClass?: string;
+  /** The CSS class of the submit button. */
+  submitButtonClass?: string;
 
-    /** The text of the cancel button. Defaults to "Cancel". */
-    cancelButtonText?: string;
+  /** The text of the cancel button. Defaults to "Cancel". */
+  cancelButtonText?: string;
 
-    /**
+  /**
      * Allows you to disable the submit button even if `getSubmitEnabled()`
      * would return true.
      *
      * This can be useful if you want to disable the submit button while a query
      * is in progress.
      */
-    submitEnabled?: boolean;
+  submitEnabled?: boolean;
 
-    /** A boolean indicating if the form is valid. */
-    formIsValid: boolean;
+  /** A boolean indicating if the form is valid. */
+  formIsValid: boolean;
 
-    /** A boolean indicating if validation feedback is being shown. */
-    showValidation: boolean;
+  /** A boolean indicating if validation feedback is being shown. */
+  showValidation: boolean;
 
-    /** A callback that fires when the dialog is submitted. */
-    onShowValidationChange(showValidation: boolean): void;
+  /** A callback that fires when the dialog is submitted. */
+  onShowValidationChange(showValidation: boolean): void;
 
-    /**
+  /**
      * A callback that fires after the `submit` function succeeds.
      *
      * If the `submit` function returned `responseData`, it is passed to your
@@ -123,17 +123,17 @@ export interface EasyFormDialogProps {
      * continue showing a loading indicator until the promise resolves. This is
      * to support refetching the data that was updated by the form submission.
      */
-    onSuccess(payload: unknown | undefined): Promise<void>;
+  onSuccess(payload: unknown | undefined): Promise<void>;
 
-    /**
+  /**
      * A callback that fires when the dialog has completely closed. Your
      * `onClose` callback should update call, for example,
      * `setDialogVisible(false)` so that the `EasyFormDialog` is no longer
      * rendered.
      */
-    onClose(): void;
+  onClose(): void;
 
-    /**
+  /**
      * A callback that fires when the form is submitted. You will typically
      * perform an API call in your `submit` function.
      *
@@ -151,22 +151,22 @@ export interface EasyFormDialogProps {
      * `formData` will be `{}` if the optional peer dependency `jquery` is not
      * installed.
      */
-    onSubmit(formData: Record<string, string | boolean>):
+  onSubmit(formData: Record<string, string | boolean>):
         | Promise<
             | {
-                shouldClose?: boolean;
-                responseData: unknown;
+              shouldClose?: boolean;
+              responseData: unknown;
             }
             | undefined
         >
         | Promise<void>;
 
-    /**
+  /**
      * An uncommonly-used callback that fires when the user clicks the cancel button.
      */
-    onCancel?(): void;
+  onCancel?(): void;
 
-    /**
+  /**
      * This prop accepts a ref object that holds a function of type `() =>
      * void`. You can execute the function to programmatically close the dialog:
      *
@@ -174,22 +174,22 @@ export interface EasyFormDialogProps {
      * closeRef.current()
      * ```
      */
-    closeRef?: React.MutableRefObject<() => void>;
+  closeRef?: React.MutableRefObject<() => void>;
 
-    /** The CSS class added to the underlying Bootstrap modal. */
-    modalClass?: string;
+  /** The CSS class added to the underlying Bootstrap modal. */
+  modalClass?: string;
 
-    /**
+  /**
      * Set to `false` to disable the default behavior of focusing the first
      * input.
      */
-    focusFirst?: boolean;
+  focusFirst?: boolean;
 
-    /**
+  /**
      * Set to `false` to hide the modal footer, which contains the submit and
      * cancel buttons.
      */
-    showFooter?: boolean;
+  showFooter?: boolean;
 }
 
 /**
@@ -252,5 +252,5 @@ export interface EasyFormDialogProps {
  * @category Component
  */
 export function EasyFormDialog(props: PropsWithChildren<EasyFormDialogProps>): ReactElement {
-    return <div />;
+  return <div />;
 }

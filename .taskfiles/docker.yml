@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  GIT_HASH:
+    sh: git rev-parse --short HEAD
+  COMPOSE_CONFIG_FILE: .docker/docker-compose.yml
+  COMPOSE_ENV_FILE: .env
+
+tasks:
+  compose-build:
+    desc: Build services
+    cmds:
+      - |
+        docker compose \
+        --file {{.COMPOSE_CONFIG_FILE}} \
+        --env-file {{.COMPOSE_ENV_FILE}} \
+        --project-directory . \
+        build
+
+  compose-down:
+    desc: Stop services
+    cmds:
+      - |
+        docker compose \
+        --file {{.COMPOSE_CONFIG_FILE}} \
+        --env-file {{.COMPOSE_ENV_FILE}} \
+        --project-directory . \
+        down
+
+  compose-up:
+    desc: Start services
+    cmds:
+      - |
+        docker compose \
+        --file {{.COMPOSE_CONFIG_FILE}} \
+        --env-file {{.COMPOSE_ENV_FILE}} \
+        --project-directory . \
+        up --detach
+
+  compose-show-config:
+    desc: Show docker-compose config
+    cmds:
+      - |
+        docker compose \
+        --file {{.COMPOSE_CONFIG_FILE}} \
+        --env-file {{.COMPOSE_ENV_FILE}} \
+        --project-directory . \
+        config
+
+  debug:
+    desc: Debug
+    cmds:
+      - echo {{.GIT_HASH}}

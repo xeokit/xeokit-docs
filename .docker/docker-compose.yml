@@ -1,0 +1,82 @@
+networks:
+  # COMMON
+  xd-net:
+    name: "xd-net"
+
+services:
+  # COMMON
+  traefik:
+    image: traefik:v3.3
+    container_name: xd-traefik
+    command:
+      - --api.dashboard=true
+      - --log.level=DEBUG
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.endpoint=tcp://socket-proxy:2375
+      - --providers.file.directory=/etc/traefik
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.reusePort=true
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.websecure.address=:443
+      # - --certificatesresolvers.xd.acme.email=tech@creoox.com
+      # - --certificatesresolvers.xd.acme.storage=/etc/letsencrypt/acme.json
+      # - --certificatesresolvers.xd.acme.httpchallenge.entrypoint=web
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./.docker/traefik/config/dynamic.yml:/etc/traefik/dynamic.yml:ro
+      - ./.docker/traefik/certs:/etc/certs:ro
+    networks:
+      - xd-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=xd-net"
+      - "traefik.http.middlewares.traefik-basic-auth.basicauth.users=admin:$$2y$$05$$11AN88HKaDalOgu62PKoQ.KZJiqqmQBtHeWRX6PqV3YJPloDqgKLO" # admin:test
+
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.routers.traefik.rule=Host(`${XD_STACK_DOMAIN}`)"
+
+      - "traefik.http.routers.traefik-secure.entrypoints=websecure"
+      - "traefik.http.routers.traefik-secure.rule=Host(`rp.${XD_STACK_DOMAIN}`) && (PathPrefix(`/`) || PathPrefix(`/api`))"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      # - "traefik.http.routers.traefik-secure.tls.certresolver=xd"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+      - "traefik.http.routers.traefik-secure.middlewares=traefik-basic-auth"
+
+  socket-proxy:
+    image: tecnativa/docker-socket-proxy:0.3
+    container_name: xd-socket-proxy
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: 1
+    networks:
+      - xd-net
+    labels:
+      - "traefik.enable=false"
+
+  docusaurus:
+    container_name: xd-docusaurus
+    image: xeokit/xd-docusaurus:latest
+    build:
+      context: .
+      dockerfile: ./.docker/docusaurus/Dockerfile.prod
+    restart: always
+    networks:
+      - xd-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=xd-net"
+
+      - "traefik.http.routers.docusaurus.entrypoints=websecure"
+      - "traefik.http.routers.docusaurus.rule=Host(`${XD_STACK_DOMAIN}`)"
+      - "traefik.http.routers.docusaurus.tls=true"
+      # - "traefik.http.routers.docusaurus.tls.certresolver=xd"
+      - "traefik.http.services.docusaurus.loadbalancer.server.port=80"

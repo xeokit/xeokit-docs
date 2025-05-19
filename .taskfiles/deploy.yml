@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  GIT_HASH:
+    sh: git rev-parse --short HEAD
+
+tasks:
+  debug:
+    desc: Debug
+    cmds:
+      - echo {{.GIT_HASH}}

@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+includes:
+  deploy:
+    taskfile: .taskfiles/deploy.yml
+  docker:
+    taskfile: .taskfiles/docker.yml
+  test:
+    taskfile: .taskfiles/test.yml
+

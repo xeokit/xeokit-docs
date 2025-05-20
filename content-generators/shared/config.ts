@@ -14,7 +14,7 @@ const Config = type({
 export const config: typeof Config.infer = (() => {
   const config = Config ({
     sdk: {
-      examplesHost: process.env.DOC_SDK_EXAMPLES_HOST,
+      examplesHost: process.env.XD_SDK_EXAMPLES_HOST,
     },
   })
 

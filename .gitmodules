@@ -6,3 +6,6 @@
 	path = _submodules/xeokit-sdk
 	url = ../xeokit-sdk.git
 	branch = master
+[submodule "example_submodule"]
+	path = _submodules/example_submodule
+	url = https://github.com/Creoox/example-submodule

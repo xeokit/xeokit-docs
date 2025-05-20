@@ -36,11 +36,11 @@ This example demonstrates XeoKit's component-based architecture and the separati
 
 ## Interactive Demo
 
-<XeoOpenInNewTabButton filePath="http://localhost:5173/src/DotBIMLoader_BlenderHouse/index.html" />
+<XeoOpenInNewTabButton filePath="https://sdk-examples.xeokit.localhost/src/DotBIMLoader_BlenderHouse/index.html" />
 
 <BrowserOnly>
 {() => (
- <XeoInteractiveExample filePath="http://localhost:5173/src/DotBIMLoader_BlenderHouse/index.html" />
+ <XeoInteractiveExample filePath="https://sdk-examples.xeokit.localhost/src/DotBIMLoader_BlenderHouse/index.html" />
 )}
 </BrowserOnly>
 

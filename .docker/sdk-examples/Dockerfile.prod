@@ -7,8 +7,8 @@ RUN npm i pnpm@10.11.0 -g
 COPY . .
 
 RUN pnpm install
-RUN pnpm run doc:build
+RUN pnpm run examples:build
 
 FROM nginx:1.28-alpine AS runtime
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/packages/examples/dist /usr/share/nginx/html

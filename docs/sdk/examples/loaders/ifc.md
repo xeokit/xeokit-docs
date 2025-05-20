@@ -42,11 +42,11 @@ This example showcases XeoKit's ability to handle both the geometric and semanti
 
 ## Interactive Demo
 
-<XeoOpenInNewTabButton filePath="http://localhost:5173/src/loaders/ifc/index.html" />
+<XeoOpenInNewTabButton filePath="https://sdk-examples.xeokit.localhost/src/loaders/ifc/index.html" />
 
 <BrowserOnly>
 {() => (
- <XeoInteractiveExample filePath="http://localhost:5173/src/loaders/ifc/index.html" />
+ <XeoInteractiveExample filePath="https://sdk-examples.xeokit.localhost/src/loaders/ifc/index.html" />
 )}
 </BrowserOnly>
 

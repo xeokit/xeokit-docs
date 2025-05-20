@@ -11,6 +11,13 @@ Parts of existing/old documentations which cannot be transformed because of comp
 
 New planned parts of documentation which cannot be served as static files by docusaurus are aims to be embed as iframes too
 
-As result docusaurus is router for whole documentation for xeokit, and gives user to browser all aspects o f xeokit without leaving a page.
+As result docusaurus is router for whole documentation for xeokit, and gives user to browser all aspects of xeokit without leaving a page.
 
+
+# Deployment architecture
+
+## Docker compose stack
+`rp.xeokit.io` - traefik, reverse proxy
+`xeokit.io` - docusaurus build served by nginx, single source of truth
+`sdk-examples.xeokit.io` - vite build served by nginx, sdk v3 typescript examples
 

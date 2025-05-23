@@ -1,4 +1,13 @@
-damian:
+dominik_szaradowski:
+  name: Dominik Szaradowski
+  title: Software Engineer @ Creoox
+  url: https://github.com/DhivinX
+  image_url: https://github.com/DhivinX.png
+  page: true
+  socials:
+    github: DhivinX
+
+damian_bobrowski:
   name: Damian Bobrowski
   title: Software Engineer @ Creoox
   url: https://github.com/damianbobrowski

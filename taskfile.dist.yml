@@ -3,8 +3,8 @@
 version: "3"
 
 includes:
-  deploy:
-    taskfile: .taskfiles/deploy.yml
+  ansible:
+    taskfile: .taskfiles/ansible.yml
   docker:
     taskfile: .taskfiles/docker.yml
   test:

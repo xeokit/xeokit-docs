@@ -1,0 +1,10 @@
+[project]
+name = "xeokit-docs-deploy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ansible>=11.6.0",
+    "ansible-lint>=25.5.0",
+]

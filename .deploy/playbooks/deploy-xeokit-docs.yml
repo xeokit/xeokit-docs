@@ -13,18 +13,18 @@
     #     name: git
     #     state: present
 
-    # - name: Clone xeokit-docs repository
-    #   ansible.builtin.git:
-    #     repo: https://github.com/xeokit/xeokit-docs.git
-    #     dest: ~/xeokit-docs
+    - name: Clone xeokit-docs repository
+      ansible.builtin.git:
+        repo: https://github.com/xeokit/xeokit-docs.git
+        dest: ~/xeokit-docs
 
-    # # Prepare env variables
-    # - name: Ensure .env file exists
-    #   ansible.builtin.copy:
-    #     src: ~/xeokit-docs/.env.production
-    #     dest: ~/xeokit-docs/.env
-    #     remote_src: true
-    #     mode: "0664"
+    # Prepare env variables
+    - name: Ensure .env file exists
+      ansible.builtin.copy:
+        src: ~/xeokit-docs/.env.production
+        dest: ~/xeokit-docs/.env
+        remote_src: true
+        mode: "0664"
 
     # sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
     - name: Install Taskfile

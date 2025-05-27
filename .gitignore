@@ -26,6 +26,9 @@ letsencrypt
 # env files
 .env
 
+# docker
+docker-compose.yml
+
 # content-generators
 content-generators/sdk/inputs
 content-generators/sdk/outputs

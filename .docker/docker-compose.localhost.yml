@@ -1,10 +1,8 @@
 networks:
-  # COMMON
   xd-net:
     name: "xd-net"
 
 services:
-  # COMMON
   traefik:
     image: traefik:v3.3
     container_name: xd-traefik
@@ -29,7 +27,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./letsencrypt:/etc/letsencrypt
+      # - ./letsencrypt:/etc/letsencrypt
       - ./.docker/traefik/config/dynamic.yml:/etc/traefik/dynamic.yml:ro
       - ./.docker/traefik/certs:/etc/certs:ro
     networks:

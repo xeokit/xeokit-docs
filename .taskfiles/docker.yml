@@ -5,7 +5,7 @@ version: "3"
 vars:
   GIT_HASH:
     sh: git rev-parse --short HEAD
-  COMPOSE_CONFIG_FILE: .docker/docker-compose.yml
+  COMPOSE_CONFIG_FILE: .docker/docker-compose.{{.TARGET}}.yml
   COMPOSE_ENV_FILE: .env
 
 tasks:
@@ -18,6 +18,10 @@ tasks:
         --env-file {{.COMPOSE_ENV_FILE}} \
         --project-directory . \
         build
+    requires:
+      vars:
+        - name: TARGET
+          enum: [localhost, production]
 
   compose-down:
     desc: Stop services
@@ -28,6 +32,10 @@ tasks:
         --env-file {{.COMPOSE_ENV_FILE}} \
         --project-directory . \
         down
+    requires:
+      vars:
+        - name: TARGET
+          enum: [localhost, production]
 
   compose-up:
     desc: Start services
@@ -38,6 +46,10 @@ tasks:
         --env-file {{.COMPOSE_ENV_FILE}} \
         --project-directory . \
         up --detach
+    requires:
+      vars:
+        - name: TARGET
+          enum: [localhost, production]
 
   compose-show-config:
     desc: Show docker-compose config
@@ -48,6 +60,10 @@ tasks:
         --env-file {{.COMPOSE_ENV_FILE}} \
         --project-directory . \
         config
+    requires:
+      vars:
+        - name: TARGET
+          enum: [localhost, production]
 
   debug:
     desc: Debug

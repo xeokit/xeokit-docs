@@ -1,8 +1,8 @@
 ---
 slug: creoox-becomes-xeokit-sales-partner
 title: Creoox AG Becomes xeokit Business Partner
-authors: [damian]
-tags: [facebook, hello, docusaurus]
+authors: [damian_bobrowski]
+tags: [xeokit, creoox]
 ---
 
 *******

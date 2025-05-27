@@ -1,19 +1,19 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+ifc:
+  label: IFC
+  permalink: /ifc
+  description: IFC tag description
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+creoox:
+  label: Creoox
+  permalink: /creoox
+  description: Creoox tag description
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+xeokit:
+  label: xeokit
+  permalink: /xeokit
+  description: Xeokit tag description
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+xeoservices:
+  label: xeoServices
+  permalink: /xeoservices
+  description: Xeoservices tag description

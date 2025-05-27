@@ -1,0 +1,27 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  GIT_HASH:
+    sh: git rev-parse --short HEAD
+
+tasks:
+  debug:
+    desc: Debug
+    cmds:
+      - echo {{.GIT_HASH}}
+
+  play:
+    desc: Run Ansible playbook
+    aliases:
+      - p
+    cmds:
+      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/deploy-xeokit-docs.yml -vvv
+
+  lint:
+    desc: Lint Ansible playbooks
+    aliases:
+      - l
+    cmds:
+      - cd ./.deploy && ansible-lint --fix

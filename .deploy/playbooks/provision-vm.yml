@@ -1,0 +1,7 @@
+---
+- name: Provision VM for xeokit-docs deployment
+  hosts: all
+  become: true
+
+  roles:
+    - install_dependencies

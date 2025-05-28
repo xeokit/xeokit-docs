@@ -16,8 +16,14 @@ tasks:
     desc: Run Ansible playbook
     aliases:
       - p
+    requires:
+      vars:
+        - name: BOOK
+          enum:
+            - deploy-xeokit-docs
+            - provision-vm
     cmds:
-      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/deploy-xeokit-docs.yml -vvv
+      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/{{.BOOK}}.yml -vvv
 
   lint:
     desc: Lint Ansible playbooks

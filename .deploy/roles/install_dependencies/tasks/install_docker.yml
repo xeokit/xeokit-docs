@@ -1,0 +1,41 @@
+---
+- name: Install required system packages
+  ansible.builtin.apt:
+    pkg:
+      - ca-certificates
+      - curl
+      # - gnupg2
+      # - software-properties-common
+      # - python3-pip
+      # - virtualenv
+      # - python3-setuptools
+
+- name: Add Docker GPG apt Key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu jammy stable
+    state: present
+
+- name: Install Docker Engine
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    append: true
+    groups: docker
+
+- name: Start Docker service
+  ansible.builtin.service:
+    name: docker
+    state: started

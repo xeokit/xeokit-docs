@@ -8,9 +8,9 @@ export default function Hello(): ReactNode {
 
   return (
     <Layout
-      title={`Example typedoc - ${siteConfig.title}`}
-      description="Example typedoc">
-      <XeoIframe src="https://typedoc.org/example" />
+      title={`xeokit-sdk - ${siteConfig.title}`}
+      description="API">
+      <XeoIframe src="https://xeokit.github.io/xeokit-sdk/docs/" />
     </Layout>
   );
 }

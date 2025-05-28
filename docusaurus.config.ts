@@ -79,22 +79,22 @@ const config: Config = {
   ],
 
   plugins: [
-    [
-      'docusaurus-plugin-openapi-docs',
-      {
-        id: "api", // plugin id
-        docsPluginId: "classic", // configured for preset-classic
-        config: {
-          petstore: {
-            specPath: "demo-openapi/petstore.yaml",
-            outputDir: "docs/plugins/demo-openapi",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-            },
-          } satisfies OpenApiPlugin.Options,
-        }
-      },
-    ],
+    // [
+    //   'docusaurus-plugin-openapi-docs',
+    //   {
+    //     id: "api", // plugin id
+    //     docsPluginId: "classic", // configured for preset-classic
+    //     config: {
+    //       petstore: {
+    //         specPath: "demo-openapi/petstore.yaml",
+    //         outputDir: "docs/plugins/demo-openapi",
+    //         sidebarOptions: {
+    //           groupPathsBy: "tag",
+    //         },
+    //       } satisfies OpenApiPlugin.Options,
+    //     }
+    //   },
+    // ],
     // [
     //   'docusaurus-plugin-typedoc',
 
@@ -145,93 +145,52 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'pluginsSidebar',
-          position: 'left',
-          label: 'Plugins',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'productsSidebar',
-          position: 'left',
-          label: 'Products',
-        },
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'xeoKitSdkSidebar',
-        //   position: 'left',
-        //   label: 'Docs',
-        // },
-        {
           type: 'dropdown',
           position: 'left',
-          label: 'External',
+          label: 'SDK v2 (current)',
           items: [
             {
-              label: 'xeokit-sdk-typedoc',
-              href: '/external/type-doc',
+              label: 'API',
+              href: '/sdk-v2/api',
             },
             {
-              label: 'typedoc-typescript-example',
-              href: '/external/type-doc-example',
-            }
-          ]
-        },
-        {
-          type: 'dropdown',
-          position: 'left',
-          label: 'Examples',
-          items: [
-            {
-              label: 'xeokit-sdk',
-              href: '/examples/xeokit-sdk',
+              label: 'SDK Examples',
+              href: '/sdk-v2/sdk-examples',
             },
             {
-              label: "xeokit-bim-viewer",
-              href: "/examples/xeokit-bim-viewer",
+              label: "BIM Viewer Examples",
+              href: "/sdk-v2/bim-viewer-examples",
             },
             {
-              label: "xeovision",
+              label: "Model Conversion",
+              href: "/sdk-v2/model-conversion",
+            },
+            {
+              label: "xeoVision",
               href: "https://xeo.vision",
               target: "_blank",
-            }
+            },
+            {
+              label: "Source Code",
+              href: "https://github.com/xeokit/xeokit-sdk",
+              target: "_blank",
+            },
           ]
         },
         {
           type: 'dropdown',
           position: 'left',
-          label: 'New Examples',
+          label: 'SDK v3 (upcoming)',
           items: [
             {
               type: 'docSidebar',
-              label: 'xeokit-sdk',
-              sidebarId: 'xeokitExamples',
-            },
-            {
-              type: 'docSidebar',
-              label: 'sdk',
-              sidebarId: 'sdkExamples',
-            },
-            {
-              label: "sdk-playground",
-              href: "https://stackblitz.com/edit/vitejs-vite-pqcbgvmu?file=index.html&terminal=dev",
-              target: "_blank",
+              label: 'SDK Examples',
+              sidebarId: 'sdkV3Examples',
             },
           ]
         },
 
         {to: '/blog', label: 'Blog', position: 'right'},
-        {
-          href: 'https://github.com/xeokit/xeokit-sdk',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
@@ -260,7 +219,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://www.facebook.com/CreooxAG',
+              href: 'https://github.com/xeolabs',
             },
             {
               label: 'X',

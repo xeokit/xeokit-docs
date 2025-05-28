@@ -8,9 +8,9 @@ export default function Hello(): ReactNode {
 
   return (
     <Layout
-      title={`Xeokit Viewer - ${siteConfig.title}`}
-      description="Embedded xeokit SDK viewer">
-      <XeoIframe src="https://xeokit.github.io/xeokit-sdk/docs/" />
+      title={`xeokit-sdk - ${siteConfig.title}`}
+      description="SDK Examples">
+      <XeoIframe src="https://xeokit.github.io/xeokit-sdk/examples/index.html" />
     </Layout>
   );
 }

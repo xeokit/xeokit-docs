@@ -13,8 +13,6 @@
     "doc:write-translations": "docusaurus write-translations",
     "doc:write-heading-ids": "docusaurus write-heading-ids",
     "doc:typecheck": "tsc",
-    "demos:plugin-demo:openapi:generate": "docusaurus gen-api-docs all",
-    "demos:plugin-demo:typedoc:generate": "docusaurus generate-typedoc",
     "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts",
     "lint": "eslint --cache .",
     "lint:fix": "eslint --fix ."

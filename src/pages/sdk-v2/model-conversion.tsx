@@ -9,8 +9,8 @@ export default function Hello(): ReactNode {
   return (
     <Layout
       title={`xeokit-sdk - ${siteConfig.title}`}
-      description="xeokit-bim-viewer Examples">
-      <XeoIframe src="https://xeokit.github.io/xeokit-sdk/examples/index.html" />
+      description="Model Conversion">
+      <XeoIframe src="https://xeokit.github.io/xeokit-model-conversion-tests" />
     </Layout>
   );
 }

@@ -1,2 +1,4 @@
 node_modules/*
-_submodules
+_submodules/xeokit-sdk/**/*
+_submodules/xeokit/packages/sdk/**/*
+_submodules/xeokit/packages/website/**/*

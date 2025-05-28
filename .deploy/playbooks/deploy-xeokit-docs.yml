@@ -2,7 +2,6 @@
 - name: Ansible Playbook for localhost
   hosts: all
 
-
   tasks:
     - name: Ping test
       ansible.builtin.ping:
@@ -27,10 +26,10 @@
 
     - name: Create and start services
       community.docker.docker_compose_v2:
+        build: always
         project_src: "{{ xeokit_docs_location }}"
       register: output
 
     - name: Show results
       ansible.builtin.debug:
         var: output
-

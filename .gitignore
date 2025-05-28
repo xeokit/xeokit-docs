@@ -32,3 +32,6 @@ docker-compose.yml
 # content-generators
 content-generators/sdk/inputs
 content-generators/sdk/outputs
+docs/sdk/examples/*
+!docs/sdk/examples/.gitkeep
+

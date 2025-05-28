@@ -17,6 +17,11 @@
       args:
         chdir: "{{ xeokit_docs_location }}"
 
+    - name: Replace GIT_HASH in docusaurus.config.ts before build
+      ansible.builtin.command: task doc:set-version
+      args:
+        chdir: "{{ xeokit_docs_location }}"
+
     - name: Tear down existing services
       community.docker.docker_compose_v2:
         project_src: "{{ xeokit_docs_location }}"
@@ -28,8 +33,4 @@
       community.docker.docker_compose_v2:
         build: always
         project_src: "{{ xeokit_docs_location }}"
-      register: output
 
-    - name: Show results
-      ansible.builtin.debug:
-        var: output

@@ -246,7 +246,7 @@ const config: Config = {
         href: 'https://xeokit.io',
 
       },
-      copyright: `Copyright © ${new Date().getFullYear()} xeolabs and Creoox AG. Build: %GIT_HASH%'`,
+      copyright: `Copyright © ${new Date().getFullYear()} xeolabs and Creoox AG. Build: %GIT_HASH%`,
     },
     prism: {
       theme: prismThemes.github,

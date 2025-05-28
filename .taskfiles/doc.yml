@@ -11,6 +11,10 @@ tasks:
     desc: Debug
     cmds:
       - echo {{.GIT_HASH}}
+  set-version:
+    desc: Replace %GIT_HASH% in docusaurus.config.ts
+    cmds:
+      - sed -i "s/%GIT_HASH%/{{.GIT_HASH}}/g" ./docusaurus.config.ts
 
   prepare-examples:
     desc: Compile sdk v3 examples into markdown files

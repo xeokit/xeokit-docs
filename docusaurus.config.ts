@@ -144,6 +144,12 @@ const config: Config = {
         src: 'img/xeokitLogoAlphaBG.png',
       },
       items: [
+        // {
+        //   type: 'docSidebar',
+        //   sidebarId: 'productsSidebar',
+        //   position: 'left',
+        //   label: 'Products',
+        // },
         {
           type: 'dropdown',
           position: 'left',
@@ -185,10 +191,11 @@ const config: Config = {
             {
               type: 'docSidebar',
               label: 'SDK Examples',
-              sidebarId: 'sdkV3Examples',
+              sidebarId: 'sdkV3ExamplesSidebar',
             },
           ]
         },
+        {to: '/blog/tags/use-cases', label: 'Use Cases', position: 'right'},
 
         {to: '/blog', label: 'Blog', position: 'right'},
       ],

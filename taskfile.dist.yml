@@ -5,6 +5,8 @@ version: "3"
 includes:
   ansible:
     taskfile: .taskfiles/ansible.yml
+  doc:
+    taskfile: .taskfiles/doc.yml
   docker:
     taskfile: .taskfiles/docker.yml
   test:

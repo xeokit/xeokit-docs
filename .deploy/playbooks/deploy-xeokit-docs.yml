@@ -4,29 +4,19 @@
 
 
   tasks:
-    # - name: Ping test
-    #   ansible.builtin.ping:
-    #     data: "pong"
+    - name: Ping test
+      ansible.builtin.ping:
+        data: "pong"
 
+    - name: Clone xeokit-docs repository
+      ansible.builtin.git:
+        repo: https://github.com/xeokit/xeokit-docs.git
+        dest: "{{ xeokit_docs_location }}"
 
-
-    # Prepare repository
-    # - name: Ensure git is installed
-    #   ansible.builtin.package:
-    #     name: git
-    #     state: present
-
-    # - name: Clone xeokit-docs repository
-    #   ansible.builtin.git:
-    #     repo: https://github.com/xeokit/xeokit-docs.git
-    #     dest: "{{ xeokit_docs_location }}"
-
-
-
-    # - name: Prepare environment
-    #   ansible.builtin.command: task docker:prepare-env TARGET=production
-    #   args:
-    #     chdir: "{{ xeokit_docs_location }}"
+    - name: Prepare environment
+      ansible.builtin.command: task docker:prepare-env TARGET=production
+      args:
+        chdir: "{{ xeokit_docs_location }}"
 
     - name: Tear down existing services
       community.docker.docker_compose_v2:

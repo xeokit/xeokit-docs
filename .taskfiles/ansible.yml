@@ -23,7 +23,7 @@ tasks:
             - deploy-xeokit-docs
             - provision-vm
     cmds:
-      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/{{.BOOK}}.yml -vvv
+      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/{{.BOOK}}.yml
 
   lint:
     desc: Lint Ansible playbooks

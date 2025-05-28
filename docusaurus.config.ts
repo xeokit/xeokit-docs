@@ -141,7 +141,7 @@ const config: Config = {
       title: 'xeokit',
       logo: {
         alt: 'xeokit Logo',
-        src: 'img/xeokitLogoAlphaBG.png',
+        src: 'img/xeokit.svg',
       },
       items: [
         // {
@@ -193,6 +193,11 @@ const config: Config = {
               label: 'SDK Examples',
               sidebarId: 'sdkV3ExamplesSidebar',
             },
+            {
+              label: "Source Code",
+              href: "https://github.com/xeokit/sdk",
+              target: "_blank",
+            },
           ]
         },
         {to: '/blog/tags/use-cases', label: 'Use Cases', position: 'right'},
@@ -237,7 +242,7 @@ const config: Config = {
       ],
       logo: {
         alt: 'xeokit Logo',
-        src: 'img/xeokitLogoAlphaBG.png',
+        src: 'img/xeokit.svg',
         href: 'https://xeokit.io',
 
       },

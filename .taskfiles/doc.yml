@@ -12,9 +12,10 @@ tasks:
     cmds:
       - echo {{.GIT_HASH}}
   set-version:
-    desc: Replace %GIT_HASH% in docusaurus.config.ts
+    desc: Replace %GIT_HASH% in docusaurus.config.ts and docker-compose.yml
     cmds:
       - sed -i "s/%GIT_HASH%/{{.GIT_HASH}}/g" ./docusaurus.config.ts
+      - sed -i "s/latest/{{.GIT_HASH}}/g" ./docker-compose.yml
 
   prepare-examples:
     desc: Compile sdk v3 examples into markdown files

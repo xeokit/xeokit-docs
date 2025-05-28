@@ -190,8 +190,12 @@ const config: Config = {
           items: [
             {
               type: 'docSidebar',
-              label: 'SDK Examples',
+              label: 'SDK TypeScript Examples',
               sidebarId: 'sdkV3ExamplesSidebar',
+            },
+            {
+              label: 'SDK Examples',
+              href: '/sdk-v3/sdk-examples',
             },
             {
               label: "Source Code",
@@ -212,7 +216,7 @@ const config: Config = {
           title: 'Learn',
           items: [
             {
-              label: 'SDK Examples',
+              label: 'SDK TypeScript Examples',
               href: '/sdk-v2/sdk-examples',
             },
           ],

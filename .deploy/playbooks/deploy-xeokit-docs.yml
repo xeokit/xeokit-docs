@@ -11,6 +11,7 @@
       ansible.builtin.git:
         repo: https://github.com/xeokit/xeokit-docs.git
         dest: "{{ xeokit_docs_location }}"
+        force: true
 
     - name: Prepare environment
       ansible.builtin.command: task docker:prepare-env TARGET=production

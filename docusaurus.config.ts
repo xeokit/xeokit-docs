@@ -212,8 +212,8 @@ const config: Config = {
           title: 'Learn',
           items: [
             {
-              label: 'Examples',
-              href: 'https://xeokit.github.io/xeokit-sdk/examples',
+              label: 'SDK Examples',
+              href: '/sdk-v2/sdk-examples',
             },
           ],
         },
@@ -221,8 +221,8 @@ const config: Config = {
           title: 'Develop',
           items: [
             {
-              label: 'API Docs',
-              href: 'https://xeokit.github.io/xeokit-sdk/docs',
+              label: 'API',
+              href: '/sdk-v2/api',
             },
           ],
         },

@@ -1,0 +1,44 @@
+name: Deploy from main branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .deploy
+
+      - name: Install deployment dependencies
+        run: |
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt-get install ansible -y
+          sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+      - name: Setup tailscale for deployment
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Test SSH connection
+        run: |
+          ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
+          echo 'SSH connection to jump-creoox is working'
+          "
+
+      - name: Run deployment playbook
+        run: task play BOOK=deploy-xeokit-docs
+
+
+
+
+
+

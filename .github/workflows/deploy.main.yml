@@ -14,28 +14,35 @@ jobs:
         with:
           sparse-checkout: |
             .deploy
-
-      - name: Install deployment dependencies
-        run: |
-          sudo add-apt-repository --yes --update ppa:ansible/ansible
-          sudo apt-get install ansible -y
-          sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
-
+            .taskfiles
+            taskfile.dist.ym
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
       - name: Setup tailscale for deployment
-        uses: tailscale/github-action@v2
+        uses: tailscale/github-action@v3
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
-
       - name: Test SSH connection
         run: |
           ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
           echo 'SSH connection to jump-creoox is working'
           "
-
-      - name: Run deployment playbook
-        run: task play BOOK=deploy-xeokit-docs
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_ENV_SSH_PRIVATE_KEY }}
+          name: creoox-production.pem
+          known_hosts: ${{ secrets.DEPLOY_ENV_SSH_PUBLIC_KEY }}
+      - name: Install ansible
+        run: |
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt-get install -y ansible
+      - name: Deploy to Test
+        run: task ansible:play BOOK=deploy-xeokit-docs
 
 
 

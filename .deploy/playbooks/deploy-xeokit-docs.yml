@@ -1,6 +1,8 @@
 ---
-- name: Ansible Playbook for localhost
+- name: Ansible Playbook
   hosts: all
+  vars:
+    git_branch: "feat/deploy_specific_branch"
 
   tasks:
     - name: Ping test
@@ -12,6 +14,7 @@
         repo: https://github.com/xeokit/xeokit-docs.git
         dest: "{{ xeokit_docs_location }}"
         force: true
+        version: "{{ git_branch }}"
 
     - name: Prepare environment
       ansible.builtin.command: task docker:prepare-env TARGET=production

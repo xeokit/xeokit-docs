@@ -40,8 +40,8 @@ jobs:
 
       - name: Debug
         run: |
-          ls ~/ssh
-          cat ~/ssh/known_hosts
+          ls ~/.ssh
+          cat ~/.ssh/known_hosts
           ssh -J ubuntu@jump-creoox -i ~/.ssh/creoox-production.pem ubuntu@3.77.137.225 "echo 'Hello from remote!'"
 
       # - name: Install ansible

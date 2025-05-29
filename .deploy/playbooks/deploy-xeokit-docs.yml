@@ -1,5 +1,5 @@
 ---
-- name: Ansible Playbook for localhost
+- name: Ansible Playbook
   hosts: all
 
   tasks:
@@ -12,6 +12,7 @@
         repo: https://github.com/xeokit/xeokit-docs.git
         dest: "{{ xeokit_docs_location }}"
         force: true
+        version: "{{ git_hash | mandatory }}"
 
     - name: Prepare environment
       ansible.builtin.command: task docker:prepare-env TARGET=production

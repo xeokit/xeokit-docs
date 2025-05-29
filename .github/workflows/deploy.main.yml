@@ -3,7 +3,14 @@ name: Deploy from main branch
 on:
   push:
     branches:
+      - main
       - develop
+      - feat/**deploy
+      - main/**deploy
+      - chore/**deploy
+      - feature/**deploy
+      - fix/**deploy
+      - hotfix/**deploy
 
 jobs:
   deploy:
@@ -45,7 +52,7 @@ jobs:
           source .deploy/.venv/bin/activate
 
       - name: Deploy xeokit docs
-        run: task ansible:play BOOK=deploy-xeokit-docs
+        run: task ansible:deploy
 
 
 

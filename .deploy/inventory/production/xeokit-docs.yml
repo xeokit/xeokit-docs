@@ -5,5 +5,5 @@ all:
       ansible_host: 3.77.137.225
       ansible_user: ubuntu
       ansible_ssh_private_key_file: ~/.ssh/creoox-production.pem
-      ansible_ssh_common_args: "-o ProxyJump=ubuntu@jump-creoox.tail8898f6.ts.net"
+      ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyJump=ubuntu@jump-creoox.tail8898f6.ts.net"
       xeokit_docs_location: /home/ubuntu/xeokit-docs

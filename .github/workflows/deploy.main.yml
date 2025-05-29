@@ -1,0 +1,59 @@
+name: Deploy from main branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .deploy
+            .taskfiles
+            taskfile.dist.ym
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+      - name: Setup tailscale for deployment
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+      - name: Test SSH connection to jump-creoox
+        run: |
+          ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
+          echo 'SSH connection to jump-creoox is working'
+          "
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_ENV_SSH_PRIVATE_KEY }}
+          name: creoox-production.pem
+          known_hosts: ${{ secrets.DEPLOY_ENV_SSH_PUBLIC_KEY }}
+
+      - name: Prepare ansible environment
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv sync --project .deploy/
+          source .deploy/.venv/bin/activate
+          task ansible:play BOOK=deploy-xeokit-docs
+
+      # - name: Install ansible
+      #   run: |
+      #     sudo add-apt-repository --yes --update ppa:ansible/ansible
+      #     sudo apt-get install -y ansible
+      # - name: Deploy to Test
+      #   run: task ansible:play BOOK=deploy-xeokit-docs
+
+
+
+
+
+

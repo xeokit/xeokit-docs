@@ -1,0 +1,103 @@
+# Backfaces in xeokit
+
+- [Introduction](#introduction)
+- [xeokit-xkt-utils](#xeokit-xkt-utils)
+- [xeokit-gltf-to-xkt](#xeokit-gltf-to-xkt)
+- [xeokit-sdk](#xeokit-sdk)
+-   [PerformanceModel](#performancemodel)
+-   [XKTLoaderPlugin](#xktloaderplugin)
+
+# Introduction
+
+On a triangle mesh geometry, backfaces are those faces which are oriented away from the viewpoint. Whenever possible, the xeokit viewer tries to avoid drawing backfaces, in order to reduce work done by the graphics hardware and speed up interactivity.
+
+The way that xeokit handles backfaces can be summarized as follows:
+
+- Don't render backfaces on watertight triangle meshes (unless slicing, see below).
+- Always render backfaces on non-watertight triangle meshes.
+- Always render backfaces on meshes when we slice them with SectionPlanes.
+
+The sections below describe how specific xeokit components manage backfaces.
+
+# xeokit-xkt-utils
+
+[xeokit-xkt-utils](https://www.npmjs.com/package/@xeokit/xeokit-xkt-utils) is a library of JavaScript tools for building XKT files in memory, which may then be exported to disk and loaded into a xeokit viewer. This library is wrapped by xeokit-gltf-to-xkt.
+
+Since 1.0.0, xeokit-xkt-utils automatically detects watertight meshes and flags them in the XKT output. Watertight meshes are triangle meshes that form closed solids, without holes.
+
+# xeokit-gltf-to-xkt
+
+[xeokit-gltf-to-xkt](https://www.npmjs.com/package/@xeokit/xeokit-gltf-to-xkt) is a command-line tool that converts a glTF file into an XKT file. This tool wraps xeokit-xkt-utils, which does the actual conversion.
+
+Since 1.0.0, xeokit-gltf-to-xkt automatically detects watertight meshes in the glTF and flags them in the XKT output.
+
+# xeokit-sdk
+
+[xeokit-sdk](https://www.npmjs.com/package/@xeokit/xeokit-sdk) implements the viewer and 3D engine at the heart of the xeokit SDK, along with various bundled plugins and utilities.
+
+Since 1.8, xeokit-sdk handles backfaces as described in the introduction.
+
+### PerformanceModel
+
+The [PerformanceModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/PerformanceModel/PerformanceModel.js~PerformanceModel.html) component represents a high-detail model within a xeokit Viewer.
+
+Along with "points", "lines" and "triangles" mesh primitives, PerformanceModel also supports the definition of "solid" and "surface" primitives. These are the same as "triangles", but specifically indicate whether the mesh is watertight or not. For example:
+
+```
+const performanceModel = new PerformanceModel(viewer.scene, {
+    id: "myModel"
+});
+
+performanceModel.createMesh({
+    id: "mySolidMesh",
+    primitive: "solid",
+    positions: [...],
+		normals: [...],
+    indices: [...]
+});
+
+performanceModel.createMesh({
+    id: "mySurfaceMesh",
+    primitive: "surface",
+    positions: [...],
+		normals: [...],
+    indices: [...]
+});
+
+performanceModel.createEntity({
+    id: "myEntity",
+    meshIds: ["mySolidMesh", "mySurfaceMesh"]
+});
+```
+
+We can also just flag a PerformanceModel with `backfaces: true` to force the Viewer to always draw its backfaces. Sometimes this is desirable for rendering triangle meshes that have irregular vertex winding orders, so we don't see holes where the backfaces are.
+
+```
+const performanceModel = new PerformanceModel(viewer.scene, {
+    id: "myModel",
+		backfaces: true
+});
+```
+
+### XKTLoaderPlugin
+
+The [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html) plugin loads XKT files, and creates PerformanceModel components that represent the files as models within the Viewer.
+
+XKTLoaderPlugin is able to load XKT (7.0+) with watertight-flagged meshes, and create PerformanceModel components (xeokit-sdk 1.8+) that contain "solid" and "surface" primitives.
+
+When loading a model, we can also make PerformanceModel force all backfaces to be visible:
+
+```
+const viewer = new Viewer({
+    canvasId: "myCanvas",
+    transparent: true
+});
+
+const xktLoader = new XKTLoaderPlugin(viewer);
+
+const model = xktLoader.load({
+    id: "myModel",
+    src: "./models/xkt/duplex/duplex.xkt",
+    backfaces: true // <<----------------- Force backfaces visible
+});
+```

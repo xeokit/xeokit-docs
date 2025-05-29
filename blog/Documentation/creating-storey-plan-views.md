@@ -1,0 +1,240 @@
+# Creating Storey Plan Views
+
+The xeokit SDK gives you flexible tools to create a variety of custom browser-based experiences for navigating the building storeys in your IFC building models. Using these tools, you can create a 2D plan view "mini-map" to help you navigate the 3D view, or just use certain functions to isolate storey objects in the 3D view, highlight them, fit them in view, and so on.
+
+- [Introduction](#introduction)
+- [Usage](#usage)
+- [Finding Storeys](#finding-storeys)
+- [Isolating a Storey](#isolating-a-storey)
+- [Arranging the Camera for a Storey Plan View](#arranging-the-camera-for-a-storey-plan-view)
+- [Creating a 2D StoreyMap](#creating-a-2d-storeymap)
+- [Navigating with a 2D StoreyMap](#navigating-with-a-2d-storeymap)
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#storeyViews_StoreyViewsPlugin_recipe2)
+
+# Introduction
+
+The [StoreyViewsPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html) provides a set of simple but flexible methods that lets us visualize building storeys in a variety of ways.
+
+Two methods are for setting up 3D views of storeys:
+
+- [showStoreyObjects](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-showStoreyObjects) - isolates the [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html)s within the given storey, and
+- [gotoStoreyCamera](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-gotoStoreyCamera) - positions the [Camera](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/camera/Camera.js~Camera.html) for a download-looking plan view of the Entitys within the given storey.
+
+The other two methods are for creating 2D mini-map images of storeys:
+
+- [createStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-createStoreyMap) - generates a plan view mini-map image of a givenn storey, and
+- [pickStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-pickStoreyMap) - picks the 3D [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html) at the given 2D pixel coordinates within a plan view image.
+
+# Usage
+
+Let's start by creating a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) with a [StoreyViewsPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html) and an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html). Then we'll load a BIM building model from an `.xkt` file.
+
+```
+import {Viewer,XKTLoaderPlugin,StoreyViewsPlugin} from 
+"https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk@1/dist/xeokit-sdk.es.min.js";
+
+// Create a Viewer, arrange the camera
+
+const viewer = new Viewer({
+       canvasId: "myCanvas",
+       transparent: true
+   });
+
+viewer.camera.eye = [-2.56, 8.38, 8.27];
+viewer.camera.look = [13.44, 3.31, -14.83];
+viewer.camera.up = [0.10, 0.98, -0.14];
+
+// Add an XKTLoaderPlugin
+
+const xktLoader = new XKTLoaderPlugin(viewer);
+
+// Add a StoreyViewsPlugin
+
+const storeyViewsPlugin = new StoreyViewsPlugin(viewer);
+
+// Load a BIM model from .xkt format
+
+const model = xktLoader.load({
+     id: "myModel",
+     src: "./models/xkt/schependomlaan/schependomlaan.xkt",
+     edges: true
+});
+```
+
+# Finding Storeys
+
+Having loaded our model, we can now get information on a given storey:
+
+```
+const storey = storeyViewsPlugin.storeys["2SWZMQPyD9pfT9q87pgXa1"]; // ID of the IfcBuildingStorey
+
+const modelId  = storey.modelId;  // "myModel"
+const storeyId = storey.storeyId; // "2SWZMQPyD9pfT9q87pgXa1"
+const aabb     = storey.aabb;     // Axis-aligned 3D World-space boundary of the IfcBuildingStorey
+```
+
+We can also get a "storeys" event every time the set of storeys changes, ie. every time a storey is created or destroyed. This happens whenever we load or unload a model that has `IfcBuildingStorey` elements.
+
+```
+storeyViewsPlugin.on("storeys", ()=> {
+     const storey = storeyViewsPlugin.storeys["2SWZMQPyD9pfT9q87pgXa1"];
+     //...
+});
+```
+
+# Isolating a Storey
+
+Let's show the [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html)s within our storey:
+
+```
+storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1");
+```
+
+Showing **only** the Entitys in a storey, hiding all others:
+
+```
+storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1", {
+    hideOthers: true
+});
+```
+
+Showing only the storey Entitys, applying custom appearances configured on [StoreyViewsPlugin#objectStates](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-set-objectStates):
+
+```
+storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1", {
+    hideOthers: true,
+    useObjectStates: true
+});
+```
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#storeyViews_StoreyViewsPlugin_showStoreyObjects)
+
+When using this option, at some point later you'll probably want to restore all Entitys to their original visibilities and appearances. To do that, save their visibility and appearance states in an [ObjectsMemento](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/mementos/ObjectsMemento.js~ObjectsMemento.html) beforehand, from which you can restore them later:
+
+```
+const objectsMemento = new ObjectsMemento();
+
+// Save all Entity visibility and appearance states
+
+objectsMemento.saveObjects(viewer.scene);
+
+// Show storey view Entitys, with custom appearances as configured for IFC types
+
+storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1", {
+    useObjectStates: true // <<--------- Apply custom appearances
+});
+
+//...
+
+// Later, restore all Entitys to their saved visibility and appearance states
+objectsMemento.restoreObjects(viewer.scene);
+```
+
+# Arranging the Camera for a Storey Plan View
+
+The [StoreyViewsPlugin#gotoStoreyCamera](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-gotoStoreyCamera) method positions the [Camera](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/camera/Camera.js~Camera.html) for a plan view of the [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html)s within the given storey.
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#storeyViews_StoreyViewsPlugin_gotoStoreyCamera)
+
+Let's fly the [Camera](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/camera/Camera.js~Camera.html) to a downward-looking orthographic view of the Entitys within our storey.
+
+```
+storeyViewsPlugin.gotoStoreyCamera("2SWZMQPyD9pfT9q87pgXa1", {
+    projection: "ortho", // Orthographic projection
+    duration: 2.5,       // 2.5 second transition
+    done: () => {
+        viewer.cameraControl.planView = true; // Disable rotation
+    }
+});
+```
+
+Note that we also set [CameraControl#planView](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/CameraControl/CameraControl.js~CameraControl.html#instance-set-planView) `true`, which prevents the CameraControl from rotating or orbiting. In orthographic mode, this effectively makes the [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) behave as if it were a 2D viewer, with picking, panning and zooming still enabled. If you need to be able to restore the Camera to its previous state, you can save it to a [CameraMemento](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/mementos/CameraMemento.js~CameraMemento.html) beforehand, from which you can restore it later:
+
+```
+const cameraMemento = new CameraMemento();
+
+// Save camera state
+
+cameraMemento.saveCamera(viewer.scene);
+
+// Position camera for a downward-looking orthographic view of our storey
+
+storeyViewsPlugin.gotoStoreyCamera("2SWZMQPyD9pfT9q87pgXa1", {
+    projection: "ortho",
+    duration: 2.5,
+    done: () => {
+        viewer.cameraControl.planView = true; // Disable rotation
+    }
+});
+
+//...
+
+// Later, restore the Camera to its saved state
+cameraMemento.restoreCamera(viewer.scene);
+```
+
+# Creating a 2D StoreyMap
+
+The [StoreyViewsPlugin#createStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-createStoreyMap) method creates a 2D orthographic plan image of the given storey, which we can use as a mini-map to help us navigate within the 3D view.
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#storeyViews_StoreyViewsPlugin_createStoreyMap)
+
+This method creates a [StoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyMap.js~StoreyMap.html), which provides the plan image as a Base64-encoded string.
+
+Let's create a 2D plan image of our building storey:
+
+```
+const storeyMap = storeyViewsPlugin.createStoreyMap("2SWZMQPyD9pfT9q87pgXa1", {
+    width: 300,
+    format: "png"
+});
+
+const imageData = storeyMap.imageData; // Base64-encoded image data string
+const width     = storeyMap.width; // 300
+const height    = storeyMap.height; // Automatically derived from width
+const format    = storeyMap.format; // "png"
+```
+
+As with `showStoreyEntitys`, We also have the option to customize the appearance of the Entitys in our plan images according to their IFC types, using the lookup table configured on [StoreyViewsPlugin#objectStates](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-set-objectStates). For example, we usually want to show only element types like `IfcWall`, `IfcDoor` and `IfcFloor` in our plan images. Let's create another StoreyMap, this time applying the custom appearances:
+
+```
+const storeyMap = storeyViewsPlugin.createStoreyMap("2SWZMQPyD9pfT9q87pgXa1", {
+    width: 300,
+    format: "png",
+    useObjectStates: true // <<--------- Apply custom appearances
+});
+```
+
+We can also specify a `height` for the plan image, as an alternative to `width`:
+
+```
+ const storeyMap = storeyViewsPlugin.createStoreyMap("2SWZMQPyD9pfT9q87pgXa1", {
+     height: 200,
+     format: "png",
+     useObjectStates: true
+});
+```
+
+# Navigating with a 2D StoreyMap
+
+We can use [StoreyViewsPlugin#pickStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-pickStoreyMap) to pick Entities in our building storey, using 2D coordinates from mouse or touch events on our [StoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyMap.js~StoreyMap.html)'s 2D plan image.
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#storeyViews_StoreyViewsPlugin_recipe2)
+
+Let's programmatically pick the Entity at the given 2D pixel coordinates within our image:
+
+```
+const mouseCoords = [65, 120]; // Mouse coords within the image extents
+
+const pickResult = storeyViewsPlugin.pickStoreyMap(storeyMap, mouseCoords);
+
+if (pickResult && pickResult.entity) {
+    pickResult.entity.highlighted = true;
+}
+```

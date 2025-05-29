@@ -1,0 +1,98 @@
+# Smoother Navigation with FastNavPlugin
+
+- [Introduction](#introduction)
+- [Usage Example](#usage-example)
+
+# Introduction
+
+[FastNavPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/FastNavPlugin/FastNavPlugin.js~FastNavPlugin.html) is a xeokit [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) plugin that makes interaction feel smoother for large models.
+
+FastNavPlugin works by temporarily disabling expensive Viewer rendering features, and optionally scaling the Viewer's canvas resolution, whenever we interact with the Viewer. Then, once we've finished interacting, FastNavPlugin restores those rendering features and the original canvas scale, after a configured delay.
+
+Depending on how we configure FastNavPlugin, we essentially switch to a smooth-rendering low-quality view while interacting, then return to the normal, higher-quality view after we stop.
+
+Down-scaling the canvas resolution gives particularly good results. For example, scaling by `0.5` causes the Viewer to render 75% less pixels, which can make it feel noticeably lighter with big models, at the cost of a slightly blurry canvas while interacting.
+
+# Usage Example
+
+In the example below, we'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html), add a [FastNavPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/FastNavPlugin/FastNavPlugin.js~FastNavPlugin.html), then use an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html) to load a BIM model. Whenever we move the Camera or resize the canvas, the FastNavPlugin will then:
+
+- hide edges,
+- hide ambient shadows,
+- hide physically-based materials (switching to non-PBR Blinn-Phong shading),
+- hide transparent objects, and
+- down-scale the canvas by 0.5, causing 75% less pixels to render.
+
+We'll also configure a 0.5 second delay before we transition back to high-quality each time we stop moving, so that we're not continually flipping between low and high quality as we interact.
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#performance_FastNavPlugin)
+
+![FastNavPlugin.gif](./attachments/FastNavPlugin.gif)
+
+```
+import {Viewer, XKTLoaderPlugin, FastNavPlugin} from "xeokit-sdk.es.js";
+
+// Create a Viewer with PBR and SAO enabled
+
+const viewer = new Viewer({
+     canvasId: "myCanvas",
+     transparent: true,
+     pbr: true, // Enable physically-based rendering for Viewer
+     sao: true  // Enable ambient shadows for Viewer
+ });
+
+viewer.scene.camera.eye = [-66.26, 105.84, -281.92];
+viewer.scene.camera.look = [42.45, 49.62, -43.59];
+viewer.scene.camera.up = [0.05, 0.95, 0.15];
+
+// We can afford to use higher-quality, expensive SAO settings!
+ 
+viewer.scene.sao.enabled = true;
+viewer.scene.sao.numSamples = 60;
+viewer.scene.sao.kernelRadius = 170;
+ 
+// Install a FastNavPlugin
+ 
+new FastNavPlugin(viewer, {
+
+    // Don't show edges while we interact (default is true)
+    hideEdges: true, 
+    
+		// Don't show ambient shadows (SAO) while we interact (default is true)
+		hideSAO: true, 
+		
+    // No physically-based rendering (PBR) while we interact (default is true)
+		hidePBR: true,                  
+ 
+		// Hide transparent objects while we interact (default is false)
+    // We don't care if the windows temporarily dissapear while we move around.
+    hideTransparentObjects: true,   
+ 
+    // Scale the canvas resolution while we interact (default is false).
+    // This makes the canvas slightly blurry while we're interacting, but 
+    // draws 75% less pixels.
+    scaleCanvasResolution: true,    
+
+    // Factor by which we scale canvas when we interact (default is 0.6)
+    scaleCanvasResolutionFactor: 0.5, 
+ 
+    // When we stop interacting, have a delay before restoring 
+    // normal render (default is true)
+    delayBeforeRestore: true,       
+ 
+    // The delay duration, in seconds (default is 0.5)
+    delayBeforeRestoreSeconds: 0.5  
+ * });
+
+// Load a BIM model from XKT format
+
+const xktLoader = new XKTLoaderPlugin(viewer);
+
+const model = xktLoader.load({
+     id: "myModel",
+     src: "./models/xkt/HolterTower.xkt",
+     sao: true, // Enable ambient shadows for this model
+     pbr: true  // Enable physically-based rendering for this model
+});
+```

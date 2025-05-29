@@ -22,8 +22,16 @@ tasks:
           enum:
             - deploy-xeokit-docs
             - provision-vm
+
     cmds:
-      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/{{.BOOK}}.yml
+      - cd ./.deploy && ansible-playbook -i ./inventory/production/xeokit-docs.yml ./playbooks/{{.BOOK}}.yml --extra-vars "git_hash={{.GIT_HASH}}"
+
+  deploy:
+    desc: Deploy xeokit docs
+    aliases:
+      - d
+    cmds:
+      - task ansible:play BOOK=deploy-xeokit-docs
 
   lint:
     desc: Lint Ansible playbooks

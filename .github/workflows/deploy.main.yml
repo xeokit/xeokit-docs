@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+      - feat/**deploy
+      - chore/**deploy
+      - feature/**deploy
+      - fix/**deploy
+      - hotfix/**deploy
 
 jobs:
   deploy:
@@ -43,14 +48,9 @@ jobs:
           curl -LsSf https://astral.sh/uv/install.sh | sh
           uv sync --project .deploy/
           source .deploy/.venv/bin/activate
-          task ansible:play BOOK=deploy-xeokit-docs
 
-      # - name: Install ansible
-      #   run: |
-      #     sudo add-apt-repository --yes --update ppa:ansible/ansible
-      #     sudo apt-get install -y ansible
-      # - name: Deploy to Test
-      #   run: task ansible:play BOOK=deploy-xeokit-docs
+      - name: Deploy xeokit docs
+        run: task ansible:deploy
 
 
 

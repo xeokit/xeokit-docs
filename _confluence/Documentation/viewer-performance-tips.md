@@ -1,0 +1,101 @@
+# Viewer Performance Tips
+
+- [Introduction](#introduction)
+- [Tip 1: Disable Geometry Reuse](#tip-1-disable-geometry-reuse)
+-   [Tip 2: Use FastNavPlugin](#tip-2-use-fastnavplugin)
+
+# Introduction
+
+The xeokit Viewer is designed for performance, but some of its special rendering effects can run slowly with huge models. Furthermore, if our models contain excessive geometry reuse (described below), then they can hit a pathological case for the Viewer and slow it down considerably.
+
+Fortunately, xeokit has some options we can use to keep our Viewers smooth and responsive for these cases, which we'll describe in this article.
+
+# Tip 1: Disable Geometry Reuse
+
+> [!NOTE]
+> If our XKT models contain huge sets of distinct geometries that are shared by objects, then we may need to disable xeokit's internal geometry reuse for best performance.
+
+The xeokit Viewer and the XKT format support geometry reuse, which is where multiple objects share the same geometries. This provides a smaller XKT file, lower browser memory footprint, and can also speed up rendering. This is normally called *instancing*.
+
+There is, however, a pathological case for performance when the number of instanced geometries is large. Internally, the Viewer performs an expensive WebGL draw call for each geometry, to draw its complete set of instances in one shot. Even though instancing is great because it saves making a draw call for each instance, it still means the Viewer makes a draw call for each of the geometries. If the number of geometries is large, then so is the number of draw calls.
+
+We can fix that with a new `reuseGeometries` configuration for XKTLoaderPlugin, as shown below. Internally, that will make XKTLoaderPlugin automatically convert all geometry instances into the Viewer's batched geometry representation, which will render them more efficiently. This will increase browser memory footprint slightly, and will work for XKT v8 and v9.
+
+```
+const viewer = new Viewer({
+    canvasId: "myCanvas"
+});
+
+const xktLoader = new XKTLoaderPlugin(viewer, {
+    reuseGeometries: false // <------- Disable geometry resuse
+});
+
+const model = xktLoader.load({
+    id: "myModel",
+    src: "myHugeModel.xkt"
+});
+```
+
+## Tip 2: Use FastNavPlugin
+
+> [!NOTE]
+> To improve Viewer responsiveness, install a [FastNavPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/FastNavPlugin/FastNavPlugin.js~FastNavPlugin.html), which will temporarily simplify the Viewer's rendering quality whenever we interact with it.
+
+The xeokit Viewer supports a bunch of visual effects for making our models look good, such as edge enhancement, physically-based shading and ambient shadows. Each of these effects has some impact on Viewer responsiveness, however, so we often want to disable them while we're interacting.
+
+In the example below, we'll create a Viewer and install a FastNavPlugin. Whenever we interact with the Viewer, our FastNavPlugin will temporarily switch off various expensive rendering effects, and will also down-scale the canvas resolution by a factor of 0.5. The down-scaling will cause the Viewer to render 75% less pixels, which gives us a significant performance boost, at the cost of a slightly rougher image while we're moving around.
+
+For extra speed, we'll also configure our XKTLoaderPlugin to disable geometry reuse, as described in the previous section.
+
+> [!NOTE]
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#performance_FastNavPlugin)
+
+![FastNavPlugin.gif](./attachments/FastNavPlugin.gif)
+
+![image-20240605-170740.png](./attachments/image-20240605-170740.png)
+
+```
+const viewer = new Viewer({
+    canvasId: "myCanvas"
+});
+
+new FastNavPlugin(viewer, {
+
+    // Don't show edges while we interact (default is true)
+    hideEdges: true, 
+    
+		// Don't show ambient shadows (SAO) while we interact (default is true)
+		hideSAO: true, 
+		
+    // No physically-based rendering (PBR) while we interact (default is true)
+		hidePBR: true,                  
+ 
+		// Hide transparent objects while we interact (default is false)
+    // We don't care if the windows temporarily dissapear while we move around.
+    hideTransparentObjects: true,   
+ 
+    // Scale the canvas resolution while we interact (default is false).
+    // This makes the canvas slightly blurry while we're interacting, but 
+    // draws 75% less pixels.
+    scaleCanvasResolution: true,    
+
+    // Factor by which we scale canvas when we interact (default is 0.6)
+    scaleCanvasResolutionFactor: 0.5, 
+ 
+    // When we stop interacting, have a delay before restoring 
+    // normal render (default is true)
+    delayBeforeRestore: true,       
+ 
+    // The delay duration, in seconds (default is 0.5)
+    delayBeforeRestoreSeconds: 0.5  
+});
+
+const xktLoader = new XKTLoaderPlugin(viewer, {
+    reuseGeometries: false // See: Disable Geometry Reuse above 
+});
+
+const model = xktLoader.load({
+    id: "myModel",
+    src: "myHugeModel.xkt"
+});
+```

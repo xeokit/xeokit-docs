@@ -26,18 +26,17 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
-      - name: Test SSH connection
-        run: |
-          ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
-          echo 'SSH connection to jump-creoox is working'
-          "
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.DEPLOY_ENV_SSH_PRIVATE_KEY }}
           name: creoox-production.pem
           known_hosts: ${{ secrets.DEPLOY_ENV_SSH_PUBLIC_KEY }}
-
+      - name: Test SSH connection
+        run: |
+          ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
+          echo 'SSH connection to jump-creoox is working'
+          "
       - name: Debug
         run: |
           ls ~/.ssh

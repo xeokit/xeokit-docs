@@ -27,3 +27,31 @@ As result docusaurus is router for whole documentation for xeokit, and gives use
 * `xeokit.io` - docusaurus build served by nginx, single source of truth
 * `sdk-examples.xeokit.io` - vite build served by nginx, sdk v3 typescript examples
 
+# Working with project
+
+## Docusaurus
+
+```bash
+git submodule update --init --recursive   # To initialize, fetch and checkout any nested submodules
+pnpm run install                          # To install docusaurus dependencies
+pnpm run doc:sdk:generate                 # To create documentation content from _submodules
+pnpm run doc:start                        # To run development server
+```
+
+## Deployment
+
+Github Action is prepared for automated deployment.
+
+For manual deployment from localhost you need `ansible` stack. You can use "self contained" setup:
+
+``` bash
+curl -LsSf https://astral.sh/uv/install.sh | sh   # To install `uv` as python manager
+uv sync --project .deploy                         # To create python virtualenv and install ansible within in
+source .deploy/.venv/bin/activate                 # To activate virtualenv and get access to ansible stack
+```
+
+To run deployment ([Task](https://taskfile.dev/) - task runner is recommended):
+
+```bash
+task ansible:deploy   # To run ansible-playbook with required options
+```

@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - main
-      - develop
       - feat/**deploy
-      - main/**deploy
       - chore/**deploy
       - feature/**deploy
       - fix/**deploy

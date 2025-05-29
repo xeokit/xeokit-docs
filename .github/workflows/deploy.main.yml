@@ -26,22 +26,24 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
+      - name: Test SSH connection to jump-creoox
+        run: |
+          ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
+          echo 'SSH connection to jump-creoox is working'
+          "
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.DEPLOY_ENV_SSH_PRIVATE_KEY }}
           name: creoox-production.pem
           known_hosts: ${{ secrets.DEPLOY_ENV_SSH_PUBLIC_KEY }}
-      - name: Test SSH connection
+
+      - name: Prepare ansible environment
         run: |
-          ssh -o "StrictHostKeyChecking=no" ubuntu@jump-creoox.tail8898f6.ts.net "
-          echo 'SSH connection to jump-creoox is working'
-          "
-      - name: Debug
-        run: |
-          ls ~/.ssh
-          cat ~/.ssh/known_hosts
-          ssh -J ubuntu@jump-creoox.tail8898f6.ts.net -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/creoox-production.pem ubuntu@3.77.137.225 "echo 'Hello from remote!'"
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          uv sync --project .deploy/
+          source .deploy/.venv/bin/activate
+          task ansible:play BOOK=deploy-xeokit-docs
 
       # - name: Install ansible
       #   run: |

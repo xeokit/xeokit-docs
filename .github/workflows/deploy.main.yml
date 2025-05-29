@@ -37,12 +37,19 @@ jobs:
           key: ${{ secrets.DEPLOY_ENV_SSH_PRIVATE_KEY }}
           name: creoox-production.pem
           known_hosts: ${{ secrets.DEPLOY_ENV_SSH_PUBLIC_KEY }}
-      - name: Install ansible
+
+      - name: Debug
         run: |
-          sudo add-apt-repository --yes --update ppa:ansible/ansible
-          sudo apt-get install -y ansible
-      - name: Deploy to Test
-        run: task ansible:play BOOK=deploy-xeokit-docs
+          ls ~/ssh
+          cat ~/ssh/known_hosts
+          ssh -J ubuntu@jump-creoox -i ~/.ssh/creoox-production.pem ubuntu@3.77.137.225 "echo 'Hello from remote!'"
+
+      # - name: Install ansible
+      #   run: |
+      #     sudo add-apt-repository --yes --update ppa:ansible/ansible
+      #     sudo apt-get install -y ansible
+      # - name: Deploy to Test
+      #   run: task ansible:play BOOK=deploy-xeokit-docs
 
 
 

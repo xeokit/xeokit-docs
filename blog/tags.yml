@@ -18,7 +18,7 @@ xeoservices:
   permalink: /xeoservices
   description: Xeoservices tag description
 
-use-cases:
-  label: use-cases
-  permalink: /use-cases
-  description: Use cases of using xeokit
+success-story:
+  label: Success Stories
+  permalink: /success-stories
+  description: Success stories of using xeokit

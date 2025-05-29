@@ -1,8 +1,8 @@
 ---
-slug: example-use-case
-title: "[Use Case]: Example company use case"
+slug: example-success-story
+title: "Example company use case"
 authors: [damian_bobrowski]
-tags: [use-cases]
+tags: [success-story]
 ---
 
 *******

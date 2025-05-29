@@ -158,31 +158,30 @@ const config: Config = {
           label: 'SDK v2 (current)',
           items: [
             {
-              label: 'API',
-              href: '/sdk-v2/api',
+              label: 'xeokit-sdk [Examples]',
+              href: '/sdk-v2/examples/xeokit-sdk',
             },
             {
-              label: 'SDK Examples',
-              href: '/sdk-v2/sdk-examples',
+              label: 'xeokit-sdk [API]',
+              href: '/sdk-v2/api-doc/xeokit-sdk',
             },
             {
-              label: "BIM Viewer Examples",
-              href: "/sdk-v2/bim-viewer-examples",
+              label: "xeokit-bim-viewer [Examples]",
+              href: "/sdk-v2/examples/xeokit-bim-viewer",
+            },
+            {
+              label: "xeokit-bim-viewer [API]",
+              href: "/sdk-v2/api-doc/xeokit-bim-viewer",
+            },
+
+            {
+              label: "xeokit-convert [API]",
+              href: "/sdk-v2/api-doc/xeokit-convert",
             },
             {
               label: "Model Conversion",
-              href: "/sdk-v2/model-conversion",
-            },
-            {
-              label: "xeoVision",
-              href: "https://xeo.vision",
-              target: "_blank",
-            },
-            {
-              label: "Source Code",
-              href: "https://github.com/xeokit/xeokit-sdk",
-              target: "_blank",
-            },
+              href: "/sdk-v2/examples/model-conversion",
+            }
           ]
         },
         {
@@ -206,8 +205,22 @@ const config: Config = {
             },
           ]
         },
-        {to: '/blog/tags/use-cases', label: 'Use Cases', position: 'right'},
-
+        {
+          label: 'Use Cases',
+          position: 'right',
+          type: "dropdown",
+          items: [
+            {
+              label: "Success Stories",
+              to: '/blog/tags/success-stories',
+            },
+            {
+              label: "xeoVision",
+              href: "https://xeo.vision",
+              target: "_blank",
+            }
+          ]
+        },
         {to: '/blog', label: 'Blog', position: 'right'},
       ],
     },
@@ -218,17 +231,33 @@ const config: Config = {
           title: 'Learn',
           items: [
             {
-              label: 'SDK TypeScript Examples',
-              href: '/sdk-v2/sdk-examples',
+              label: 'xeokit-sdk [Examples]',
+              href: '/sdk-v2/examples/xeokit-sdk',
             },
+            {
+              label: "xeokit-bim-viewer [Examples]",
+              href: "/sdk-v2/examples/xeokit-bim-viewer",
+            },
+            {
+              label: "Model Conversion",
+              href: "/sdk-v2/examples/model-conversion",
+            }
           ],
         },
         {
           title: 'Develop',
           items: [
             {
-              label: 'API',
-              href: '/sdk-v2/api',
+              label: 'xeokit-sdk [API]',
+              href: '/sdk-v2/api-doc/xeokit-sdk',
+            },
+            {
+              label: "xeokit-bim-viewer [API]",
+              href: "/sdk-v2/api-doc/xeokit-bim-viewer",
+            },
+            {
+              label: "xeokit-convert [API]",
+              href: "/sdk-v2/api-doc/xeokit-convert",
             },
           ],
         },

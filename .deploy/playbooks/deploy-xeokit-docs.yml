@@ -24,7 +24,7 @@
         chdir: "{{ xeokit_docs_location }}"
 
     - name: Build images before trying to restart services
-      ansible:builtin.command: task docker:compose-build
+      ansible.builtin.command: task docker:compose-build
       args:
         chdir: "{{ xeokit_docs_location }}"
 

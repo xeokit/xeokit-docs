@@ -23,6 +23,11 @@
       args:
         chdir: "{{ xeokit_docs_location }}"
 
+    - name: Build images before trying to restart services
+      ansible:builtin.command: task docker:compose-build
+      args:
+        chdir: "{{ xeokit_docs_location }}"
+
     - name: Tear down existing services
       community.docker.docker_compose_v2:
         project_src: "{{ xeokit_docs_location }}"
@@ -32,6 +37,5 @@
 
     - name: Create and start services
       community.docker.docker_compose_v2:
-        build: always
         project_src: "{{ xeokit_docs_location }}"
 

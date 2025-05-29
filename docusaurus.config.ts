@@ -32,6 +32,8 @@ const config: Config = {
     locales: ['en'],
   },
 
+  noIndex: true,
+
   presets: [
     [
       'classic',

@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 // import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
@@ -71,7 +71,7 @@ const config: Config = {
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
-            const {defaultCreateSitemapItems, ...rest} = params;
+            const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
             return items.filter((item) => !item.url.includes('/page/'));
           },
@@ -199,6 +199,10 @@ const config: Config = {
               href: '/sdk-v3/sdk-examples',
             },
             {
+              label: 'Development Status',
+              to: '/sdk-v3/development-status',
+            },
+            {
               label: "Source Code",
               href: "https://github.com/xeokit/sdk",
               target: "_blank",
@@ -221,7 +225,7 @@ const config: Config = {
             }
           ]
         },
-        {to: '/blog', label: 'Blog', position: 'right'},
+        { to: '/blog', label: 'Blog', position: 'right' },
       ],
     },
     footer: {

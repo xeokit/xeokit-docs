@@ -46,7 +46,7 @@ For manual deployment from localhost you need `ansible` stack. You can use "self
 
 ``` bash
 curl -LsSf https://astral.sh/uv/install.sh | sh   # To install `uv` as python manager
-uv sync --project .deploy                         # To create python virtualenv and install ansible within in
+uv sync --project .deploy                         # To create python virtualenv and install ansible within it
 source .deploy/.venv/bin/activate                 # To activate virtualenv and get access to ansible stack
 ```
 

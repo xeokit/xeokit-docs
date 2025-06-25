@@ -20,7 +20,7 @@ jobs:
           sparse-checkout: |
             .deploy
             .taskfiles
-            taskfile.dist.ym
+            taskfile.dist.yml
       - name: Install Task
         uses: arduino/setup-task@v2
         with:

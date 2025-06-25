@@ -1,57 +1,119 @@
+# xeokit Documentation Website
 
-# TODO
+## Overview
 
-* enable indexing after migration to production: robots.txt, and docusaurus.config.ts
+This website serves as the comprehensive documentation portal for xeokit, built using [Docusaurus](https://docusaurus.io/), a modern static website generator. The site combines various content sources to provide a seamless documentation experience for all xeokit products.
 
-# Website
+## For Management Team
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+### Project Goals
 
-# Goal
-Docusaurus is used as `main part` ot this project. It creates blog and documentation content.
+- Create a unified documentation platform for all xeokit products
+- Improve user experience through better organization and search capabilities
+- Enable easier content maintenance and updates
+- Support multiple documentation formats (API references, guides, tutorials)
+- Maintain consistent branding and styling across all documentation
 
-There are git submodules in `_submodule` folder. Some parts of those repositories are used after some polishing to generate content for documentation. Typically there are scripts which reads submodule content and then generate markdowns, and copy some static files.
+### Contribution Opportunities
 
-Parts of existing/old documentations which cannot be transformed because of complexity or time are planned to be embedded as iframe in docusaurus pages.
+- **Content Review**: Provide feedback on documentation clarity and completeness
+- **User Experience**: Suggest improvements for navigation and information architecture
+- **Prioritization**: Help identify which documentation areas need the most attention
+- **Use Case Examples**: Contribute real-world examples of how xeokit is used
 
-New planned parts of documentation which cannot be served as static files by docusaurus are aims to be embed as iframes too
+### Current Status
 
-As result docusaurus is router for whole documentation for xeokit, and gives user to browser all aspects of xeokit without leaving a page.
+The project integrates content from multiple sources:
+- Newly authored Docusaurus content
+- Transformed content from existing documentation
+- SDK examples embedded as iframes
+- API documentation generated from code
+
+## For Developers
+
+### Technical Architecture
+
+Docusaurus serves as the main framework, with specialized plugins:
+- `@docusaurus/plugin-content-pages`: For static pages
+- `@docusaurus/plugin-content-blog`: For blog posts and announcements
+- `@docusaurus/plugin-content-docs`: For documentation content
+
+The repository includes git submodules in the `_submodule` folder, which contain source content that is processed to generate documentation.
+
+### Deployment Architecture
+
+The deployment consists of:
+- `rp.xeokit.io`: Traefik reverse proxy
+- `xeokit.io`: Docusaurus build served by nginx (main documentation)
+- `sdk-examples.xeokit.io`: Vite build for SDK v3 TypeScript examples
+
+### Getting Started
+
+1. Clone the repository and initialize submodules:
+   ```bash
+   git clone <repository-url>
+   cd xeokit-docs
+   git submodule update --init --recursive
+   ```
+
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. Generate SDK documentation:
+   ```bash
+   pnpm run doc:sdk:generate
+   ```
+
+4. Start the development server:
+   ```bash
+   pnpm run doc:start
+   ```
+
+### Content Generation
+
+The documentation content comes from multiple sources:
+1. Markdown files in the `docs/` directory
+2. Generated content from submodules using scripts in `content-generators/`
+3. Blog posts in the `blog/` directory
+4. Static pages in the `src/pages/` directory
+
+### Deployment
+
+#### Automated Deployment
+GitHub Actions is configured for automated deployment.
+
+#### Manual Deployment
+For manual deployment from localhost, use the Ansible stack:
+
+1. Set up the Python environment:
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   uv sync --project .deploy
+   source .deploy/.venv/bin/activate
+   ```
+
+2. Run the deployment (using [Task](https://taskfile.dev/)):
+   ```bash
+   task ansible:deploy
+   ```
+
+## TODO
+
+- Enable indexing after migration to production: update robots.txt and docusaurus.config.ts
+- Complete the migration of legacy documentation
+- Improve search functionality
+
+## Contributing
+
+We welcome contributions from both technical and non-technical team members:
+
+1. For content changes, submit a pull request with your proposed changes
+2. For architectural or design suggestions, open an issue with the "enhancement" label
+3. For bug reports, open an issue with the "bug" label
 
 
-# Deployment architecture
+## License
 
-## Docker compose stack
-
-* `rp.xeokit.io` - traefik, reverse proxy
-* `xeokit.io` - docusaurus build served by nginx, single source of truth
-* `sdk-examples.xeokit.io` - vite build served by nginx, sdk v3 typescript examples
-
-# Working with project
-
-## Docusaurus
-
-```bash
-git submodule update --init --recursive   # To initialize, fetch and checkout any nested submodules
-pnpm run install                          # To install docusaurus dependencies
-pnpm run doc:sdk:generate                 # To create documentation content from _submodules
-pnpm run doc:start                        # To run development server
-```
-
-## Deployment
-
-Github Action is prepared for automated deployment.
-
-For manual deployment from localhost you need `ansible` stack. You can use "self contained" setup:
-
-``` bash
-curl -LsSf https://astral.sh/uv/install.sh | sh   # To install `uv` as python manager
-uv sync --project .deploy                         # To create python virtualenv and install ansible within in
-source .deploy/.venv/bin/activate                 # To activate virtualenv and get access to ansible stack
-```
-
-To run deployment ([Task](https://taskfile.dev/) - task runner is recommended):
-
-```bash
-task ansible:deploy   # To run ansible-playbook with required options
-```
+[Add appropriate license information here]

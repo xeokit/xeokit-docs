@@ -1,14 +1,14 @@
-import { type } from 'arktype'
+import { type } from 'arktype';
 
 // Components
 const Sdk = type({
   examplesHost: 'string.url',
-})
+});
 
 // Composition
 const Config = type({
   sdk: Sdk,
-})
+});
 
 // Validation
 export const config: typeof Config.infer = (() => {
@@ -16,17 +16,12 @@ export const config: typeof Config.infer = (() => {
     sdk: {
       examplesHost: process.env.XD_SDK_EXAMPLES_HOST,
     },
-  })
+  });
 
   if (config instanceof type.errors ) {
-    throw Error(config.summary)
+    throw Error(config.summary);
   }
-  return config
-})()
-
-
-
-
-
+  return config;
+})();
 
 

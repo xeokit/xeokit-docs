@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs';
+import path from 'path';
 
 export function processDirectoryRecursively(source: string, fileCallback: (filePath: string) => void) {
   const items = fs.readdirSync(source);
@@ -10,5 +10,5 @@ export function processDirectoryRecursively(source: string, fileCallback: (fileP
       processDirectoryRecursively(fullPath, fileCallback); // Recurse into subfolders
     } else if (stat.isFile()) {
       fileCallback(fullPath); // Process file
-    }})
+    }});
 }

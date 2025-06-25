@@ -29,6 +29,6 @@ export function copyExamples() {
         return true;
       }
       return false;
-    }
-  })
+    },
+  });
 }

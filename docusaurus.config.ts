@@ -1,6 +1,6 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
 // import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -71,7 +71,7 @@ const config: Config = {
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
           createSitemapItems: async (params) => {
-            const {defaultCreateSitemapItems, ...rest} = params;
+            const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
             return items.filter((item) => !item.url.includes('/page/'));
           },
@@ -181,8 +181,13 @@ const config: Config = {
             {
               label: "Model Conversion",
               href: "/sdk-v2/examples/model-conversion",
-            }
-          ]
+            },
+            {
+              label: "Source Code",
+              href: "https://github.com/xeokit/sdk",
+              target: "_blank",
+            },
+          ],
         },
         {
           type: 'dropdown',
@@ -203,7 +208,7 @@ const config: Config = {
               href: "https://github.com/xeokit/sdk",
               target: "_blank",
             },
-          ]
+          ],
         },
         {
           label: 'Use Cases',
@@ -218,10 +223,10 @@ const config: Config = {
               label: "xeoVision",
               href: "https://xeo.vision",
               target: "_blank",
-            }
-          ]
+            },
+          ],
         },
-        {to: '/blog', label: 'Blog', position: 'right'},
+        { to: '/blog', label: 'Blog', position: 'right' },
       ],
     },
     footer: {
@@ -241,7 +246,7 @@ const config: Config = {
             {
               label: "Model Conversion",
               href: "/sdk-v2/examples/model-conversion",
-            }
+            },
           ],
         },
         {

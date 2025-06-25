@@ -33,5 +33,5 @@ export function copyContent() {
 
   processDirectoryRecursively(outputDir, (inputFilePath: string) => {
     _copyFile(inputFilePath);
-  })
+  });
 }

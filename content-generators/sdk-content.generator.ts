@@ -8,4 +8,4 @@ function generateSdkContent() {
   copyContent();
 }
 
-generateSdkContent()
+generateSdkContent();

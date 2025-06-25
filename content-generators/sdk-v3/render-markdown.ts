@@ -18,7 +18,7 @@ const RENDER_CONTEXT: RenderContext = { /* Add global Nunjucks variables here */
 
 const env = new nunjucks.Environment([
   new nunjucks.FileSystemLoader('templates'),
-])
+]);
 
 function _processFile(inputFilePath: string) {
   // if not .md file, return
@@ -77,6 +77,6 @@ export function renderMarkdown() {
 
   processDirectoryRecursively(inputDir, (inputFilePath: string) => {
     _processFile(inputFilePath);
-  })
+  });
 
 }

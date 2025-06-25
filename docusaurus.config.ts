@@ -204,6 +204,10 @@ const config: Config = {
               href: '/sdk-v3/sdk-examples',
             },
             {
+              label: 'Development Status',
+              to: '/sdk-v3/development-status',
+            },
+            {
               label: "Source Code",
               href: "https://github.com/xeokit/sdk",
               target: "_blank",

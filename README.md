@@ -49,6 +49,8 @@ The deployment consists of:
 
 ### Getting Started
 
+#### Development 
+
 1. Clone the repository and initialize submodules:
    ```bash
    git clone <repository-url>
@@ -61,17 +63,36 @@ The deployment consists of:
    pnpm install
    ```
 
-3. Generate SDK documentation:
+3. Create .env file.
+    ```bash
+    cp .env.localdev .env
+    ```
+    At current stage `envs` are required for content generation, and docker. 
+
+4. Generate SDK documentation:
    ```bash
    pnpm run doc:sdk:generate
    ```
 
-4. Start the development server:
+5. Start the development server:
    ```bash
    pnpm run doc:start
    ```
 
-### Content Generation
+# Test build locally
+
+1. Build project:
+   ```bash
+   pnpm run doc:build
+   ```
+
+2. Build project:
+   ```bash
+   pnpm run doc:serve
+   ```
+
+
+### Multiple source of content
 
 The documentation content comes from multiple sources:
 1. Markdown files in the `docs/` directory

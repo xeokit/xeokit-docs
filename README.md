@@ -58,6 +58,8 @@ The deployment consists of:
    git submodule update --init --recursive
    ```
 
+   It will take a while as submodule repositories are quite big.
+
 2. Install dependencies:
    ```bash
    pnpm install
@@ -115,7 +117,12 @@ For manual deployment from localhost, use the Ansible stack:
    source .deploy/.venv/bin/activate
    ```
 
-2. Run the deployment (using [Task](https://taskfile.dev/)):
+2. Login to tailnet:
+   ```bash
+   tailscale login
+   ```   
+3. Run the deployment (using [Task](https://taskfile.dev/)):
+
    ```bash
    task ansible:deploy
    ```

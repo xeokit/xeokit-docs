@@ -10,7 +10,7 @@ vars:
 
 tasks:
   prepare-env:
-    desc: Prepare environment variables
+    desc: Prepare environment
     aliases:
       - pe
     cmds:
@@ -43,7 +43,7 @@ tasks:
       - cu
     desc: Start services
     cmds:
-      - up --detach
+      - docker compose up --detach
 
   compose-show-config:
     desc: Show docker-compose config

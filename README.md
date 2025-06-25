@@ -4,8 +4,6 @@
 
 This website serves as the comprehensive documentation portal for xeokit, built using [Docusaurus](https://docusaurus.io/), a modern static website generator. The site combines various content sources to provide a seamless documentation experience for all xeokit products.
 
-## For Management Team
-
 ### Project Goals
 
 - Create a unified documentation platform for all xeokit products
@@ -29,7 +27,7 @@ The project integrates content from multiple sources:
 - SDK examples embedded as iframes
 - API documentation generated from code
 
-## For Developers
+## For Contributors
 
 ### Technical Architecture
 
@@ -39,6 +37,14 @@ Docusaurus serves as the main framework, with specialized plugins:
 - `@docusaurus/plugin-content-docs`: For documentation content
 
 The repository includes git submodules in the `_submodule` folder, which contain source content that is processed to generate documentation.
+
+### Multiple source of content
+
+The documentation content comes from multiple sources:
+1. Markdown files in the `docs/` directory
+2. Generated content from submodules using scripts in `content-generators/`
+3. Blog posts in the `blog/` directory
+4. Static pages in the `src/pages/` directory
 
 ### Deployment Architecture
 
@@ -93,14 +99,27 @@ The deployment consists of:
    pnpm run doc:serve
    ```
 
+# Test build in close to production environment
 
-### Multiple source of content
+1. Prepare, build, and run service
+   ```bash
+   task docker:prepare-env TARGET=localhost
+   task docker:compose-build
+   task docker:compose-up
+   ```
 
-The documentation content comes from multiple sources:
-1. Markdown files in the `docs/` directory
-2. Generated content from submodules using scripts in `content-generators/`
-3. Blog posts in the `blog/` directory
-4. Static pages in the `src/pages/` directory
+2. Browse websites:
+
+   ```
+   https://rp.xeokit.localhost
+   https://xeokit.localhost
+   https://sdk-examples.xeokit.localhost/
+   ```
+3. Down services:
+
+   ```bash
+   task docker:compose-down
+   ```
 
 ### Deployment
 

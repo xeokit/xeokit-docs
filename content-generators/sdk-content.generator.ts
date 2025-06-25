@@ -1,6 +1,6 @@
-import { copyContent } from "./sdk/copy-content";
-import { copyExamples } from "./sdk/copy-examples";
-import { renderMarkdown } from "./sdk/render-markdown";
+import { copyContent } from "./sdk-v3/copy-content";
+import { copyExamples } from "./sdk-v3/copy-examples";
+import { renderMarkdown } from "./sdk-v3/render-markdown";
 
 function generateSdkContent() {
   copyExamples();

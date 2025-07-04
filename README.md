@@ -124,7 +124,7 @@ The deployment consists of:
 ### Deployment
 
 #### Automated Deployment
-GitHub Actions is configured for automated deployment.
+GitHub Actions is configured for automated deployment from main branch.
 
 #### Manual Deployment
 For manual deployment from localhost, use the Ansible stack:
@@ -185,11 +185,19 @@ This repository uses ESLint 9 with the stylistic package for consistent code for
 
 ### Branching Strategy
 
+#### Development
 1. Create feature branches from `develop`
 2. After rebasing from `develop`, open a Pull Request back into `develop`
+
+#### Deployment
+`main` branch should never be ahead of `develop`.
+For that reason use `git merge origin/develop --ff-only`
 
 ### Commit Messages
 
 - Use [Conventional Commits](https://www.conventionalcommits.org/) format
 - Husky pre-commit hook validates messages against `commitlint.config.mjs`
 - Invalid commit messages will be rejected
+
+
+

@@ -36,6 +36,8 @@
     "typedoc-plugin-markdown": "catalog:docusaurus-extensions"
   },
   "devDependencies": {
+    "@commitlint/cli": "catalog:lint",
+    "@commitlint/config-conventional": "catalog:lint",
     "@docusaurus/module-type-aliases": "catalog:docusaurus-base",
     "@docusaurus/tsconfig": "catalog:docusaurus-base",
     "@docusaurus/types": "catalog:docusaurus-base",

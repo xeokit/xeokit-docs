@@ -16,6 +16,8 @@
     "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts",
     "lint": "eslint --cache .",
     "lint:fix": "eslint --fix .",
+
+
     "prepare": "husky"
   },
   "dependencies": {
@@ -50,6 +52,7 @@
     "dotenv-cli": "catalog:script",
     "eslint": "catalog:lint",
     "husky": "catalog:script",
+    "lint-staged": "catalog:lint",
     "nunjucks": "catalog:script",
     "tsx": "catalog:script",
     "typescript": "catalog:docusaurus-base",
@@ -70,5 +73,10 @@
   "engines": {
     "node": ">=22.0",
     "pnpm": ">=10"
-  }
+  },
+  "lint-staged": {
+    "*": [
+      "pnpm lint:fix"
+    ]
+    }
 }

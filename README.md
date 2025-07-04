@@ -164,3 +164,32 @@ We welcome contributions from both technical and non-technical team members:
 ## License
 
 [Add appropriate license information here]
+
+# Development Style Guide
+
+## Code Style & Linting
+
+This repository uses ESLint 9 with the stylistic package for consistent code formatting and linting.
+
+### Setup & Usage
+
+1. **Manual linting**: Run `pnpm lint:fix` to automatically fix linting issues
+2. **VS Code integration**: 
+   - Install recommended extensions from the `.vscode` folder
+   - With proper IDE configuration, files will be linted automatically on save
+3. **Pre-commit hooks**:
+   - Husky runs lint-staged to check and fix staged files
+   - Commits will be blocked if automatic fixes aren't possible
+
+## Git Workflow
+
+### Branching Strategy
+
+1. Create feature branches from `develop`
+2. After rebasing from `develop`, open a Pull Request back into `develop`
+
+### Commit Messages
+
+- Use [Conventional Commits](https://www.conventionalcommits.org/) format
+- Husky pre-commit hook validates messages against `commitlint.config.mjs`
+- Invalid commit messages will be rejected

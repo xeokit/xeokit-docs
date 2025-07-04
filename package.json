@@ -15,7 +15,8 @@
     "doc:typecheck": "tsc",
     "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts",
     "lint": "eslint --cache .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
@@ -46,6 +47,7 @@
     "chalk": "catalog:script",
     "dotenv-cli": "catalog:script",
     "eslint": "catalog:lint",
+    "husky": "catalog:script",
     "nunjucks": "catalog:script",
     "tsx": "catalog:script",
     "typescript": "catalog:docusaurus-base",

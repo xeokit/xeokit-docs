@@ -15,3 +15,12 @@ damian_bobrowski:
   page: true
   socials:
     github: damianbobrowski
+
+wojciech_radaczynski:
+  name: Wojciech Radaczyński
+  title: Software Engineer @ Creoox
+  url: https://github.com/paireks
+  image_url: https://creoox.com/wp-content/uploads/2025/04/Wojtek.png
+  page: true
+  socials:
+    github: paireks

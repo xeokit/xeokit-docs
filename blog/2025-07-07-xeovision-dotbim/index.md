@@ -17,6 +17,8 @@ This combination makes it possible to share your geometry + metadata with your c
 
 Let's take a look on the examples below.
 
+<!-- truncate -->
+
 ## Rhino/Grasshopper into xeo.vision
 
 In this example we create some simple geometry + metadata model from scratch in Grasshopper & export it into .bim. Later we will share this model in xeo.vision.

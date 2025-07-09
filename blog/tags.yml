@@ -13,6 +13,11 @@ xeokit:
   permalink: /xeokit
   description: Xeokit tag description
 
+xeovision:
+  label: xeovision
+  permalink: /xeovision
+  description: Xeovision tag description
+
 xeoservices:
   label: xeoServices
   permalink: /xeoservices

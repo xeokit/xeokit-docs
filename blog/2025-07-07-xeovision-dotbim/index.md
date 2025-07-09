@@ -66,7 +66,11 @@ All connectors are listed here: https://github.com/paireks/dotbim?tab=readme-ov-
 
 So there are many different ways how you can transfer you .bim files using xeo.vision.
 
-For instance take a look at this video: https://www.youtube.com/watch?v=sybo0PeYWCU This one comes from Grzegorz Olszewski who created dotbim-Tekla connector: https://github.com/LetsConstructIT/dotbim-Tekla
+For instance take a look at this video:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sybo0PeYWCU?si=uJEi62spK9tdF5AT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+This one comes from Grzegorz Olszewski who created dotbim-Tekla connector: https://github.com/LetsConstructIT/dotbim-Tekla
 
 ## Conclusion
 

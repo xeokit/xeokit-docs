@@ -1,5 +1,5 @@
 ---
-slug: model-tranfer-with-dotbim-xeo.vision
+slug: model-transfer-with-dotbim-xeo.vision
 title: Model transfer with dotbim + xeo.vision
 authors: [wojciech_radaczynski]
 tags: [xeovision]

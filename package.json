@@ -16,8 +16,6 @@
     "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts",
     "lint": "eslint --cache .",
     "lint:fix": "eslint --fix .",
-
-
     "prepare": "husky"
   },
   "dependencies": {
@@ -78,5 +76,5 @@
     "*": [
       "pnpm lint:fix"
     ]
-    }
+  }
 }

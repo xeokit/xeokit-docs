@@ -16,12 +16,11 @@
     "doc:sdk:generate": "cd content-generators && dotenv -e ../.env tsx sdk-content.generator.ts",
     "lint": "eslint --cache .",
     "lint:fix": "eslint --fix .",
-
-
     "prepare": "husky"
   },
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
+    "@docusaurus/plugin-ideal-image": "catalog:docusaurus-extensions",
     "@docusaurus/preset-classic": "catalog:docusaurus-base",
     "@docusaurus/theme-live-codeblock": "catalog:docusaurus-extensions",
     "@docusaurus/theme-mermaid": "catalog:docusaurus-extensions",
@@ -78,5 +77,5 @@
     "*": [
       "pnpm lint:fix"
     ]
-    }
+  }
 }

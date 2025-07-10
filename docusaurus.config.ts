@@ -81,7 +81,6 @@ const config: Config = {
   ],
 
   plugins: [
-    '@docusaurus/plugin-ideal-image',
     // [
     //   'docusaurus-plugin-openapi-docs',
     //   {

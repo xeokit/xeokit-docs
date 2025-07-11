@@ -124,7 +124,7 @@ const config: Config = {
         // language: ["en", "zh"],
 
         // If you're using `noIndex: true`, set `forceIgnoreNoIndex` to enable local index:
-        // forceIgnoreNoIndex: true,
+        forceIgnoreNoIndex: true,
       }),
     ],
   ],

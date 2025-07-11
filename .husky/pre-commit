@@ -1,1 +1,4 @@
+export PNPM_DIR="$HOME/.local/share/pnpm"
+[ -s "$PNPM_DIR" ] && export PATH="$PNPM_DIR:$PATH"
+
 pnpm lint-staged

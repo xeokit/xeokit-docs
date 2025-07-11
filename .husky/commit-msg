@@ -1,4 +1,4 @@
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export PNPM_DIR="$HOME/.local/share/pnpm"
+[ -s "$PNPM_DIR" ] && export PATH="$PNPM_DIR:$PATH"
 
-npx commitlint --edit $1
+pnpm dlx commitlint --edit $1

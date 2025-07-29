@@ -6,8 +6,8 @@ import { themes as prismThemes } from 'prism-react-renderer';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'xeokit',
-  tagline: 'Web programming toolkit',
+  title: '3D Web Graphics for BIM, GIS, AEC & FM - WebGL & xeokit SDK',
+  tagline: 'xeokit is an open-source 3D graphics SDK from xeolabs and Creoox for BIM and AEC. High performance & double precision empower visualization of large, complex 3D models. Used by AECO + FM industry leaders for viewing IFC, BCF, point clouds and more.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -60,6 +60,7 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -155,7 +156,7 @@ const config: Config = {
         {
           type: 'dropdown',
           position: 'left',
-          label: 'SDK v2 (current)',
+          label: 'SDK v2',
           items: [
             {
               label: 'xeokit-sdk [Examples]',
@@ -189,31 +190,31 @@ const config: Config = {
             },
           ],
         },
-        {
-          type: 'dropdown',
-          position: 'left',
-          label: 'SDK v3 (upcoming)',
-          items: [
-            {
-              type: 'docSidebar',
-              label: 'SDK TypeScript Examples',
-              sidebarId: 'sdkV3ExamplesSidebar',
-            },
-            {
-              label: 'SDK Examples',
-              href: '/sdk-v3/sdk-examples',
-            },
-            {
-              label: 'Development Status',
-              to: '/sdk-v3/development-status',
-            },
-            {
-              label: "Source Code",
-              href: "https://github.com/xeokit/sdk",
-              target: "_blank",
-            },
-          ],
-        },
+        // {
+        //   type: 'dropdown',
+        //   position: 'left',
+        //   label: 'SDK v3 (upcoming)',
+        //   items: [
+        //     {
+        //       type: 'docSidebar',
+        //       label: 'SDK TypeScript Examples',
+        //       sidebarId: 'sdkV3ExamplesSidebar',
+        //     },
+        //     {
+        //       label: 'SDK Examples',
+        //       href: '/sdk-v3/sdk-examples',
+        //     },
+        //     {
+        //       label: 'Development Status',
+        //       to: '/sdk-v3/development-status',
+        //     },
+        //     {
+        //       label: "Source Code",
+        //       href: "https://github.com/xeokit/sdk",
+        //       target: "_blank",
+        //     },
+        //   ],
+        // },
         {
           label: 'Use Cases',
           position: 'right',

@@ -1,0 +1,179 @@
+# Converting Models to XKT with convert2xkt
+
+The xeokit SDK enables us to load large, full-precision BIM and AEC models over the Web in seconds and view them in the browser. To do this, we pre-convert our models into xeokit's native XKT \*\*format. The XKT format compresses model geometry and metadata into a compact payload that a xeokit viewer can load quickly while using minimal browser resources.
+
+In this mini-tutorial, we introduce `convert2xkt`, a new JavaScript function and CLI tool that converts several 3D model formats into XKT format.
+
+We provide `convert2xkt` as an additional conversion option for your models, alongside our existing [standard open source IFC→XKT conversion pipeline](https://www.notion.so/c373e48bc4094ff5b6e5c5700ff580ee?pvs=21).
+
+Note that the pipeline in this tutorial only converts IFC element structure, and does not convert property sets. For property sets, we recommend [Converting IFC Models to XKT using ifc2gltf](/blog/converting-ifc-to-xkt-using-ifc2gltfcxconverter).
+
+- [Introduction](#introduction)
+-   [What's IFC?](#whats-ifc)
+-   [What's XKT?](#whats-xkt)
+- [convert2xkt](#convert2xkt)
+-   [Features](#features)
+-   [Resources](#resources)
+- [Installing convert2xkt](#installing-convert2xkt)
+- [Converting Models on the CLI](#converting-models-on-the-cli)
+- [Converting Models in JavaScript](#converting-models-in-javascript)
+
+# Introduction
+
+## What's IFC?
+
+The Industry Foundation Classes (IFC) data model is used to describe architectural, building and construction industry data.
+
+IFC defines an entity-relationship model consisting of various entities organized into a object-based inheritance model, with classes representing various building elements such as IfcWall, geometry such as IfcExtrudedAreaSolid, and basic constructs such as IfcCartesianPoint.
+
+The data model is developed by [buildingSMART](https://www.buildingsmart.org/) to facilitate interoperability in the AEC industry, and is a commonly used open collaboration format in BIM based projects.
+
+An IFC file is usually provided as an IFC-SPF file ("STEP-file") , which is a text format in which each line represents an entity that instantiates a class within the data model.
+
+## What's XKT?
+
+XKT is xeokit's native 3D model format, which compresses IFC and CAD models into a compact binary payload from which we can load large numbers of objects over the Web in seconds, at full geometric precision.
+
+An XKT file also contains metadata on its objects, which enables a xeokit viewer to classify and manipulate them according to their types. That's useful for building things like object tree view UIs, automatic building storey plan views, and so on.
+
+For each object/element, the metadata stores:
+
+- Name,
+- Element ID,
+- Element IFC type
+- Parent element ID
+
+The metadata also stores IFC property sets, some of which may be associated with objects/elements.
+
+In this tutorial, we'll use `convert2xkt` to convert an IFC 4 model into an XKT file, which we'll then load into a xeokit Viewer. For our IFC file, we'll use one of the [Revit Sample Project Files](https://knowledge.autodesk.com/support/revit/getting-started/caas/CloudHelp/cloudhelp/2020/ENU/Revit-GetStarted/files/GUID-61EF2F22-3A1F-4317-B925-1E85F138BE88-htm.html) from AutoDesk. When that's converted and loaded, it will look like the example below.
+
+
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_RevitSamples_RAC)
+
+![image-20240531-152428.png](./attachments/image-20240531-152428.png)
+
+# convert2xkt
+
+### Features
+
+- Converts models to XKT in a single step, without intermediate file formats or 3rd-party tools
+- Converts several source formats, including IFC, CityJSON, LAS and glTF
+- Converts IFC metadata, including property sets
+- Run from both CLI and JavaScript, on Node.js
+
+### Resources
+
+- Source code: [https://github.com/xeokit/xeokit-convert](https://github.com/xeokit/xeokit-convert)
+- API Docs: [https://xeokit.github.io/xeokit-convert/docs/](https://xeokit.github.io/xeokit-convert/docs/)
+- Benchmarks: [https://xeokit.github.io/xeokit-convert/perfTests/](https://xeokit.github.io/xeokit-convert/perfTests/)
+- XKT specification: [https://github.com/xeokit/xeokit-convert/tree/master/specs](https://github.com/xeokit/xeokit-convert/tree/master/specs)
+
+# Installing convert2xkt
+
+Using git and npm, clone and install our `xeokit-convert` repository, which contains the `convert2xkt` tool that we'll use to convert our models into XKT. Be sure to use the latest versions of both `xeokit-convert` and `xeokit-sdk`.
+
+```bash
+git clone https://github.com/xeokit/xeokit-convert.git
+cd xeokit-convert
+npm install
+```
+
+# Converting Models on the CLI
+
+To get started with `convert2xkt` , let's convert an IFC model at the command line.
+
+First, we'll get the tool to print out some usage info:
+
+```bash
+node convert2xkt.js -h
+
+Usage: convert2xkt [options]
+
+Options:
+
+    -v, --version            output the version number
+    -s, --source [file]      path to source file
+    -f, --format [string]    source file format (optional); supported formats are gltf, ifc, laz, las, pcd, ply, stl and cityjson
+    -m, --metamodel [file]   path to source metamodel JSON file (optional)
+    -o, --output [file]      path to target .xkt file; creates directories on path automatically if not existing
+    -p, --properties [file]  path to target directory for object property files; creates directories on path automatically if not existing
+    -l, --log                enable logging
+    -h, --help               output usage information
+```
+
+Then we'll go ahead and convert our model. We'll use the tool's logging option to see what's happening during conversion.
+
+```bash
+convert2xkt.js -s rac_sample_project.ifc -o rac_sample_project.ifc.xkt -l
+
+[convert2xkt] Reading input file: rac_sample_project.ifc
+[convert2xkt] Input file size: 45316.70 kB
+[convert2xkt] Converting...
+[convert2xkt] Converted objects: 5563
+[convert2xkt] Converted geometries: 2871
+[convert2xkt] Converted triangles: 283238
+[convert2xkt] Converted vertices: 743996
+[convert2xkt] Converted to: XKT v9
+[convert2xkt] XKT size: 1776.94 kB
+[convert2xkt] Compression ratio: 25.50
+[convert2xkt] Conversion time: 31.85 s
+[convert2xkt] Writing XKT file: rac_sample_project.ifc.xkt
+```
+
+
+> If NodeJS throws an out-of-memory exception, try setting a larger heap size, eg. node --max-old-space-size=25192 convert2xkt.js -s myModel.ifc -o myModel.ifc.xkt -l
+
+Now we've got our XKT model - it's compressed 25x and took 31 seconds to convert. Let's view it in the browser using xeokit, which should load this model in ~3-4s over a decent network connection.
+
+```js
+import {Viewer, XKTLoaderPlugin} from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-sdk/dist/xeokit-sdk.es.min.js";
+
+const viewer = new Viewer({
+     canvasId: "myCanvas"
+});
+
+const xktLoader = new XKTLoaderPlugin(viewer);
+
+const modelNode = xktLoader.load({
+     id: "myModel",
+     src: "./rme_sample_project.ifc.xkt"
+});
+```
+
+![image-20240531-152627.png](./attachments/image-20240531-152627.png)
+
+
+> [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_RevitSamples_RAC)
+
+# Converting Models in JavaScript
+
+Let's use `convert2xkt` from within a Node.js script to convert several different models to XKT. We'll convert models from CityJSON, IFC, LAZ and glTF.
+
+```js
+// TODO: fix converter require import
+const convert2xkt = require("@xeokit/xeokit-xkt-utils/dist/convert2xkt.cjs.js");
+
+// CityJSON -> XKT
+await convert2xkt({
+    source: "./DenHaag_01.json",
+    target: "./DenHaag_01.json.xkt"
+});
+
+// IFC -> XKT
+await convert2xkt({
+    source: "./rme_sample_project.ifc",
+    target: "./rme_sample_project.ifc.xkt"
+});
+
+// LAZ -> XKT
+await convert2xkt({
+    source: "./autzen.laz",
+    target: "./autzen.laz.xkt"
+});
+
+// glTF -> XKT
+await convert2xkt({
+    source: "./schependomlaan.gltf",
+    target: "./schependomlaan.gltf.xkt"
+});
+```

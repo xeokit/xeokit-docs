@@ -1,0 +1,158 @@
+# Textures in Scene Representations
+
+> See also: [Textures in XKT Model Format](/blog/textures-in-xkt-model-format)
+
+- [Introduction](#introduction)
+- [Building VBOSceneModels Containing Textures](#building-vboscenemodels-containing-textures)
+-   [Loading KTX2 files into a VBOSceneModel](#loading-ktx2-files-into-a-vboscenemodel)
+-   [Loading KTX2 ArrayBuffers into a VBOSceneModel](#loading-ktx2-arraybuffers-into-a-vboscenemodel)
+
+# Introduction
+
+In this tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a binary glTF model with textures into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
+
+The XKT format compresses models into a compact payload from which xeokit can load large numbers of objects over the Web in seconds, at full geometric precision.
+
+XKT stores textures in such a way that, as they are loaded, they are transcoded within the browser straight to the optimal compressed format that’s supported by the user’s GPU. Transcoding consumes minimal browser resources, and the GPU footprint of the compressed textures is also minimal. This gives us a minimal memory spike while loading textures, and the ability to pack more more them onto our GPU.
+
+To achieve this, XKT stores each texture in the [KTX 2.0 Container Format](https://github.khronos.org/KTX-Specification/) (`.ktx2`) . Within each KTX2 container, the texture’s pixel data is is encoded in the [UASTC Transmission Format](https://github.com/BinomialLLC/basis_universal/wiki/UASTC-Texture-Specification). The UASTC format is designed to be efficiently transcoded into the optimal compressed format for the target GPU.
+
+Internally, convert2xkt uses the [Basis Universal Transcoder](https://github.com/xeokit/xeokit-sdk/tree/master/dist/basis) to convert the glTF textures into XKT textures. Likewise, XKTLoaderPlugin uses the Basis Transcoder to transcode the XKT textures to the GPU’s optimal format.
+
+For our glTF model, we'll use an architectural model from Sketchfab. When that's converted and loaded into our viewer, it will look like the example below.
+
+This model contains 571 visible objects, with 139642 triangles and 14 textures, and a xeokit Viewer can usually load it over a good Internet connection in ~2 seconds.
+
+# Building VBOSceneModels Containing Textures
+
+A [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/model/VBOSceneModel.js~VBOSceneModel.html) that is configured with a [KTX2TextureTranscoder](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/utils/textureTranscoders/KTX2TextureTranscoder/KTX2TextureTranscoder.js~KTX2TextureTranscoder.html) will allow us to create textures within it from KTX2 data. In the next two examples, we’ll show how to use this component to programmatically build 3D scene content containing KTX2 textures.
+
+## Loading KTX2 files into a VBOSceneModel
+
+In the example below, we'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html), containing a [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/model/VBOSceneModel.js~VBOSceneModel.html) configured with a KTX2TextureTranscoder.
+
+We'll then programmatically create a simple object within the VBOSceneModel, consisting of a single box mesh with a texture loaded from a KTX2 file, which our VBOSceneModel internally transcodes, using its KTX2TextureTranscoder.
+
+As in the previous example, we'll configure our KTX2TextureTranscoder to load the Basis Codec from a local directory. If we were happy with loading the Codec from our CDN (ie. our app will always have an Internet connection) then we could just leave out the KTX2TextureTranscoder altogether, and let the VBOSceneModel use its internal default KTX2TextureTranscoder.
+
+
+> [Run a similar example](https://xeokit.github.io/xeokit-sdk/examples/sceneRepresentation_VBOSceneModel_batching_textures_ktx2.html)
+
+```js
+const viewer = new Viewer({
+    canvasId: "myCanvas",
+    transparent: true
+});
+
+viewer.scene.camera.eye = [-21.80, 4.01, 6.56];
+viewer.scene.camera.look = [0, -5.75, 0];
+viewer.scene.camera.up = [0.37, 0.91, -0.11];
+
+const textureTranscoder = new KTX2TextureTranscoder({
+    viewer,
+    transcoderPath: "./../dist/basis/" // <------ Path to BasisU transcoder module
+});
+
+const vboSceneModel = new VBOSceneModel(viewer.scene, {
+     id: "myModel",
+     textureTranscoder // <<---------- Configure model with our transcoder
+ });
+
+vboSceneModel.createTexture({
+     id: "myColorTexture",
+     src: "sample_uastc_zstd.ktx2" // <<----- KTX2 texture asset
+});
+
+vboSceneModel.createTexture({
+     id: "myMetallicRoughnessTexture",
+     src: "crosshatchAlphaMap.jpg" // <<----- JPEG texture asset
+});
+
+vboSceneModel.createTextureSet({
+     id: "myTextureSet",
+     colorTextureId: "myColorTexture",
+     metallicRoughnessTextureId: "myMetallicRoughnessTexture"
+ });
+
+vboSceneModel.createMesh({
+     id: "myMesh",
+     textureSetId: "myTextureSet",
+     primitive: "triangles",
+     positions: [1, 1, 1, ...],
+     normals: [0, 0, 1, 0, ...],
+     uv: [1, 0, 0, ...],
+     indices: [0, 1, 2, ...],
+ });
+
+vboSceneModel.createEntity({
+     id: "myEntity",
+     meshIds: ["myMesh"]
+ });
+
+vboSceneModel.finalize();
+```
+
+## Loading KTX2 ArrayBuffers into a VBOSceneModel
+
+A [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/models/VBOSceneModel/VBOSceneModel.js~VBOSceneModel.html) that is configured with a [KTX2TextureTranscoder](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/utils/textureTranscoders/KTX2TextureTranscoder/KTX2TextureTranscoder.js~KTX2TextureTranscoder.html) will also allow us to load textures into it from KTX2 ArrayBuffers.
+
+In the example below, we'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html), containing a [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/models/VBOSceneModel/VBOSceneModel.js~VBOSceneModel.html) configured with a KTX2TextureTranscoder.
+
+We'll then programmatically create a simple object within the VBOSceneModel, consisting of a single mesh with a texture loaded from a KTX2 ArrayBuffer, which our VBOSceneModel internally transcodes, using its KTX2TextureTranscoder.
+
+```js
+const viewer = new Viewer({
+    canvasId: "myCanvas",
+    transparent: true
+});
+
+viewer.scene.camera.eye = [-21.80, 4.01, 6.56];
+viewer.scene.camera.look = [0, -5.75, 0];
+viewer.scene.camera.up = [0.37, 0.91, -0.11];
+
+const textureTranscoder = new KTX2TextureTranscoder({
+    viewer,
+    transcoderPath: "./../dist/basis/" // <--- Path to BasisU transcoder module
+});
+
+const vboSceneModel = new VBOSceneModel(viewer.scene, {
+     id: "myModel",
+     textureTranscoder // <<----------- Configure model with our transcoder
+});
+
+utils.loadArraybuffer("sample_uastc_zstd.ktx2",(arrayBuffer) => {
+
+    vboSceneModel.createTexture({
+        id: "myColorTexture",
+        buffers: [arrayBuffer] // <<----- KTX2 texture asset
+    });
+
+    vboSceneModel.createTexture({
+        id: "myMetallicRoughnessTexture",
+        src: "crosshatchAlphaMap.jpg" // <<----- JPEG texture asset
+    });
+
+    vboSceneModel.createTextureSet({
+       id: "myTextureSet",
+       colorTextureId: "myColorTexture",
+       metallicRoughnessTextureId: "myMetallicRoughnessTexture"
+    });
+
+    vboSceneModel.createMesh({
+         id: "myMesh",
+         textureSetId: "myTextureSet",
+         primitive: "triangles",
+         positions: [1, 1, 1, ...],
+         normals: [0, 0, 1, 0, ...],
+         uv: [1, 0, 0, ...],
+         indices: [0, 1, 2, ...],
+    });
+
+    vboSceneModel.createEntity({
+        id: "myEntity",
+        meshIds: ["myMesh"]
+    });
+
+    vboSceneModel.finalize();
+});
+```

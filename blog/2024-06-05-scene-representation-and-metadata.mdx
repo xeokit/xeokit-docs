@@ -25,7 +25,7 @@ In this guide, we'll use [convert2xkt](https://github.com/xeokit/xeokit-convert)
 
 The xeokit SDK's core Viewer is built for viewing large AEC and BIM models. These models are often complex assembles, with metadata that classifies the objects and attaches domain-specific information to them. In this guide, we'll describe how the xeokit Viewer represents scene objects and metadata, and how we can access that metadata from JavaScript. As we go, we'll refer to the UML diagram below, which shows the main components we'll be discussing.
 
-We'll use an IFC model as our example, converted to XKT using [convert2xkt](/blog/2024-05-31-converting-models-to-xkt-with-convert2xkt), so that we can load it into our Viewer. This tutorial only works with convert2xkt currently.
+We'll use an IFC model as our example, converted to XKT using [convert2xkt](/blog/2024/05/31/converting-models-to-xkt-with-convert2xkt), so that we can load it into our Viewer. This tutorial only works with convert2xkt currently.
 
 Although we're using IFC in this guide, the core xeokit Viewer is not bound to IFC, or any other data model. Therefore, with the exception of one or two Viewer plugins, much of what you'll see here also works with other source formats, such as CityJSON.
 
@@ -61,7 +61,7 @@ convert2xkt.js -s rac_sample_project.ifc -o rac_sample_project.ifc.xkt
 ```
 
 
-> See also: [Converting Models to XKT with convert2xkt](/blog/converting-models-to-xkt-with-convert2xkt)
+> See also: [Converting Models to XKT with convert2xkt](/blog/2024/05/31/converting-models-to-xkt-with-convert2xkt)
 
 ## Loading XKT into a Viewer
 

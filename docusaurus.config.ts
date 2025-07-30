@@ -156,7 +156,7 @@ const config: Config = {
         {
           type: 'dropdown',
           position: 'left',
-          label: 'SDK v2',
+          label: 'SDK',
           items: [
             {
               label: 'xeokit-sdk [Examples]',
@@ -185,7 +185,7 @@ const config: Config = {
             },
             {
               label: "Source Code",
-              href: "https://github.com/xeokit/sdk",
+              href: "https://github.com/xeokit/xeokit-sdk",
               target: "_blank",
             },
           ],
@@ -275,12 +275,24 @@ const config: Config = {
           title: 'Connect',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/xeolabs',
+              html: `<a href="https://github.com/xeolabs" target="_blank" rel="noreferrer noopener" aria-label="Github repository" class="footer__link-item">
+                  <i class="fa-brands fa-github"></i> Github
+                </a>`,
             },
             {
-              label: 'X',
-              href: 'https://twitter.com/xeolabs',
+              html: `<a href="https://twitter.com/xeolabs" target="_blank" rel="noreferrer noopener" aria-label="Twitter" class="footer__link-item">
+                  <i class="fa-brands fa-twitter"></i> X
+                </a>`,
+            },
+            {
+              html: `<a href="https://www.youtube.com/@xeokitSDK" target="_blank" rel="noreferrer noopener" aria-label="YouTube Channel" class="footer__link-item">
+                  <i class="fa-brands fa-youtube"></i> YouTube
+                </a>`,
+            },
+            {
+              html: `<a href="https://www.linkedin.com/showcase/xeokit/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn Page" class="footer__link-item">
+                  <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>`,
             },
           ],
         },

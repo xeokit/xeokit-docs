@@ -8,6 +8,19 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  height: 100vh;
+  min-height: 600px;
+  max-height: 600px;
+
+  background: linear-gradient(to right,  rgba(0, 0, 0.8, 0.99), rgba(0,0, 0, 0.2) ), url('/img/RevitSamples.png') center center no-repeat scroll;
+  background-position:center center;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+  color: var(--ifm-header-color);
 }
 
 @media screen and (max-width: 996px) {

@@ -220,10 +220,10 @@ const config: Config = {
           position: 'right',
           type: "dropdown",
           items: [
-            {
-              label: "Success Stories",
-              to: '/blog/tags/success-stories',
-            },
+            // {
+            //   label: "Success Stories",
+            //   to: '/blog/tags/success-stories',
+            // },
             {
               label: "xeoVision",
               href: "https://xeo.vision",

@@ -1,0 +1,326 @@
+.pricing {
+  padding: 4rem 0;
+  background-color: var(--ifm-background-color-secondary);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subtitle:last-of-type {
+  margin-bottom: 3rem;
+}
+
+.subtitle a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.subtitle a:hover {
+  text-decoration: underline;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+}
+
+.pricingCard {
+  background: var(--ifm-card-background-color);
+  border: 2px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricingCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.popular {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.planTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.planDescription {
+  color: var(--ifm-color-content-secondary);
+  margin: 0;
+}
+
+.cardBody {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.checkmark {
+  color: var(--ifm-color-success);
+  font-weight: bold;
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.cardFooter {
+  text-align: center;
+  color: var(--ifm-color-content-secondary);
+}
+
+.ctaButton {
+  width: 100%;
+  font-weight: 600;
+}
+
+.ctaButton:hover {
+  color: var(--ifm-color-primary);
+}
+
+.agplInfo {
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+  text-align: center;
+}
+
+.agplTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.agplQuote {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ifm-color-content);
+  /* border-left: 4px solid var(--ifm-color-primary); */
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  background: var(--ifm-background-color);
+  padding: 1.5rem;
+  /* border-radius: 8px; */
+}
+
+.agplSource {
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.9rem;
+}
+
+.agplSource a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.agplSource a:hover {
+  text-decoration: underline;
+}
+
+.whatsIncluded {
+  max-width: 1000px;
+  margin: 0 auto 4rem auto;
+}
+
+.includedTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+}
+
+.includedDescription {
+  font-size: 1.1rem;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.includedDescription a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.includedDescription a:hover {
+  text-decoration: underline;
+}
+
+.includedItems {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.includedItem {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.itemTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-heading-color);
+}
+
+.itemTitle a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.itemTitle a:hover {
+  text-decoration: underline;
+}
+
+.itemDescription {
+  color: var(--ifm-color-content-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.itemDescription a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.itemDescription a:hover {
+  text-decoration: underline;
+}
+
+.enterpriseTools {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.enterpriseTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+  text-align: center;
+}
+
+.enterpriseDescription {
+  font-size: 1.1rem;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.enterpriseItem {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pricingGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .pricingCard {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .price {
+    font-size: 2rem;
+  }
+
+  .includedItems {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .pricing {
+    padding: 3rem 0;
+  }
+
+  .pricingCard {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .agplQuote {
+    padding: 1rem;
+  }
+
+  .includedItem,
+  .enterpriseItem {
+    padding: 1rem;
+  }
+}

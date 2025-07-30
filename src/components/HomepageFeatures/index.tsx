@@ -1,22 +1,19 @@
 import clsx from 'clsx';
-import FlexibilitySvg from '@site/static/img/features/computer-sourcecode.svg';
-import FreedomSvg from '@site/static/img/features/computer-gear.svg';
 import Heading from '@theme/Heading';
-import PowerSvg from '@site/static/img/features/xeokit_viewer.svg';
 import type { ReactNode } from 'react';
 import styles from './styles.module.css';
 
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  img: string;
   description: ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Power',
-    Svg: PowerSvg,
+    img: '/img/features/xeokit-viewer.png',
     description: (
       <>
         Visualize complex, federated AEC models at full-precision, in all major browsers, including mobile.
@@ -25,7 +22,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Flexibility',
-    Svg: FlexibilitySvg,
+    img: '/img/features/computer-sourcecode.png',
     description: (
       <>
         A complete JavaScript graphics toolkit for building BIM and AEC viewing applications.
@@ -34,7 +31,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Freedom',
-    Svg: FreedomSvg,
+    img: '/img/features/computer-gear.png',
     description: (
       <>
         Open-source components to build your own product, your way. Keep everything on your own servers.
@@ -43,14 +40,14 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, img, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+      <div className="content-center">
+        <img className={styles.featureImg} src={img} alt={title} />
       </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
+      <div className="content-center mx-2 font-black text--center">
+        <Heading as="h3" className='text--center'>{title}</Heading>
         <p>{description}</p>
       </div>
     </div>

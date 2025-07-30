@@ -1,3 +1,10 @@
+---
+slug: loading-large-laslaz-files
+title: Loading large Las/Laz Files
+authors: [xeokit]
+tags: [xeokit]
+---
+
 # Loading large Las/Laz Files
 
 Hello !
@@ -6,7 +13,7 @@ Thank you for your patience while we investigated the issue.
 
 We identified that the root cause lies in a limitation of the [http://loaders.gl](http://loaders.gl) package, which is used by our SDK and xeokit-converter to load LAS/LAZ files. Currently, the package supports files up to **160MB**, whereas the file you are trying to load exceeds **200MB**. Unfortunately, this limit cannot be increased at this time.
 
-However, we do have a workaround to offer:  
+However, we do have a workaround to offer:
 You can use **lasmerge**, an open-source tool provided by LASTools, to split the large LAS/LAZ file into smaller files. Once split, these smaller files can be loaded or converted individually using our SDK or xeokit-converter.
 
 To assist you further, I’ve included the following resources:
@@ -18,5 +25,5 @@ To assist you further, I’ve included the following resources:
 
 If you need any help implementing this workaround or have further questions, feel free to reach out.
 
-Best,  
+Best,
 Muhammad Ijlal

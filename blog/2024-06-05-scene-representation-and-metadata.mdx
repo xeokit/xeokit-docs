@@ -1,3 +1,10 @@
+---
+slug: scene-representation-and-metadata
+title: Scene Representation and Metadata
+authors: [xeokit]
+tags: [xeokit]
+---
+
 # Scene Representation and Metadata
 
 In this guide, we'll use [convert2xkt](https://github.com/xeokit/xeokit-convert) to convert an IFC file to xeokit's native, fast-loading XKT format. Then, using JavaScript, we'll view the XKT model in the browser using xeokit Viewer component. As the Viewer loads our model, it will create 3D scene objects, along with a parallel metadata structure. We'll show how to use that metadata to navigate the scene objects and get information about them.
@@ -61,7 +68,7 @@ convert2xkt.js -s rac_sample_project.ifc -o rac_sample_project.ifc.xkt
 ```
 
 
-> See also: [Converting Models to XKT with convert2xkt](/blog/2024/05/31/converting-models-to-xkt-with-convert2xkt)
+> See also: [Converting Models to XKT with convert2xkt](/blog/converting-models-to-xkt-with-convert2xkt)
 
 ## Loading XKT into a Viewer
 

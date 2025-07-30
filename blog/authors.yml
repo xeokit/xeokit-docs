@@ -1,3 +1,8 @@
+xeokit:
+  name: xeokit
+  url: https://github.com/xeokit/
+  image_url: https://github.com/xeokit.png
+
 dominik_szaradowski:
   name: Dominik Szaradowski
   title: Software Engineer @ Creoox

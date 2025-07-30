@@ -156,7 +156,7 @@ const config: Config = {
         {
           type: 'dropdown',
           position: 'left',
-          label: 'SDK v2',
+          label: 'SDK',
           items: [
             {
               label: 'xeokit-sdk [Examples]',
@@ -185,7 +185,7 @@ const config: Config = {
             },
             {
               label: "Source Code",
-              href: "https://github.com/xeokit/sdk",
+              href: "https://github.com/xeokit/xeokit-sdk",
               target: "_blank",
             },
           ],

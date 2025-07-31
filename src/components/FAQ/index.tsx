@@ -45,7 +45,7 @@ const faqItems: FAQItem[] = [
         <p>The xeokit SDK is a partnership between:</p>
         <ul>
           <li><a href="https://xeolabs.com" target="_blank" rel="noopener noreferrer">xeolabs</a> - created xeokit in 2019, based on 10+ years experience visualizing 3D BIM and STEM in the browser.</li>
-          <li><a href="./blog_creoox_becomes_xeokit_sales_partner.html" target="_blank" rel="noopener noreferrer">Creoox AG</a> - xeokit's official and exclusive business partner, supporting with development, handling sales, marketing, CRM and business development.</li>
+          <li><a href="/blog/creoox-becomes-xeokit-sales-partner" target="_blank" rel="noopener noreferrer">Creoox AG</a> - xeokit's official and exclusive business partner, supporting with development, handling sales, marketing, CRM and business development.</li>
         </ul>
       </div>
     ),

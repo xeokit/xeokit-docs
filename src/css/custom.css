@@ -1,6 +1,5 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/brands.min.css);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/solid.min.js);
 
 /**
  * Any CSS included here will be global. The classic template
@@ -20,10 +19,9 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-navbar-background-color: #C4C4C4;
-
   --ifm-header-color: #ffffff;
-  /* --ifm-heading-color: #000000;
-  --ifm-hero-text-color: #000000; */
+  --ifm-link-color: #060729;
+  --ifm-link-weight: 600;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -37,8 +35,27 @@
   --ifm-color-primary-lightest: #C4C4C4;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-navbar-background-color: #000000;
-  /* --ifm-heading-color: #ffffff;
-  --ifm-hero-text-color: #ffffff; */
-
+  --ifm-link-color: #C4C4C4;
+  --ifm-link-weight: 600;
   --ifm-header-color: #ffffff;
 }
+
+/* Links */
+a {
+  color: var(--ifm-link-color);
+  font-weight: var(--ifm-link-weight);
+  /* autoprefixer: ignore next */
+  text-decoration: var(--ifm-link-decoration);
+  transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+a:hover {
+    color: var(--ifm-link-hover-color);
+    /* autoprefixer: ignore next */
+    text-decoration: var(--ifm-link-hover-decoration);
+  }
+
+a:not([href]) {
+    -webkit-text-decoration: none;
+    text-decoration: none;
+  }

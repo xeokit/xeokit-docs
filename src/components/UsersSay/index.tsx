@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 interface Testimonial {
   name: string;
+  link: string;
   title: string;
   company: string;
   image: string;
@@ -16,6 +17,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     name: "Toni Marti",
+    link: "https://www.linkedin.com/in/toni-mart%C3%AD-392604103/",
     title: "Software Artist",
     company: "uniZite AS",
     image: "/img/toni-marti.jpg",
@@ -25,6 +27,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Chloe Sun",
+    link: "https://www.linkedin.com/in/chloe-c-s-955a22114/",
     title: "Design Technology Specialist",
     company: "HOK Architects",
     image: "/img/chloe-sun.jpg",
@@ -34,6 +37,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Hugo Duroux",
+    link: "https://www.linkedin.com/in/hugo-duroux-46262166/",
     title: "Technical Director",
     company: "BIMData.io",
     image: "/img/hugo-duroux.jpg",
@@ -43,6 +47,7 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Christoph Degendorfer",
+    link: "https://www.linkedin.com/in/christoph-degendorfer-712287b5/",
     title: "Co-Founder & CEO",
     company: "bimspot.io",
     image: "/img/christoph-degendorfer.jpg",
@@ -57,7 +62,7 @@ export default function UsersSay(): ReactNode {
     <section className={styles.testimonials}>
       <div className="container">
         <div className="text--center">
-          <h2 className={styles.title}>What xeokit's users say</h2>
+          <h2 id="testimonials" className={styles.title}>What xeokit's users say</h2>
         </div>
         <div className={styles.testimonialsGrid}>
           {testimonials.map((testimonial, idx) => (
@@ -71,7 +76,7 @@ export default function UsersSay(): ReactNode {
                 <div className={styles.author}>
                   <div className={styles.authorInfo}>
                     <div className={styles.authorName}>
-                      <a href={`https://www.linkedin.com/in/${testimonial.name.toLowerCase().replace(' ', '-')}/`} target="_blank" rel="noopener noreferrer">
+                      <a href={testimonial.link} target="_blank" rel="noopener noreferrer">
                         {testimonial.name}
                       </a>
                     </div>

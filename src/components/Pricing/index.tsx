@@ -24,7 +24,7 @@ const pricingPlans: PricingPlan[] = [
       "Open-source restrictions apply",
     ],
     buttonText: "Get Started",
-    buttonUrl: "https://github.com/xeokit/xeokit-sdk",
+    buttonUrl: "/sdk-v2/api-doc/xeokit-sdk",
   },
   {
     title: "Custom License",
@@ -144,9 +144,9 @@ export default function Pricing(): ReactNode {
                 <a href="https://openproject.org" target="_blank" rel="noopener noreferrer">
                   OpenProject
                 </a>{' '}
-                - try a{' '}
-                <a href="./demo.html?projectId=OTCConferenceCenter&tab=storeys" target="_blank" rel="noopener noreferrer">
-                  demo
+                - try our{' '}
+                <a href="/sdk-v2/examples/xeokit-bim-viewer" target="_blank" rel="noopener noreferrer">
+                  demos
                 </a>!
               </p>
             </div>

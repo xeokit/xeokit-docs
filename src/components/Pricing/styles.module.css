@@ -131,10 +131,11 @@
 .ctaButton {
   width: 100%;
   font-weight: 600;
+  color: #999;
 }
 
 .ctaButton:hover {
-  color: var(--ifm-color-primary);
+  color: #666;
 }
 
 .agplInfo {

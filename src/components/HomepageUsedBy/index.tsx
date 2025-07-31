@@ -28,7 +28,7 @@ const CompanyList: CompanyItem[] = [
   },
   {
     name: 'Libal CDE',
-    logo: '/img/userLogos/libal-cde-Logo.png',
+    logo: '/img/userLogos/libal-cde-logo.png',
     alt: 'Libal CDE - Collaborative Data Environment',
   },
   {
@@ -49,7 +49,7 @@ const CompanyList: CompanyItem[] = [
   },
   {
     name: 'Madaster: The cadastre for materials and products',
-    logo: '/img/userLogos/madaster-logo.png',
+    logo: '/img/userLogos/Madaster-logo.png',
     alt: 'Madaster - The cadastre for materials and products',
   },
   {

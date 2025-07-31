@@ -280,8 +280,8 @@ const config: Config = {
                 </a>`,
             },
             {
-              html: `<a href="https://twitter.com/xeolabs" target="_blank" rel="noreferrer noopener" aria-label="Twitter" class="footer__link-item">
-                  <i class="fa-brands fa-twitter"></i> X
+              html: `<a href="https://www.linkedin.com/showcase/xeokit/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn Page" class="footer__link-item">
+                  <i class="fa-brands fa-linkedin"></i> LinkedIn
                 </a>`,
             },
             {
@@ -290,8 +290,18 @@ const config: Config = {
                 </a>`,
             },
             {
-              html: `<a href="https://www.linkedin.com/showcase/xeokit/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn Page" class="footer__link-item">
-                  <i class="fa-brands fa-linkedin"></i> LinkedIn
+              html: `<a href="https://twitter.com/xeolabs" target="_blank" rel="noreferrer noopener" aria-label="Twitter" class="footer__link-item">
+                  <i class="fa-brands fa-x"></i> Twitter
+                </a>`,
+            },
+            {
+              html: `<a href="https://xeolabs.com" target="_blank" rel="noreferrer noopener" aria-label="Xeolabs" class="footer__link-item">
+                  Xeolabs
+                </a>`,
+            },
+            {
+              html: `<a href="https://creoox.com" target="_blank" rel="noreferrer noopener" aria-label="Creoox" class="footer__link-item">
+                  Creoox AG
                 </a>`,
             },
           ],

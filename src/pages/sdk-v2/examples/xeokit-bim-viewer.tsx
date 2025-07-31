@@ -10,7 +10,7 @@ export default function Hello(): ReactNode {
     <Layout
       title={`xeokit-sdk - ${siteConfig.title}`}
       description="BIM Viewer Examples">
-      <XeoIframe src="https://xeokit.github.io/xeokit-sdk/examples/bimviewer.html" />
+      <XeoIframe src={'https://xeokit.github.io/xeokit-sdk/examples/bimviewer.html' + (window.location.search ? window.location.search : '')} />
     </Layout>
   );
 }

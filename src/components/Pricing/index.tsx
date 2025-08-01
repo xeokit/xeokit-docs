@@ -44,7 +44,7 @@ const pricingPlans: PricingPlan[] = [
 
 export default function Pricing(): ReactNode {
   return (
-    <section className={styles.pricing}>
+    <section id="pricing" className={styles.pricing}>
       <div className="container">
         <div className="text--center">
           <h2 className={styles.title}>Pricing</h2>

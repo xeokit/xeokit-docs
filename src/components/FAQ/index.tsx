@@ -122,7 +122,7 @@ export default function FAQ(): ReactNode {
   };
 
   return (
-    <section className={styles.faq}>
+    <section id="faq" className={styles.faq}>
       <div className="container">
         <div className="text--center">
           <h2 className={styles.title}>FAQ</h2>

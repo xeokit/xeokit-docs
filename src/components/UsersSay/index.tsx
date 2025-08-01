@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React from 'react';
 import type { ReactNode } from 'react';
 import styles from './styles.module.css';

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import type { ReactNode } from 'react';
 import styles from './styles.module.css';

@@ -29,3 +29,12 @@ wojciech_radaczynski:
   page: true
   socials:
     github: paireks
+
+marcin_feszter:
+  name: Marcin Feszter
+  title: Software Engineer @ Creoox
+  url: https://github.com/frytaz
+  image_url: https://creoox.com/wp-content/uploads/2025/03/marcin2.png
+  page: true
+  socials:
+    github: frytaz

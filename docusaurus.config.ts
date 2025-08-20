@@ -32,8 +32,6 @@ const config: Config = {
     locales: ['en'],
   },
 
-  noIndex: true,
-
   presets: [
     [
       'classic',
@@ -123,9 +121,6 @@ const config: Config = {
 
         // For Docs using Chinese, it is recomended to set:
         // language: ["en", "zh"],
-
-        // If you're using `noIndex: true`, set `forceIgnoreNoIndex` to enable local index:
-        forceIgnoreNoIndex: true,
       }),
     ],
   ],

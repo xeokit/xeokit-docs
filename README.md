@@ -146,12 +146,6 @@ For manual deployment from localhost, use the Ansible stack:
    task ansible:deploy
    ```
 
-## TODO
-
-- Enable indexing after migration to production: update robots.txt and docusaurus.config.ts
-- Complete the migration of legacy documentation
-- Improve search functionality
-
 ## Contributing
 
 We welcome contributions from both technical and non-technical team members:

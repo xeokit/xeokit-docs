@@ -8,7 +8,7 @@ export default function HomepageFeaturesSection(): ReactNode {
       <div className="container">
         <div className="text--center margin-bottom--xl">
 
-          <Heading as="h2" className={styles.featuresSectionTitle}>
+          <Heading as="h2" className={styles.featuresSectionTitle} id="features">
             Features
           </Heading>
         </div>

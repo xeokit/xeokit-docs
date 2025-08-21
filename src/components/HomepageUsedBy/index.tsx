@@ -208,9 +208,9 @@ const CompanyList: CompanyItem[] = [
     alt: 'CMDBuild',
   },
   {
-    name: 'Tribia',
-    logo: '/img/userLogos/tribia.jpg',
-    alt: 'Tribia',
+    name: 'Tribia SA',
+    logo: '/img/userLogos/tribia-web.jpg',
+    alt: 'Tribia SA',
   },
   {
     name: 'Technical University Eindhoven',
@@ -306,7 +306,7 @@ export default function HomepageUsedBy(): ReactNode {
         <div className="row">
           <div className="col col--12">
             <div className="text--center margin-bottom--lg">
-              <Heading as="h2" className={styles.usedByTitle}>
+              <Heading as="h2" className={styles.usedByTitle} id="used-by">
                 Used by Industry Leaders
               </Heading>
               {/* <p className={styles.usedBySubtitle}>

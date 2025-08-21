@@ -1,3 +1,4 @@
+import Heading from '@theme/Heading';
 import React from 'react';
 import type { ReactNode } from 'react';
 import styles from './styles.module.css';
@@ -18,10 +19,10 @@ const testimonials: Testimonial[] = [
     name: "Toni Marti",
     link: "https://www.linkedin.com/in/toni-mart%C3%AD-392604103/",
     title: "Software Artist",
-    company: "uniZite AS",
+    company: "Tribia SA",
     image: "/img/toni-marti.jpg",
     quote: "xeokit is a success enabler for our customers. Incredibly fast load times and super high-performance rendering, even on mobile browsers. Built in a modular way that allowed us to easily customize its behaviour, while allowing us to create a differentiated navigation experience.\n\nClean code, with the ability to inspect its internals, was key to our development experience. Teams focused on simple things can start using it with less than ten lines of JavaScript, while more advanced users will find that xeokit can be adapted to meet their advanced use cases.",
-    companyLogo: "/img/userLogos/unizite-logo.png",
+    companyLogo: "/img/userLogos/tribia-web.jpg",
     companyUrl: "https://www.tribia.com",
   },
   {
@@ -61,7 +62,9 @@ export default function UsersSay(): ReactNode {
     <section className={styles.testimonials}>
       <div className="container">
         <div className="text--center">
-          <h2 id="testimonials" className={styles.title}>What xeokit's users say</h2>
+          <Heading as="h2" className={styles.title} id="testimonials">
+            What xeokit's users say
+          </Heading>
         </div>
         <div className={styles.testimonialsGrid}>
           {testimonials.map((testimonial, idx) => (

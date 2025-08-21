@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Heading from '@theme/Heading';
 import type { ReactNode } from 'react';
 import styles from './styles.module.css';
 
@@ -47,7 +48,10 @@ export default function Pricing(): ReactNode {
     <section id="pricing" className={styles.pricing}>
       <div className="container">
         <div className="text--center">
-          <h2 className={styles.title}>Pricing</h2>
+          <Heading as="h2" className={styles.title} id="pricing">
+            Pricing
+          </Heading>
+
           <p className={styles.subtitle}>
             The xeokit SDK is open-source software, licensed under the{' '}
             <a href="https://github.com/xeokit/xeokit-sdk/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">

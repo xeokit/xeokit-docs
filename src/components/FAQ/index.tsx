@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import Heading from '@theme/Heading';
 import type { ReactNode } from 'react';
 import styles from './styles.module.css';
 
@@ -125,7 +126,9 @@ export default function FAQ(): ReactNode {
     <section id="faq" className={styles.faq}>
       <div className="container">
         <div className="text--center">
-          <h2 className={styles.title}>FAQ</h2>
+          <Heading as="h2" className={styles.title} id="faq">
+            FAQ
+          </Heading>
         </div>
         <div className={styles.faqContainer}>
           {faqItems.map((item, index) => (

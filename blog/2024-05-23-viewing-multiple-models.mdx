@@ -20,6 +20,8 @@ Supported formats (so far) include IFC, glTF, DAE, OBJ, STL and 3DXML. Regardles
 
 In this tutorial, you'll load several models from different formats into the same scene, then update rendering states on a couple of their objects.
 
+<!-- truncate -->
+
 # Loading Three Models
 
 In this guide below, we'll use an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html) to load the Schependomlaan house model, an [OBJLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/OBJLoaderPlugin/OBJLoaderPlugin.js~OBJLoaderPlugin.html) to load a model of a car, and an [STLLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/STLLoaderPlugin/STLLoaderPlugin.js~STLLoaderPlugin.html) to load a model of a spur gear. We'll also add a scene graph [Mesh](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/mesh/Mesh.js~Mesh.html) to represent the green ground plane, which gets a plane shaped [Geometry](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/geometry/Geometry.js~Geometry.html), which we'll create using a [buildPlaneGeometry](https://xeokit.github.io/xeokit-sdk/docs/function/index.html#static-function-buildPlaneGeometry) builder function.

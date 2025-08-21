@@ -21,6 +21,7 @@
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
     "@docusaurus/preset-classic": "catalog:docusaurus-base",
+    "@docusaurus/theme-common": "^3.8.1",
     "@docusaurus/theme-live-codeblock": "catalog:docusaurus-extensions",
     "@docusaurus/theme-mermaid": "catalog:docusaurus-extensions",
     "@easyops-cn/docusaurus-search-local": "catalog:docusaurus-extensions",

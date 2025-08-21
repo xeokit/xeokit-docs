@@ -19,6 +19,8 @@ tags: [xeokit]
 
 In this tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a binary glTF model with textures into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
 
+<!-- truncate -->
+
 The XKT format compresses models into a compact payload from which xeokit can load large numbers of objects over the Web in seconds, at full geometric precision.
 
 XKT stores textures in such a way that, as they are loaded, they are transcoded within the browser straight to the optimal compressed format that’s supported by the user’s GPU. Transcoding consumes minimal browser resources, and the GPU footprint of the compressed textures is also minimal. This gives us a minimal memory spike while loading textures, and the ability to pack more more them onto our GPU.

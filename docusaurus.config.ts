@@ -270,7 +270,7 @@ const config: Config = {
           title: 'Connect',
           items: [
             {
-              html: `<a href="https://github.com/xeolabs" target="_blank" rel="noreferrer noopener" aria-label="Github repository" class="footer__link-item">
+              html: `<a href="https://github.com/xeokit" target="_blank" rel="noreferrer noopener" aria-label="Github repository" class="footer__link-item">
                   <i class="fa-brands fa-github"></i> Github
                 </a>`,
             },
@@ -285,13 +285,8 @@ const config: Config = {
                 </a>`,
             },
             {
-              html: `<a href="https://twitter.com/xeolabs" target="_blank" rel="noreferrer noopener" aria-label="Twitter" class="footer__link-item">
+              html: `<a href="https://twitter.com/xeokit" target="_blank" rel="noreferrer noopener" aria-label="Twitter" class="footer__link-item">
                   <i class="fa-brands fa-x"></i> Twitter
-                </a>`,
-            },
-            {
-              html: `<a href="https://xeolabs.com" target="_blank" rel="noreferrer noopener" aria-label="Xeolabs" class="footer__link-item">
-                  Xeolabs
                 </a>`,
             },
             {

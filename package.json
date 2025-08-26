@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
+    "@docusaurus/plugin-google-gtag": "^3.8.1",
     "@docusaurus/preset-classic": "catalog:docusaurus-base",
     "@docusaurus/theme-common": "^3.8.1",
     "@docusaurus/theme-live-codeblock": "catalog:docusaurus-extensions",

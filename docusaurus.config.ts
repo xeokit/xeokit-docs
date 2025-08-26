@@ -75,6 +75,10 @@ const config: Config = {
             return items.filter((item) => !item.url.includes('/page/'));
           },
         },
+        gtag: {
+          trackingID: 'G-9VRQEEM351',
+          anonymizeIP: true,
+        },
       } satisfies Preset.Options,
     ],
   ],

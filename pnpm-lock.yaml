@@ -137,6 +137,9 @@ importers:
       '@easyops-cn/docusaurus-search-local':
         specifier: catalog:docusaurus-extensions
         version: 0.51.1(@docusaurus/theme-common@3.8.1(@docusaurus/plugin-content-docs@3.7.0(@mdx-js/react@3.1.0(@types/react@19.1.4)(react@19.1.0))(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3))(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@mdx-js/react@3.1.0(@types/react@19.1.4)(react@19.1.0))(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3)
+      '@gracefullight/docusaurus-plugin-microsoft-clarity':
+        specifier: ^1.0.0
+        version: 1.0.0(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@mdx-js/react':
         specifier: catalog:docusaurus-base
         version: 3.1.0(@types/react@19.1.4)(react@19.1.0)
@@ -1927,6 +1930,9 @@ packages:
 
   '@gerrit0/mini-shiki@3.2.3':
     resolution: {integrity: sha512-yemSYr0Oiqk5NAQRfbD5DKUTlThiZw1MxTMx/YpQTg6m4QRJDtV2JTYSuNevgx1ayy/O7x+uwDjh3IgECGFY/Q==}
+
+  '@gracefullight/docusaurus-plugin-microsoft-clarity@1.0.0':
+    resolution: {integrity: sha512-tOFMgF8GdWL4VgdkuPiT/mDYbi4GgtOpq4hVWCg4O3XfSUd7TNGSrzNXnLiOzcO64gQSrBMpB3aQwIpi4gshdw==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -10894,6 +10900,19 @@ snapshots:
       '@shikijs/themes': 3.2.2
       '@shikijs/types': 3.2.2
       '@shikijs/vscode-textmate': 10.0.2
+
+  '@gracefullight/docusaurus-plugin-microsoft-clarity@1.0.0(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@docusaurus/utils-validation': 3.8.1(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    transitivePeerDependencies:
+      - '@swc/core'
+      - acorn
+      - esbuild
+      - react
+      - react-dom
+      - supports-color
+      - uglify-js
+      - webpack-cli
 
   '@hapi/hoek@9.3.0': {}
 

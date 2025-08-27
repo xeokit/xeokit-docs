@@ -6,7 +6,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: '3D Web Graphics for BIM, GIS, AEC & FM - WebGL & xeokit SDK',
+  title: 'Open-Source xeokit SDK',
   tagline: 'xeokit is an open-source 3D graphics SDK from xeolabs and Creoox for BIM and AEC. High performance & double precision empower visualization of large, complex 3D models. Used by AECO + FM industry leaders for viewing IFC, BCF, point clouds and more.',
   favicon: 'img/favicon.ico',
 
@@ -110,6 +110,11 @@ const config: Config = {
     //     tsconfig: 'demo-typedoc/tsconfig.json',
     //   },
     // ]
+
+    [
+      "@gracefullight/docusaurus-plugin-microsoft-clarity",
+      { projectId: "nml0pjdlbw" },
+    ],
   ],
 
   themes: [
@@ -138,7 +143,7 @@ const config: Config = {
        */
       playgroundPosition: 'bottom',
     },
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/xeokit-social.jpg',
     navbar: {
       title: 'xeokit',
       logo: {

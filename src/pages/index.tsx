@@ -36,10 +36,9 @@ function HomepageHeader() {
 }
 
 export default function Home(): ReactNode {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title={`Build Faster 3D Web Apps for BIM`}
       description="Build high-performance 3D BIM IFC web apps with open-source xeokit SDK. WebGL-based, fully customizable with double precision global coordinates for GIS.">
       <HomepageHeader />
       <main>

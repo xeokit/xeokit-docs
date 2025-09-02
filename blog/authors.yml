@@ -38,3 +38,21 @@ marcin_feszter:
   page: true
   socials:
     github: frytaz
+
+muhammad_ijlal:
+  name: Muhammad Ijlal
+  title: Software Engineer @ Creoox
+  url: https://github.com/ijlal99
+  image_url: https://creoox.com/wp-content/uploads/2025/03/muhammad.png
+  page: true
+  socials:
+    github: ijlal99
+
+anna_wilczura:
+  name: Anna Wilczura
+  title: Software Engineer @ Creoox
+  url: https://github.com/annawilczura
+  image_url: https://creoox.com/wp-content/uploads/2025/03/anna.png
+  page: true
+  socials:
+    github: annawilczura

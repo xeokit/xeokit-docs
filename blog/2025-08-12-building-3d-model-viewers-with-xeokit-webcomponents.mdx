@@ -100,8 +100,8 @@ IFC will be automatically converted to xkt format in your browser by our WASM cx
 
 <body>
   <div id="app">
-    <xeo-viewer id="my-viewer" transparent="true">
-      <xeo-model src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" bounding-box="true" show-edges="true"></xeo-model>
+    <xeo-viewer id="viewer-1" transparent="true">
+      <xeo-model src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" id="model-1" bounding-box="true" show-edges="true"></xeo-model>
       <xeo-model src="las;https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.laz"></xeo-model>
     </xeo-viewer>
   </div>
@@ -111,6 +111,7 @@ IFC will be automatically converted to xkt format in your browser by our WASM cx
 ```
 
 *   `src`: The URL to your 3D model.
+*.  `id`: Unique id of your model
 *   `bounding-box`: (Optional) Displays the bounding box of the loaded model. This is useful for debugging or visualizing model extents. (Default: false)
 *   `show-edges`: (Optional) Whether or not to show edges (Default: false)
 *   `dtx-enabled`: (Optional) Whether data texture scene representation (DTX) is enabled (Default: false)
@@ -140,11 +141,11 @@ IFC will be automatically converted to xkt format in your browser by our WASM cx
   <div id="app">
     <xeo-viewer id="viewer-1" transparent="true">
       <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" positionRight>
-        <xeo-tree-view hierarchy="containment" autoExpandDepth="3"></xeo-tree-view>
+        <xeo-tree-view hierarchy="containment" autoExpandDepth="3" id="tree-view-1"></xeo-tree-view>
         <xeo-tree-view hierarchy="types" autoExpandDepth="1"></xeo-tree-view>
         <xeo-tree-view hierarchy="storeys" autoExpandDepth="2"></xeo-tree-view>
       </xeo-tree-view-panel>
-      <xeo-model src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" bounding-box="true"></xeo-model>
+      <xeo-model src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" id="model-1" bounding-box="true"></xeo-model>
       <xeo-model src="las;https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.laz"></xeo-model>
     </xeo-viewer>
   </div>
@@ -161,6 +162,7 @@ Here we've added:
     *   `positionRight`: Positions the panel to the right of the viewer.
     *   `positionLeft`: Positions the panel to the left of the viewer.
 *   `<xeo-tree-view>`: Renders a tree view of the loaded models. You can have multiple `xeo-tree-view` elements, each displaying a different hierarchy.
+    *   `id`: Unique id of tree view
     *   `hierarchy`: Defines the hierarchy type. Common values include:
         *   `"containment"`: Based on IFC spatial containment.
         *   `"types"`: Grouped by IFC types.
@@ -188,12 +190,12 @@ Another useful component is `<xeo-fast-nav>`, which optimizes rendering for bett
   <div id="app">
     <xeo-viewer id="viewer-1" transparent="true">
       <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" positionRight>
-        <xeo-tree-view hierarchy="containment" autoExpandDepth="3"></xeo-tree-view>
+        <xeo-tree-view hierarchy="containment" id="tree-view-1" autoExpandDepth="3"></xeo-tree-view>
         <xeo-tree-view hierarchy="types" autoExpandDepth="1"></xeo-tree-view>
         <xeo-tree-view hierarchy="storeys" autoExpandDepth="2"></xeo-tree-view>
       </xeo-tree-view-panel>
       <xeo-fast-nav scale-canvas-resolution="true" scale-canvas-resolution-factor="0.5"></xeo-fast-nav>
-      <xeo-model src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" bounding-box="true"></xeo-model>
+      <xeo-model src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" id="model-1" bounding-box="true"></xeo-model>
       <xeo-model src="las;https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.laz"></xeo-model>
     </xeo-viewer>
   </div>
@@ -206,61 +208,51 @@ Another useful component is `<xeo-fast-nav>`, which optimizes rendering for bett
 
 ## Interacting with the Viewer
 
-While the declarative API is great for setup, you might want to programmatically interact with the viewer. You can access the underlying `xeokit.Viewer` instance through the `xeo-viewer` element.
+While the declarative API is great for setup, you might want to programmatically interact with the viewer.
 
 ```javascript
-document.addEventListener('DOMContentLoaded', () => {
-  const viewerElement = document.getElementById('viewer-1');
+import { XeoViewerService } from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-webcomponents/dist/index.min.js";
+const viewer = XeoViewerService.getInstance().getViewer("viewer-1");
 
-  if (viewerElement) {
-    const handleViewerReady = () => {
-      const viewer = viewerElement.viewer; // Access the xeokit.Viewer instance
-
-      if (viewer) {
-        viewer.camera.eye = [-10, 5, 10];
-        viewer.camera.look = [0, 0, 0];
-        viewer.camera.up = [0, 1, 0];
-
-        viewer.scene.on("picked", (event) => {
-          const pickedEntity = event.entity;
-          if (pickedEntity) {
-            console.log("Picked object ID:", pickedEntity.id);
-            // You can also access pickedEntity.json, pickedEntity.type, etc.
-          }
-        });
-
-        // Disconnect the observer once the viewer is found to prevent unnecessary checks
-        observer.disconnect();
-      }
-    };
-
-    // Use a MutationObserver to watch for changes to the 'viewer' property
-    const observer = new MutationObserver((mutationsList) => {
-      console.log({mutationsList});
-      for (const mutation of mutationsList) {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'viewer' // Assuming 'viewer' property could be reflected as an attribute,
-          // though it's more likely to be a property, which MutationObserver directly watches for in childList or subtree.
-          // For direct property changes, a custom event might be more appropriate,
-          // but for now, we check on any attribute or subtree change that might indicate readiness.
-        ) {
-          handleViewerReady();
-        } else if (mutation.type === 'childList' || mutation.type === 'subtree') {
-          // This captures general DOM changes, which might include when properties are set
-          // internally by the Web Component, especially if it adds elements.
-          handleViewerReady();
-        }
-      }
-    });
-
-    console.log({observer});
-
-    observer.observe(viewerElement, { attributes: true, subtree: true, attributeFilter: [] }); // Observe all attributes and subtree
-    handleViewerReady();
-
-  }
+// Listen to model-entity-clicked events
+const viewerComponent = document.getElementById("viewer-1");
+viewerComponent.addEventListener('model-entity-clicked', (event) => {
+  console.log('on model-entity-clicked:', { detail: event.detail });
 });
+
+// Listen to model-loaded events
+const xktModel = document.getElementById("model-1");
+xktModel.addEventListener('model-loaded', (event) => {
+  console.log('on model-loaded:', { detail: event.detail });
+});
+
+const containmentTreeView = document.getElementById("tree-view-1");
+containmentTreeView.addEventListener('tree-view-node-title-clicked', (event) => {
+  const entity = event.detail.viewer.scene.objects[event.detail.treeViewNode.objectId];
+  console.log('on tree-view-node-title-clicked:', { detail: event.detail, entity });
+});
+
+// Add custom events to viewer scene (https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/input/Input.js~Input.html)
+// viewer.scene.input.on("mouseclicked", (coords) => {
+//   const hit = viewer.scene.pick({
+//     canvasPos: coords
+//   });
+
+//   if (hit && hit.entity && hit.entity.isObject) {
+//     const entity = hit.entity;
+//     const metaObject = viewer.metaScene.metaObjects[entity.id];
+
+//     if (metaObject) {
+//       console.log("Custom Clicked entity:", {
+//         id: entity.id,
+//         name: metaObject.name,
+//         type: metaObject.type,
+//         volume: entity.volume,
+//         aabb: entity.aabb
+//       });
+//     }
+//   }
+// });
 ```
 
 ## Conclusion

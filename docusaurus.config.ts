@@ -160,7 +160,7 @@ const config: Config = {
         {
           type: 'dropdown',
           position: 'left',
-          label: 'SDK',
+          label: 'Developers',
           items: [
             {
               label: 'xeokit-sdk [Examples]',
@@ -220,6 +220,22 @@ const config: Config = {
         //   ],
         // },
         {
+          label: "Features",
+          position: "right",
+          to: "/#features",
+        },
+        {
+          label: "Pricing",
+          position: "right",
+          to: "/#pricing",
+        },
+        {
+          label: "FAQ",
+          position: "right",
+          to: "/#faq",
+        },
+        { to: '/blog', label: 'Blog', position: 'right' },
+        {
           label: 'Use Cases',
           position: 'right',
           type: "dropdown",
@@ -233,9 +249,17 @@ const config: Config = {
               href: "https://xeo.vision",
               target: "_blank",
             },
+            {
+              label: "Used By",
+              to: "/#used-by",
+            },
+            {
+              label: "Testimonials",
+              to: "/#testimonials",
+            },
           ],
         },
-        { to: '/blog', label: 'Blog', position: 'right' },
+
       ],
     },
     footer: {

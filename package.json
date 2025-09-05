@@ -35,6 +35,7 @@
     "prism-react-renderer": "catalog:docusaurus-base",
     "react": "catalog:docusaurus-base",
     "react-dom": "catalog:docusaurus-base",
+    "react-share": "^5.2.2",
     "typedoc": "catalog:docusaurus-extensions",
     "typedoc-plugin-markdown": "catalog:docusaurus-extensions"
   },

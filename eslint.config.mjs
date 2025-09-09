@@ -20,16 +20,17 @@ export default tseslint.config(
       '@stylistic': stylistic,
     },
     rules: {
-      'sort-imports': [
-        'error',
-        {
-          ignoreCase: true,
-          ignoreDeclarationSort: false,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-          allowSeparatedGroups: false,
-        },
-      ],
+      // TODO: eslint should automatically fix this, but still I have to do it manually
+      // 'sort-imports': [
+      //   'error',
+      //   {
+      //     ignoreCase: true,
+      //     ignoreDeclarationSort: false,
+      //     ignoreMemberSort: false,
+      //     memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+      //     allowSeparatedGroups: false,
+      //   },
+      // ],
       '@stylistic/comma-dangle': ['error', {
         arrays: 'always-multiline',
         objects: 'always-multiline',

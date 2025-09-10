@@ -77,8 +77,10 @@ In this example:
 *   `id`: A unique ID for the viewer instance.
 *   `transparent`: (Optional) Control the viewer background transparency (Default: false).
 *   `edges`: (Optional) Show edges (default false)
-*   `dtxEnabled`: (Optional) Whether data texture-based scene representation (DTX) is enabled (default false)
-*   `colorTextureEnabled`: (Optional) Whether basic color texture rendering is enabled (default false)
+*   `dtx-enabled`: (Optional) Whether data texture-based scene representation (DTX) is enabled (default false)
+*   `color-texture-enabled`: (Optional) Whether basic color texture rendering is enabled (default false)
+*   `nav-cube-enabled`: (Optional) Whether navcube plugin is enabled (default false)
+*   `nav-cube-position`: (Optional) Position of navcube (default bottom-left)
 
 ### 3. Load 3D Models
 
@@ -141,7 +143,7 @@ IFC will be automatically converted to xkt format in your browser by our WASM cx
 <body>
   <div id="app">
     <xeo-viewer id="viewer-1" transparent="true">
-      <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" positionRight>
+      <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" position="right">
         <xeo-tree-view hierarchy="containment" autoExpandDepth="3" id="tree-view-1"></xeo-tree-view>
         <xeo-tree-view hierarchy="types" autoExpandDepth="1"></xeo-tree-view>
         <xeo-tree-view hierarchy="storeys" autoExpandDepth="2"></xeo-tree-view>
@@ -160,8 +162,7 @@ Here we've added:
 *   `<xeo-tree-view-panel>`: A container for one or more tree views.
     *   `width`: Sets the width of the panel.
     *   `bgColor`: Sets the background color using an RGBA value for transparency.
-    *   `positionRight`: Positions the panel to the right of the viewer.
-    *   `positionLeft`: Positions the panel to the left of the viewer.
+    *   `position`: Panel position, left or right side of a page.
 *   `<xeo-tree-view>`: Renders a tree view of the loaded models. You can have multiple `xeo-tree-view` elements, each displaying a different hierarchy.
     *   `id`: Unique id of tree view
     *   `hierarchy`: Defines the hierarchy type. Common values include:
@@ -190,7 +191,7 @@ Another useful component is `<xeo-fast-nav>`, which optimizes rendering for bett
 <body>
   <div id="app">
     <xeo-viewer id="viewer-1" transparent="true">
-      <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" positionRight>
+      <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" position="right">
         <xeo-tree-view hierarchy="containment" id="tree-view-1" autoExpandDepth="3"></xeo-tree-view>
         <xeo-tree-view hierarchy="types" autoExpandDepth="1"></xeo-tree-view>
         <xeo-tree-view hierarchy="storeys" autoExpandDepth="2"></xeo-tree-view>
@@ -207,11 +208,65 @@ Another useful component is `<xeo-fast-nav>`, which optimizes rendering for bett
 
 *   `scale-canvas-resolution-factor`: Reduces the canvas resolution during fast navigation to improve frame rates. A value of `0.5` means the canvas will be rendered at half its normal resolution.
 
+### 6. Listening for callbacks
+
+There is a really easy way to add custom callbacks simply by adding attribute to webcomponents.
+
+`@model-entity-clicked`, `@model-loaded`, `@tree-view-node-title-clicked`
+
+```html {15,17,22,27,31,35}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Viewer</title>
+  <script type="module"
+    src="https://cdn.jsdelivr.net/npm/@xeokit/xeokit-webcomponents/dist/index.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <xeo-viewer @model-entity-clicked="entityClicked" id="viewer-1" transparent="true">
+      <xeo-tree-view-panel width="350px" bgColor="rgba(239,207,227,0.6)" position="right">
+        <xeo-tree-view @tree-view-node-title-clicked="treeNodeTitleClicked" hierarchy="containment" id="tree-view-1" autoExpandDepth="3"></xeo-tree-view>
+        <xeo-tree-view hierarchy="types" autoExpandDepth="1"></xeo-tree-view>
+        <xeo-tree-view hierarchy="storeys" autoExpandDepth="2"></xeo-tree-view>
+      </xeo-tree-view-panel>
+      <xeo-fast-nav scale-canvas-resolution="true" scale-canvas-resolution-factor="0.5"></xeo-fast-nav>
+      <xeo-model @model-loaded="modelLoaded" src="https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.xkt" id="model-1" bounding-box="true"></xeo-model>
+      <xeo-model src="las;https://sos-ch-gva-2.exo.io/creoox-public/example-no-1.laz"></xeo-model>
+    </xeo-viewer>
+  </div>
+  <script>
+    function entityClicked(event) {
+      console.log('Custom callback for model-entity-clicked:', { detail: event.detail });
+    }
+
+    function modelLoaded(event) {
+      console.log('Custom callback for model-loaded:', { detail: event.detail });
+    }
+
+    function treeNodeTitleClicked(event) {
+      console.log('Custom callback for tree-view-node-title-clicked:', { detail: event.detail });
+    }
+  </script>
+</body>
+
+</html>
+```
+
+Custom callbacks functions needs to be defined in `<script>` tag. We can read detail information from event argument.
+
 ## Interacting with the Viewer
 
 While the declarative API is great for setup, you might want to programmatically interact with the viewer.
 
-```javascript
+Here we can see how to get to viewer object from `XeoViwerService` singleton and then add custom event listeners to elements or to viewer scene itself.
+
+```javascript {2}
 import { XeoViewerService } from "https://cdn.jsdelivr.net/npm/@xeokit/xeokit-webcomponents/dist/index.min.js";
 const viewer = XeoViewerService.getInstance().getViewer("viewer-1");
 
@@ -225,6 +280,35 @@ viewerComponent.addEventListener('model-entity-clicked', (event) => {
 const xktModel = document.getElementById("model-1");
 xktModel.addEventListener('model-loaded', (event) => {
   console.log('on model-loaded:', { detail: event.detail });
+});
+
+const containmentTreeView = document.getElementById("tree-view-1");
+containmentTreeView.addEventListener('tree-view-node-title-clicked', (event) => {
+  const entity = viewer.metaScene.metaObjects[event.detail.treeViewNode.objectId];
+  const metaObject = viewer.metaScene.metaObjects[entity.id];
+  console.log('on tree-view-node-title-clicked:', { detail: event.detail, entity, metaObject });
+});
+
+// Add custom events to viewer scene (https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/input/Input.js~Input.html)
+viewer.scene.input.on("mouseclicked", (coords) => {
+  const hit = viewer.scene.pick({
+    canvasPos: coords
+  });
+
+  if (hit && hit.entity && hit.entity.isObject) {
+    const entity = hit.entity;
+    const metaObject = viewer.metaScene.metaObjects[entity.id];
+
+   if (metaObject) {
+     console.log("Custom Clicked entity:", {
+        id: entity.id,
+        name: metaObject.name,
+        type: metaObject.type,
+        volume: entity.volume,
+        aabb: entity.aabb
+      });
+    }
+  }
 });
 
 const containmentTreeView = document.getElementById("tree-view-1");
@@ -263,3 +347,5 @@ containmentTreeView.addEventListener('tree-view-node-title-clicked', (event) => 
 Whether you're building a BIM viewer, a product configurator, or just want to display 3D assets on your website, this package can significantly reduce development time and complexity. Give it a try in your next project!
 
 For more advanced features and customization, refer to the official `@xeokit/xeokit-webcomponents` documentation and the underlying [xeokit-sdk documentation](https://xeokit.github.io/xeokit-sdk/docs/index.html).
+
+

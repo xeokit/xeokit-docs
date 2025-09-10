@@ -115,6 +115,7 @@ const config: Config = {
       "@gracefullight/docusaurus-plugin-microsoft-clarity",
       { projectId: "nml0pjdlbw" },
     ],
+    ['@lunaticmuch/docusaurus-terminology', {}],
   ],
 
   themes: [
@@ -279,6 +280,10 @@ const config: Config = {
             {
               label: "Model Conversion",
               href: "/sdk-v2/examples/model-conversion",
+            },
+            {
+              label: "Glossary",
+              href: "/docs/glossary",
             },
           ],
         },

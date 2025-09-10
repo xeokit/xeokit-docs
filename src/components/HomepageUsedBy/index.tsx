@@ -28,12 +28,12 @@ const CompanyList: CompanyItem[] = [
   },
   {
     name: 'Libal CDE',
-    logo: '/img/userLogosNew/libal-cde-logo.png',
+    logo: '/img/userLogosNew/libal-cde.png',
     alt: 'Libal CDE - Collaborative Data Environment',
   },
   {
     name: 'OpenProject',
-    logo: '/img/userLogosNew/OpenProject-Logo-640x137.png',
+    logo: '/img/userLogosNew/open_project_transparent.png',
     alt: 'OpenProject - Open source project management software',
     //website: 'https://www.openproject.org',
   },
@@ -149,7 +149,7 @@ const CompanyList: CompanyItem[] = [
   },
   {
     name: 'Fonn',
-    logo: '/img/userLogosNew/fonn.png',
+    logo: '/img/userLogosNew/fonn_transparent.png',
     alt: 'Fonn Construction Project Management Software',
   },
   {
@@ -244,7 +244,7 @@ const CompanyList: CompanyItem[] = [
   },
   {
     name: 'B3 Gruppe AG',
-    logo: '/img/userLogosNew/B3-logo.png',
+    logo: '/img/userLogosNew/b3.png',
     alt: 'B3 Gruppe AG - Engineering and Management am Bau - in Construction',
   },
   {

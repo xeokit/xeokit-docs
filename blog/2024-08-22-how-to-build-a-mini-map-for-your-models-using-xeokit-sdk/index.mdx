@@ -1,0 +1,849 @@
+---
+slug: how-to-build-a-mini-map-for-your-models-using-xeokit-sdk
+title: How to build a Mini Map for your models using Xeokit SDK
+authors: [muhammad_ijlal]
+tags: [xeokit]
+---
+
+This guide provides a step-by-step process for creating and modifying a minimap for your 3D model using the Xeokit SDK. The minimap enhances the user's navigation experience by providing an overhead view of different floors (storeys) and enabling first-person navigation within the 3D model.
+
+{/* truncate */}
+
+<iframe width="100%" height="450" src="https://www.youtube.com/embed/DsQ4VlgH9AE?si=7M3IDYuDDDUG6X4G&amp;start=313" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Styling
+
+Minimap styling directory has been detailed in the following material. The minimap has major components including the Storey image representation, user marker and dropdown menu with list of storeys/floors. Below we have listed the names and details of components affected by the css code. Modify theses according to your needs for the desired look.
+
+`#storeys`
+
+Defines the appearance and behavior of the floor view in the minimap at any given time.
+
+`.marker`
+
+Defines the appearance and behavior of the marker in the middle of the minimap. It represents the current position of the viewer and is red by default.
+
+`.dropdown`
+
+Defines the appearance and behavior of the dropdown menu used to change between floor views.
+
+`.dropdown.opened`
+
+Defines the appearance and behavior of the dropdown menu when it is in the open state.
+
+`.dropdown.closed`
+
+Defines the appearance and behavior of the dropdown menu when it is in the closed state.
+
+`.dropdown.hover`
+
+Defines the appearance and behavior of the dropdown menu when it is hovered over with the cursor.
+
+`.hamburger`
+
+Defines the appearance and behavior of a hamburger menu icon (☰) on the dropdown menu.
+
+`.floor`
+
+Defines the appearance and behavior of floor name text, e.g., "6th floor".
+
+`.dropdown-options`
+
+Defines the appearance and behavior of options in the dropdown menu.
+
+`option`
+
+Defines the appearance and behavior of the individual options in the dropdown menu.
+
+`.option:hover`
+
+Defines the appearance and behavior of a dropdown option when it is hovered over.
+
+`.option .check`
+
+Defines the appearance and behavior of a check icon within a dropdown option.
+
+`option.selected .check`
+
+Defines the appearance and behavior of a selected check icon on a dropdown option.
+
+`option .floor-number`
+
+Defines the appearance and behavior of floor number text within a dropdown option.
+
+## HTML/Web Structure
+
+We will define the HTML structure that will house our minimap. This is already done in the code below, and is dynamic so adapts to your model, but can be alerted as per your needs. We expand upon what the structure of HTML code block is to this end.
+
+```html
+<body>
+    <input type="checkbox" id="info-button" />
+    <label for="info-button" class="info-button"><i class="far fa-3x fa-question-circle"></i></label>
+    <canvas id="myCanvas"></canvas>
+    <div id="storeys">
+        <div class="dropdown closed" id="dropdown">
+            <label for="hamburger" class="hamburger"><i class="fas fa-bars"></i></label>
+            <span class="floor" id="selected-floor">3rd Floor</span>
+        </div>
+        <div class="dropdown-options" id="dropdown-options">
+        </div>
+        <div class="marker" id="marker"></div>
+    </div>
+    <div class="slideout-sidebar">
+        <img class="info-icon" src="../../assets/images/storey_views_icon.png" />
+        <h1>StoreyViewsPlugin</h1>
+        <h2>Minimap</h2>
+        <p>Click a room in the plan images to go there in <b>first-person mode</b>. </p>
+        <h3>Components Used</h3>
+        <ul>
+            <li>
+                <a href="../../docs/class/src/viewer/Viewer.js~Viewer.html" target="_other">Viewer</a>
+            </li>
+            <li>
+                <a href="../../docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html"
+                    target="_other">StoreyViewsPlugin</a>
+            </li>
+            <li>
+                <a href="../../docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html"
+                    target="_other">XKTLoaderPlugin</a>
+            </li>
+            <li>
+                <a href="../../docs/class/src/viewer/scene/camera/CameraFlightAnimation.js~CameraFlightAnimation.html"
+                    target="_other">CameraFlightAnimation</a>
+            </li>
+        </ul>
+        <h3>Resources</h3>
+        <ul>
+            <li>
+                <a href="<https://github.com/openBIMstandards/DataSetSchependomlaan>" target="_other">Model source</a>
+            </li>
+        </ul>
+    </div>
+</body>
+```
+
+#### Checkbox for Info Button:
+
+This checkbox input is used as a control element. It’s likely used to toggle the visibility or functionality of an info button in the user interface.
+
+#### Label for Info Button:
+
+This label, associated with the checkbox, contains an icon (a question mark inside a circle). It’s styled to look like an info button that users can click to toggle the checkbox and display more information or help.
+
+#### Canvas for 3D Viewer:
+
+This canvas element is where the 3D viewer will render its content. It’s an area where the 3D graphics and interactions will be displayed.
+
+#### Storey Selector Dropdown:
+
+Contains elements for selecting different storeys (floors) of a building.
+
+## Minimap Functionality
+
+Next, we will set up script for the minimap. The script code sets up a 3D viewer using the xeokit-sdk to load and interact with 3D models, specifically using storey views and camera controls. It includes functionality for displaying storey maps, handling camera movements, and managing UI interactions.
+
+#### Set up libraries
+
+In our code file begin by importing the necessary dependencies.
+
+```js
+import { Viewer, StoreyViewsPlugin, math, XKTLoaderPlugin, CameraMemento, Skybox } from "../../dist/xeokit-sdk.min.es.js";
+```
+
+* [**Viewer**](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html): Initializes the 3D viewer.
+* [**StoreyViewsPlugin**](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html): Provides functionalities for managing storey views.
+* [**math**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math): Contains utility functions for mathematical operations.
+* [**XKTLoaderPlugin**](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html): Loads 3D models in XKT format.
+* [**CameraMemento**](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/mementos/CameraMemento.js~CameraMemento.html): Manages and restores camera states.
+* [**Skybox**](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/SkyboxesPlugin/SkyboxesPlugin.js~SkyboxesPlugin.html): Adds a skybox to the scene.
+
+#### After that we have our viewer/camera for viewing the model.
+
+```js
+const viewer = new Viewer({
+  canvasId: "myCanvas",
+  transparent: true,
+  edges: true
+});
+
+viewer.camera.eye = [-2.56, 8.38, 8.27];
+viewer.camera.look = [13.44, 3.31, -14.83];
+viewer.camera.up = [0.10, 0.98, -0.14];
+viewer.camera.project.fovy = 70;
+
+new Skybox(viewer.scene, {
+  src: "../../assets/textures/skybox/cloudySkyBox.jpg",
+  size: 1000
+});
+```
+
+_viewer_ is an instance initializing the 3D viewer with specified canvas and rendering options.
+
+The camera is set up with initial pre-specificied eye position, look direction, and up vector, along with a field of view.
+
+* Camera Position (eye): Specifies the camera's location in the 3D space.
+* Camera Target (look): Defines the point the camera is focusing on.
+* Camera Up Vector (up): Determines the direction that is considered "up" for the camera.
+* Field of View (fovy): Controls how wide the camera's view is, affecting how much of the scene is visible.
+
+The viewing is set modifying the **eye**, **look**, **up** and **fovy** values. Each of them is a vector of the type \[x, y, z\].
+
+We expand on what each is and how it affects your setup, so you can modify them accordingly.
+
+* The eye property defines the position of the camera in the 3D world.
+* This position determines where the camera is located relative to the 3D scene. By default, the camera is positioned behind and above the origin of the scene. This setup is used to provide a high-level view of the scene.
+* This target point determines the direction the camera is facing. The camera will be oriented towards this point, providing a view of the scene from the specified position. In this configuration, the camera is looking towards a point that is ahead and below its current position, allowing it to view a broader area of the scene.
+* This vector defines which direction is considered "up" for the camera. It affects the camera's orientation and how it rotates around its view axis. In this configuration, the up direction is slightly tilted, indicating that the camera is not perfectly aligned with the global Y-axis. This can create a more natural or dynamic perspective.
+* The field of view (FoV) controls how much of the scene is visible through the camera. A larger FoV shows more of the scene, creating a wider view, while a smaller FoV shows less, creating a zoomed-in effect. A 70-degree FoV is a moderate value that provides a balanced view, neither too wide nor too narrow.Once the viewer is done we can modify the background of our 3D model. This is done using skybox. You can import your own by replacing the following variable’s import:
+  ```js
+  viewer.scene.skybox.src = "../../assets/textures/skybox/yourSkyBox.jpg";
+  ```
+
+After all this we can finally load our model. For that we would be using the XTKLoaderPlugin, designed to handle the loading of 3D models in the XKT format.
+
+Firstly we would create an instance of the plugin class:
+
+```js
+const xktLoader = new XKTLoaderPlugin(viewer);
+```
+
+Next we will load the model.
+
+```js
+const sceneModel = xktLoader.load({
+        id: "myModel",
+        src: "../../assets/models/xkt/v8/ifc/Schependomlaan.ifc.xkt",
+        edges: true,
+        objectDefaults: {
+            "IfcPlate": {
+                opacity: 0.3
+            },
+            "IfcWindow": {
+                opacity: 0.4
+            },
+            "IfcSpace": {
+                opacity: 0.4
+            }
+        }
+    });
+```
+
+Change the `"src"` variable to your models’ file. edges is a boolean value indicating whether the edges of the model should be rendered, keep it `"true"`. The following variables can be adjusted as per your needs:
+
+`IfcPlate` Defines Plate object in the model.
+
+`IfcWindow` Defines Window object in the model.
+
+`IfcSpace` Defines Spaces in the model.
+
+By default they would render the objects the define to 30, 40 and 40 percent opacity respectively.
+
+Finally, we generate and handle storey/floor views using the StoreyViewsPlugins.
+
+```js
+const storeyViewsPlugin = new StoreyViewsPlugin(viewer);
+```
+
+StoreyViewsPlugin provides functionalities related to storey or floor views within a 3D scene. It allows for operations including generating floor plans, interacting with different storeys, and managing views for architectural models.
+
+Passing the viewer instance to the plugin, it would enable us to to interact with the scene rendered by the viewer.
+
+```js
+sceneModel.on("loaded", function () {
+  viewer.cameraFlight.jumpTo(sceneModel);
+  viewer.scene.setObjectsOpacity(viewer.metaScene.getObjectIDsByType("IfcDoor"), 0.3);
+  buildStoreyMapsMenu();
+});
+```
+
+We use the event `sceneModel.on` to wait for the model to load. When the scene model is loaded, the camera immediately jumps to focus on the scene model using `viewer.cameraFlight.jumpTo(sceneModel)`.
+
+The opacity of all objects is set as earlier defined. Upon its loading, the `sceneModel.on("loaded", function () { ... })` event handler is triggered. First, the camera immediately jumps to focus on the loaded scene model using `viewer.cameraFlight.jumpTo(sceneModel)`.
+
+Then, the opacity of all objects classified as "IfcDoor" in the scene is reduced to 30% with `viewer.scene.setObjectsOpacity(viewer.metaScene.getObjectIDsByType("IfcDoor"), 0.3)`, making doors semi-transparent, as set earlier. Finally, the function `buildStoreyMapsMenu()` is called, which sets up our Minimap menu i.e. interface element related to the storey maps within the scene.
+
+### buildStoreyMap()
+
+**To build the minimap for our model, buildStoreyMap is one of two functions that forms the backbone of it. In this function, we only setup the html structure and event listeners. The actual synchronisation of minimap with 3D world is done in the ‘getStorey’ function.**
+
+We begin by setting up Camera for our model, using the default code we imported earlier. It is used to save and restore the state of a particular scene’s camera.
+
+```js
+const cameraMemento = new CameraMemento();
+cameraMemento.saveCamera(viewer.scene);
+```
+
+Next, we setup three variables for the purpose of fetching HTML elements and utilizing them with the Minimap. StoreyDiv is for the storey related option, optionsDiv stores dropdown menu functionality and storeyIds for individual floor/storey that we get from the StoreyViewsPlugin.
+
+```js
+const storeyDiv = document.getElementById("storeys");
+const optionsDiv = document.getElementById("dropdown-options");
+const storeyIds = Object.keys(storeyViewsPlugin.storeys);
+```
+
+After that we will generate images for each of the stories in the following loop, using png format and a default width of 400. We save these storeyMaps in an array so that we can use them later as well.
+
+```js
+for (var i = 0, len = storeyIds.length; i < len; i++) {
+      const storeyId = storeyIds[i];
+      const storeyMap = storeyViewsPlugin.createStoreyMap(storeyId, {
+           format: "png",
+           width: 400
+      });
+      allStoreyMaps.push(storeyMap);
+```
+
+Once our stories information is accessible as images from the last step, we will style them and stack the images on one another. The following code block deals with styling and can be adjusted as needed.
+
+```js
+const img = document.createElement("img");
+img.className = 'storeyMap';
+img.src = storeyMap.imageData;
+img.id = `${storeyId}`;
+img.style.borderRadius = "15px";
+img.style.background = "lightblue";
+img.style.width = "100%";
+img.style.height = "100%";
+img.style.opacity = 0.8;
+img.style.display = 'none'
+```
+
+Next, we we handle the interaction between the user and an image (img) within a 3D viewer environment, specifically in relation to the storey map of a building. It is what enables user to click on different parts of the storey map, determine which part of the map was clicked, and then navigate the 3D camera to the corresponding location within the 3D scene. To that end we have the following events:
+
+When the user's mouse enters the image area the onmouseenter event fires. It sets the cursor to "default," ensuring that when the mouse enters the image, it starts with a normal cursor.
+
+```js
+img.onmouseenter = () => {
+    img.style.cursor = "default";
+};
+```
+
+onmousemove triggers when the user moves the mouse within the image area. The function starts by setting the cursor to "default" and captures the current mouse position relative to the image using `e.offsetX` and `e.offsetY`. It then uses `storeyViewsPlugin.pickStoreyMap` to determine if the mouse is hovering over an interactive part of the storey map. If a successful pick is detected (`pickResult`), it checks if the picked entity has associated metadata. If metadata is present, the cursor is set to "pointer," indicating that the area under the cursor is clickable.
+
+```js
+img.onmousemove = (e) => {
+    img.style.cursor = "default";
+    const imagePos = [e.offsetX, e.offsetY];
+    const pickResult = storeyViewsPlugin.pickStoreyMap(storeyMap, imagePos, {});
+    if (pickResult) {
+        const entity = pickResult.entity;
+        const metaObject = viewer.metaScene.metaObjects[entity.id];
+        if (metaObject) {
+            img.style.cursor = "pointer";
+        }
+    }
+};
+```
+
+onmouseleave event triggers when the user's mouse leaves the image area. It resets the cursor to "default," ensuring the cursor does not remain as "pointer" when moving out of the image area.
+
+```js
+img.onmouseleave = () => {
+    img.style.cursor = "default";
+};
+```
+
+The onclick event triggers when the user clicks on the image. It immediately closes any open dropdown menu using `toggleDropdown(true)` and captures the click position within the image using `e.offsetX` and `e.offsetY`. It then attempts to pick the clicked location on the storey map, similar to the mouse move event but in response to a click. If a successful pick is detected (`pickResult`), it extracts the corresponding 3D world coordinates (`pickResult.worldPos`), sets the vertical position (`worldPos[idx]`) to the midpoint of the storey’s vertical extent for proper camera centering, and initiates a smooth camera transition (`flyTo`) to the clicked location within the 3D scene. Upon completion, it updates the minimap UI by invoking `getStorey()` and changes the camera control mode to `firstPerson` for better navigation.
+
+```js
+img.onclick = (e) => {
+    toggleDropdown(true);
+    const imagePos = [e.offsetX, e.offsetY];
+
+    const pickResult = storeyViewsPlugin.pickStoreyMap(storeyMap, imagePos, {
+        pickSurface: true
+    });
+
+    if (pickResult) {
+        worldPos.set(pickResult.worldPos);
+
+        const camera = viewer.scene.camera;
+        const idx = camera.xUp ? 0 : (camera.yUp ? 1 : 2);
+        const storey = storeyViewsPlugin.storeys[storeyMap.storeyId];
+        worldPos[idx] = (storey.aabb[idx] + storey.aabb[3 + idx]) / 2;
+
+        viewer.cameraFlight.flyTo({
+            eye: worldPos,
+            up: viewer.camera.worldUp,
+            look: math.addVec3(worldPos, viewer.camera.worldForward, []),
+            projection: "perspective",
+            duration: 1.5
+        }, () => {
+            getStorey();
+            viewer.cameraControl.navMode = "firstPerson";
+        });
+    }
+};
+```
+
+After that we setup an event listener that automatically calls the getStorey() function whenever the camera's view matrix changes.
+
+The view matrix represents the camera's position and orientation in the 3D scene. As the user navigates, moves, or rotates the camera, the view matrix updates to reflect the new camera position or direction. By listening to these changes, the code ensures that getStorey() is triggered every time the camera's position or orientation changes.
+
+This is used to update the application’s interface or logic in response to the camera's current view, such as determining which floor or storey of a building the camera is currently viewing, and then updating the UI or performing related actions accordingly.
+
+Once that’s done we make the minimap HTML element with the ID "storeys" visible by setting its display style to "block". It then adds a click event listener to the element with the ID "dropdown", so that when this element is clicked, the onDropdownClicked function is triggered. Additionally, the code selects all elements with the class name ".option" and attaches a click event listener to each one. When any of these options are clicked, the onOptionSelected function is called, passing the event and the index of the clicked option (starting from 1) as arguments.
+
+```js
+document.getElementById("storeys").style.display = "block";
+document.getElementById("dropdown").addEventListener('click', onDropdownClicked);
+document.querySelectorAll('.option').forEach((el, index) => {
+            el.addEventListener('click', (e) => {
+                onOptionSelected(e, index + 1);
+            })
+        })
+```
+
+### getStorey()
+
+#### 1. Getting active storeyId
+
+```js
+const cameraPos = viewer.camera.eye;
+let storeyId = getStoreyId(cameraPos)
+```
+
+We use the ‘getStoreyId’ (defined and explained later in this blog) function to get the id of storey where our camera is currently positioned.
+
+#### 2. Enabling the active storey map image
+
+```js
+setFloorDropdown(storeyId);
+hideStoreyMaps();
+const el = document.getElementById(`${storeyId}`)
+el.style.display = "block";
+```
+
+We call the ‘setFloorDropdown’ function and provide it with the storeyId that we got in previous step, to update the selected floor. Then we hide all of the storeyMaps and only enable the image of storey map with the id: storeyId.
+
+#### 3. Modify Camera Direction Influence
+
+```js
+const cameraDir = viewer.camera.worldForward;
+const storeyMap = allStoreyMaps.filter(storey => storey.storeyId === storeyId)[0];
+const imageDir = math.vec2();
+storeyViewsPlugin.worldDirToStoreyMap(storeyMap, cameraDir, imageDir);
+```
+
+We previously stored all of our storey maps in ‘allStoreyMaps’ array, we filter it to find that particular storey map that has the same id as we got in the previous step.
+
+Then we get the direction of camera relative to the image of storey that show on the minimap, using ‘worldDirToStoreyMap’ function provided by StoreyViewsPlugin.
+
+#### 4. Change Position Mapping Logic
+
+```js
+const imagePos = math.vec2();
+storeyViewsPlugin.worldPosToStoreyMap(storeyMap, cameraPos, imagePos);
+```
+
+We do the same with position of camera using ‘worldPosToStoreyMap’ function, also provided by StoreyViewsPlugin.
+
+#### 5. Adjust Transformation and Rotation Calculations
+
+```js
+const centerX = 400 / 2;
+const centerY = 400 / 2;
+const angle = calculateAngleFromDirection(imageDir);
+const transformedPosition = transformCoordinates(imagePos[0], imagePos[1], -angle, centerX, centerY);
+const translateX = centerX - transformedPosition.x;
+const translateY = centerY - transformedPosition.y;
+el.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
+```
+
+After getting the direction and position relative to the storey map image, we have to do a little work to be able to transform the image in desired.
+
+First, we will use ‘calculateAngleFromDirection’ to get how much do we need to rotate the image (in radians) and then ‘transformCoordinates’ function to get how much do we need to translate the image in both x and y coordinates.
+
+At the end, we transform the image by providing it the values of translate and rotate and we have our minimap working nicely. Please note that the order of transformations matter in this case.
+
+### getStoreyId(cameraPos)
+
+```js
+function getStoreyId(cameraPos) {
+    let storey = null;
+    storey = storeyViewsPlugin.getStoreyContainingWorldPos(cameraPos);
+    if (storey === null) {
+        storey = storeyViewsPlugin.getStoreyInVerticalRange(cameraPos);
+        if (storey === null) {
+            storey = storeyViewsPlugin.isPositionAboveOrBelowBuilding(cameraPos);
+        }
+    }
+    return storey;
+}
+```
+
+#### Functionality:
+
+* Determines which storey a given camera position (cameraPos) is located in.
+* **Initial Check:** Uses storeyViewsPlugin.getStoreyContainingWorldPos(cameraPos) to find the storey containing the camera position.
+* **Fallback 1:** If no storey is found, checks if the camera position is within a vertical range of any storey using storeyViewsPlugin.getStoreyInVerticalRange(cameraPos).
+* **Fallback 2:** If still no storey is found, determines if the camera position is above or below the building using storeyViewsPlugin.isPositionAboveOrBelowBuilding(cameraPos).
+* **Return:** Returns the identified storey or null if none are found.
+
+### setFloorDropdown(storeyId)
+
+```js
+function setFloorDropdown(storeyId) {
+    if (storeyId === selectedStoreyId) return;
+    selectedStoreyId = storeyId;
+    let floor = 0;
+    for (let i = 0; i < allStoreyMaps.length; i++) {
+        if (storeyId === allStoreyMaps[i].storeyId) {
+            floor = i + 1;
+            break;
+        }
+    }
+    selectOption(floor);
+}
+```
+
+#### Functionality:
+
+* Updates the floor dropdown selection based on the given storeyId.
+* **Check Selection:** Compares storeyId with the currently selected storey (selectedStoreyId), and returns early if they are the same.
+* **Update Selection:** Sets selectedStoreyId to the new storeyId.
+* **Find Floor Index:** Loops through allStoreyMaps to find the corresponding floor index for the storeyId.
+* **Select Floor:** Calls selectOption(floor) to update the dropdown UI to the selected floor.
+
+### onDropdownClicked(e)
+
+```js
+function onDropdownClicked(e) {
+    const dropdown = document.getElementById("dropdown");
+    toggleDropdown(dropdown.classList.contains('opened'));
+}
+```
+
+#### Functionality:
+
+* Handles the click event on the dropdown.
+* **Get Dropdown:** Retrieves the dropdown element by its ID (dropdown).
+* **Toggle Visibility:** Calls toggleDropdown() with the current visibility state of the dropdown, effectively toggling its visibility.
+
+### toggleDropdown(visible)
+
+```js
+function toggleDropdown(visible) {
+    if (visible) {
+        dropdown.classList.remove('opened');
+        dropdown.classList.add('closed');
+        document.getElementById("dropdown-options").style.display = "none";
+    } else {
+        dropdown.classList.remove('closed');
+        dropdown.classList.add('opened');
+        document.getElementById("dropdown-options").style.display = "flex";
+    }
+}
+```
+
+#### Functionality:
+
+* Toggles the visibility of the dropdown.
+* **Check Visibility:** If visible is true, removes the 'opened' class and adds the 'closed' class, hiding the dropdown options.
+* **Else Case:** If visible is false, does the opposite: adds the 'opened' class, removes the 'closed' class, and displays the dropdown options.
+
+### onOptionSelected(e, floor)
+
+```js
+function onOptionSelected(e, floor) {
+    selectOption(floor);
+    toggleDropdown(true);
+    const storeyId = allStoreyMaps[floor - 1].storeyId;
+    const storey = storeyViewsPlugin.storeys[storeyId];
+    const worldPos = [
+        (storey.aabb[0] + storey.aabb[3]) / 2,
+        (storey.aabb[1] + storey.aabb[4]) / 2,
+        (storey.aabb[2] + storey.aabb[5]) / 2
+    ];
+    viewer.cameraFlight.flyTo({
+        eye: worldPos,
+        up: viewer.camera.worldUp,
+        look: math.addVec3(worldPos, viewer.camera.worldForward, []),
+        projection: "perspective",
+        duration: 1.5
+    }, () => {
+        getStorey();
+        viewer.cameraControl.navMode = "firstPerson";
+    });
+}
+```
+
+#### Functionality:
+
+* Handles the selection of an option from the dropdown.
+* **Update Selection:** Calls selectOption(floor) to update the UI for the selected floor.
+* **Toggle Dropdown:** Hides the dropdown by calling toggleDropdown(true).
+* **Retrieve Storey Data:** Retrieves the storeyId and storey data for the selected floor from allStoreyMaps.
+* **Calculate World Position:** Computes the center of the storey's bounding box (aabb) as the target position for the camera.
+* **Animate Camera:** Calls viewer.cameraFlight.flyTo() to animate the camera to the center of the selected storey.
+* **Update Navigation Mode:** Sets the camera control navigation mode to "firstPerson" after reaching the target position.
+
+## Helper Functions
+
+### radToDeg(rad)
+
+```js
+function radToDeg(rad) {
+    return rad * (180 / Math.PI);
+}
+```
+
+#### Functionality:
+
+* Converts an angle in radians to degrees.
+* **Conversion:** Multiplies the given radians by 180 / Math.PI to convert it to degrees.
+* **Return:** Returns the angle in degrees.
+
+### getOrdinalSuffix(number)
+
+```js
+function getOrdinalSuffix(number) {
+    const suffixes = ["th", "st", "nd", "rd"];
+    const v = number % 100;
+    return number + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
+}
+```
+
+#### Functionality:
+
+* Returns the appropriate ordinal suffix ("th", "st", "nd", "rd") for a given number.
+* Compute Suffix: Determines the suffix based on the last two digits of the number.
+* Return: Concatenates the number with its ordinal suffix.
+
+### hideStoreyMaps()
+
+```js
+function hideStoreyMaps() {
+    const elements = document.querySelectorAll('.storeyMap');
+    elements.forEach(element => {
+        element.style.display = 'none';
+    });
+}
+```
+
+#### Functionality:
+
+* Hides all elements with the class storeyMap.
+* Select Elements: Retrieves all elements with the class storeyMap using querySelectorAll.
+* Hide Elements: Iterates through the elements and sets their display style to 'none'.
+
+### unSelectAllOptions()
+
+```js
+function unSelectAllOptions() {
+    const optionElements = document.querySelectorAll(".option");
+    optionElements.forEach(el => {
+        el.classList.remove('selected');
+    });
+}
+```
+
+#### Functionality:
+
+* Deselects all options in the dropdown.
+* Select Elements: Retrieves all elements with the class option using querySelectorAll.
+* Remove Class: Iterates through the elements and removes the selected class from each.
+
+### selectOption(floor)
+
+```js
+function selectOption(floor) {
+    unSelectAllOptions();
+    document.getElementById("selected-floor").innerHTML = `${getOrdinalSuffix(floor)} Floor`;
+    document.getElementById(`option${floor}`).classList.add('selected');
+}
+```
+
+#### Functionality:
+
+* Updates the dropdown UI to reflect the selected floor.
+* Deselect All: Calls unSelectAllOptions() to clear any previously selected options.
+* Update Display: Updates the inner HTML of the selected-floor element to show the ordinal number of the selected floor.
+* Highlight Selection: Adds the selected class to the option corresponding to the selected floor.
+
+### calculateAngleFromDirection(direction)
+
+```js
+function calculateAngleFromDirection(direction) {
+    const angleInRad = Math.atan2(direction[0], direction[1]);
+    const angleInDeg = angleInRad * (180 / Math.PI);
+    return angleInDeg;
+}
+```
+
+#### Functionality:
+
+* Calculates the angle in degrees from a given direction vector.
+* Calculate Angle: Uses Math.atan2 to compute the angle in radians between the x and y components of the direction vector.
+* Math.atan2(y, x) computes the angle of the vector from the positive x-axis in radians.
+* Convert to Degrees: Converts the angle from radians to degrees by multiplying with 180 / Math.PI.
+* This is the standard conversion from radians to degrees.
+* Return: Returns the calculated angle in degrees.
+
+### rotatePoint(x, y, angle)
+
+
+```js
+function rotatePoint(x, y, angle) {
+    const radians = angle * Math.PI / 180;
+    const cos = Math.cos(radians);
+    const sin = Math.sin(radians);
+    return {
+        x: cos * x - sin * y,
+        y: sin * x + cos * y
+    };
+}
+```
+
+#### Functionality:
+
+* Rotates a point around the origin (0, 0) by a specified angle.
+* Convert to Radians: Converts the angle from degrees to radians using angle * Math.PI / 180.
+* This is necessary because trigonometric functions in JavaScript use radians.
+* Calculate New Coordinates:
+  * x': The new x-coordinate after rotation is calculated using cos * x - sin * y.
+  * y': The new y-coordinate after rotation is calculated using sin * x + cos * y.
+* Return: Returns the new coordinates as an object `{ x, y }`.
+
+### transformCoordinates(x, y, angle, centerX, centerY)
+
+```js
+function transformCoordinates(x, y, angle, centerX, centerY) {
+    // Translate point to origin
+    const translatedX = x - centerX;
+    const translatedY = y - centerY;
+
+    // Rotate the point
+    const rotatedPoint = rotatePoint(translatedX, translatedY, -angle);
+
+    // Translate the point back
+    const finalX = rotatedPoint.x + centerX;
+    const finalY = rotatedPoint.y + centerY;
+
+    return { x: finalX, y: finalY };
+}
+```
+
+#### Functionality:
+
+* Transforms coordinates by rotating them around a specified center point and then translating them back.
+* Translate to Origin:
+  * Subtracts the center coordinates from the input coordinates to shift the point so that the center is at the origin (0, 0).
+* Rotate Point:
+  * Calls rotatePoint() to rotate the translated coordinates around the origin by the specified angle (note that the angle is negated to rotate in the correct direction).
+* Translate Back:
+  * Adds the center coordinates back to the rotated point to shift it back to its original position relative to the original center.
+* Return: Returns the final transformed coordinates as an object `{ x, y }`.
+  * `img.onmouseenter = () => { img.style.cursor = "default"; };`
+* This event triggers when the user's mouse enters the image area.
+* Action: It sets the cursor to "default," ensuring that when the mouse enters the image, it starts with a normal cursor.
+
+## Support Functions
+
+### radToDeg(rad)
+
+Converts an angle from radians to degrees.
+
+```js
+function radToDeg(rad) {
+    return rad * (180 / Math.PI);
+}
+```
+
+### getOrdinalSuffix(number)
+
+Returns the ordinal suffix (e.g., "st", "nd", "rd", "th") for a given number.
+
+```js
+function getOrdinalSuffix(number) {
+    const suffixes = ["th", "st", "nd", "rd"];
+    const v = number % 100;
+    return number + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
+}
+
+```
+
+### hideStoreyMaps()
+
+Hides all elements with the class name storeyMap.
+
+```js
+function hideStoreyMaps() {
+    const elements = document.querySelectorAll('.storeyMap');
+    elements.forEach(element => {
+        element.style.display = 'none';
+    });
+}
+```
+
+### unSelectAllOptions()
+
+Removes the selected class from all elements with the class name option.
+
+```js
+function unSelectAllOptions() {
+    const optionElements = document.querySelectorAll(".option");
+    optionElements.forEach(el => {
+        el.classList.remove('selected');
+    })
+}
+```
+
+### selectOption()
+
+Updates the display to show the currently selected floor and marks the corresponding option as selected.
+
+```js
+function unSelectAllOptions() {
+    const optionElements = document.querySelectorAll(".option");
+    optionElements.forEach(el => {
+        el.classList.remove('selected');
+    })
+}
+```
+
+### calculateAngleFromDirection()
+
+Calculates the angle in degrees from a given direction vector.
+
+```js
+function calculateAngleFromDirection(direction) {
+    const angleInRad = Math.atan2(direction[0], direction[1]);
+    const angleInDeg = angleInRad * (180 / Math.PI);
+    return angleInDeg;
+}
+```
+
+### calculateAngleFromDirection()
+
+Rotates a point around the origin (0, 0) by a given angle in degrees.
+
+```js
+function rotatePoint(x, y, angle) {
+    const radians = angle * Math.PI / 180;
+    const cos = Math.cos(radians);
+    const sin = Math.sin(radians);
+    return {
+        x: cos * x - sin * y,
+        y: sin * x + cos * y
+    };
+}
+```
+
+### calculateAngleFromDirection()
+
+Transforms coordinates by rotating them around a center point by a specified angle.
+
+```js
+function transformCoordinates(x, y, angle, centerX, centerY) {
+    const translatedX = x - centerX;
+    const translatedY = y - centerY;
+
+    const rotatedPoint = rotatePoint(translatedX, translatedY, -angle);
+
+    const finalX = rotatedPoint.x + centerX;
+    const finalY = rotatedPoint.y + centerY;
+
+    return { x: finalX, y: finalY };
+}
+```

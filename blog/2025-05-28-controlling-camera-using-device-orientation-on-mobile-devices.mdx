@@ -1,0 +1,207 @@
+---
+slug: controlling-camera-using-device-orientation-on-mobile-devices
+title: Controlling Camera using Device Orientation on Mobile Devices
+authors: [muhammad_ijlal]
+tags: [xeokit]
+---
+
+## Introduction
+
+Mobile devices offer exciting possibilities for immersive 3D experiences through their built-in sensors. In this tutorial, we'll explore how to control the xeokit camera using device orientation data, creating a virtual reality-like experience where users can look around a 3D model by simply moving their mobile device.
+
+***Important Requirements***: This example only works on mobile devices and requires a secure HTTPS connection to access device orientation data. If you're testing locally, you can set up a secure context using `http-server` with SSL:
+
+```bash
+npm install -g http-server
+http-server -S -C cert.pem -K key.pem
+```
+
+You'll need to generate SSL certificates for local testing to meet the browser's security requirements.
+
+{/* truncate */}
+
+## Setting Up the Basic Viewer
+
+Let's start by creating a basic xeokit viewer and loading a model:
+
+```js
+import {math, Viewer, XKTLoaderPlugin} from "../../dist/xeokit-sdk.min.es.js";
+
+const canvas = window.document.getElementById("myCanvas");
+
+const viewer = new Viewer({
+    canvasElement: canvas,
+    transparent: true
+});
+```
+
+Here we're importing the necessary modules and creating a viewer instance attached to our canvas element. The `transparent: true` option allows the canvas background to be transparent.
+
+## Disabling Default Camera Controls
+
+Since we want to control the camera through device orientation instead of touch gestures, we need to disable the default camera controls:
+
+```js
+viewer.cameraControl.active = false;
+```
+
+This prevents the standard touch-based camera controls from interfering with our orientation-based system.
+
+## Loading the 3D Model
+
+Next, we'll load a 3D model using the XKTLoaderPlugin:
+
+```js
+new XKTLoaderPlugin(viewer).load({
+    src: "../../assets/models/xkt/v10/glTF-Embedded/Duplex_A_20110505.glTFEmbedded.xkt",
+    edges: true
+});
+```
+
+The `edges: true` option ensures that model edges are visible, providing better visual definition in the 3D scene.
+
+## Setting Up Permission Request
+
+Modern browsers require explicit permission to access device orientation data. We need to handle this permission request:
+
+```js
+const requestOrientationPermission = window.DeviceOrientationEvent && window.DeviceOrientationEvent.requestPermission;
+
+if (typeof requestOrientationPermission === "function") {
+    const button = document.getElementById("requestPermission");
+    button.style.display = "";
+    button.addEventListener("click", () => {
+        button.style.display = "none";
+        requestOrientationPermission().then(permissionState => {
+            if (permissionState === "granted") {
+                console.log("Orientation permission granted");
+                startOrientationListener();
+            } else {
+                console.error("Orientation permission denied");
+            }
+        });
+    });
+} else {
+    console.log("Orientation permission not needed");
+    startOrientationListener();
+}
+```
+
+This code checks if permission is required (typically on iOS devices). If permission is needed, it shows a button that, when clicked, requests permission from the user. Once granted, it starts the orientation listener.
+
+## Creating the Core Orientation Listener
+
+Now we'll implement the main function that handles device orientation:
+
+```js
+const startOrientationListener = () => {
+    const rot = math.mat4();
+    const tmpMat4 = math.mat4();
+
+    let down = false;
+    const pos = math.vec3([4, 1.7, 15-10]);
+
+    // Event listeners and orientation handling will go here
+};
+```
+
+We initialize several variables:
+
+* rot and tmpMat4: 4x4 matrices for rotation calculations
+* down: Boolean to track if the user is touching the screen
+* pos: Starting position vector for the camera
+
+## Handling Touch Events for Movement
+
+We'll add touch event listeners to enable forward movement when the user touches the screen:
+
+```js
+canvas.addEventListener("touchstart", (event) => {
+    down = true;
+    event.preventDefault();
+});
+
+canvas.addEventListener("touchend", (event) => {
+    down = false;
+    event.preventDefault();
+});
+```
+
+These events set the `down` flag to true when touching begins and false when it ends. The `preventDefault()` calls stop default touch behaviors from interfering.
+
+## Processing Device Orientation Data
+
+The heart of our implementation is the device orientation event listener:
+
+```js
+window.addEventListener("deviceorientation", (event) => {
+    math.identityMat4(rot);
+
+    // Apply screen orientation
+    math.mulMat4(math.rotationMat4v(window.orientation * math.DEGTORAD, [0,0,1], tmpMat4), rot, rot);
+
+    // Apply device rotations
+    math.mulMat4(math.rotationMat4v( event.gamma * math.DEGTORAD, [0,1,0], tmpMat4), rot, rot);
+    math.mulMat4(math.rotationMat4v(-event.beta  * math.DEGTORAD, [1,0,0], tmpMat4), rot, rot);
+    math.mulMat4(math.rotationMat4v(-event.alpha * math.DEGTORAD, [0,0,1], tmpMat4), rot, rot);
+
+    // Final coordinate system adjustment
+    math.mulMat4(math.rotationMat4v(Math.PI / 2, [1,0,0], tmpMat4), rot, rot);
+
+    // Apply to camera...
+});
+```
+
+Let's break down these transformations:
+
+### Understanding Device Orientation Values
+
+The device orientation event provides three key rotation values:
+
+* **Alpha**: Rotation around the Z-axis (compass heading, 0-360°)
+* **Beta**: Rotation around the X-axis (front-to-back tilt, -180° to 180°)
+* **Gamma**: Rotation around the Y-axis (left-to-right tilt, -90° to 90°)
+
+### Transformation Sequence
+
+The transformations are applied in a specific order to properly convert device orientation to camera orientation:
+
+* **Screen Orientation**: window.orientation accounts for how the device is held (portrait, landscape, etc.)
+* **Gamma (Y-axis)**: Left-right tilting of the device
+* **Beta (X-axis)**: Forward-backward tilting, with negative value to match coordinate system
+* **Alpha (Z-axis)**: Compass rotation, with negative value for proper direction
+* **Final Adjustment**: 90-degree rotation to align coordinate systems
+
+## Applying Camera Transformations
+
+Finally, we calculate the camera's new position and orientation:
+
+```js
+const camera = viewer.camera;
+const dir = math.mulMat4v4(rot, [0, 0, 1, 0], math.vec4());
+
+if (down) {
+    math.addVec3(pos, math.mulVec3Scalar(dir, 1/60, math.vec3()), pos);
+}
+
+camera.eye  = pos;
+camera.look = math.addVec3(camera.eye, dir, math.vec3());
+camera.up   = math.mulMat4v4(rot, [0, 1, 0, 0], math.vec4()).slice(0, 3);
+```
+
+This code:
+
+* **Calculates Direction**: Transforms the forward vector [0, 0, 1, 0] by our rotation matrix to get the current look direction
+* **Handles Movement**: If the screen is being touched (down is true), moves the camera position forward in the current direction at 1/60th speed
+* **Updates Camera**: Sets the camera's eye position, look target (eye + direction), and up vector
+
+## The Complete Experience
+
+When running on a mobile device with HTTPS, this creates an immersive experience where:
+
+* Moving the device changes the view direction naturally
+* Touching the screen moves the user forward in the direction they're looking
+* The camera responds smoothly to device orientation changes
+* Users can explore the 3D model by physically moving their device
+
+This implementation demonstrates the power of combining web-based 3D graphics with mobile device sensors, creating engaging and intuitive user experiences for architectural visualization and other 3D applications.

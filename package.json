@@ -10,6 +10,8 @@
     "doc:deploy": "docusaurus deploy",
     "doc:clear": "docusaurus clear",
     "doc:serve": "docusaurus serve",
+    "doc:parse": "docusaurus parse",
+    "doc:glossary": "docusaurus glossary",
     "doc:write-translations": "docusaurus write-translations",
     "doc:write-heading-ids": "docusaurus write-heading-ids",
     "doc:typecheck": "tsc",
@@ -20,6 +22,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
+    "@docusaurus/plugin-content-blog": "^3.8.1",
     "@docusaurus/plugin-google-gtag": "^3.8.1",
     "@docusaurus/preset-classic": "catalog:docusaurus-base",
     "@docusaurus/theme-common": "^3.8.1",
@@ -27,6 +30,7 @@
     "@docusaurus/theme-mermaid": "catalog:docusaurus-extensions",
     "@easyops-cn/docusaurus-search-local": "catalog:docusaurus-extensions",
     "@gracefullight/docusaurus-plugin-microsoft-clarity": "^1.0.0",
+    "@lunaticmuch/docusaurus-terminology": "^1.5.0",
     "@mdx-js/react": "catalog:docusaurus-base",
     "clsx": "catalog:docusaurus-base",
     "docusaurus-plugin-openapi-docs": "catalog:docusaurus-extensions",
@@ -35,6 +39,7 @@
     "prism-react-renderer": "catalog:docusaurus-base",
     "react": "catalog:docusaurus-base",
     "react-dom": "catalog:docusaurus-base",
+    "react-share": "^5.2.2",
     "typedoc": "catalog:docusaurus-extensions",
     "typedoc-plugin-markdown": "catalog:docusaurus-extensions"
   },

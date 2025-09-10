@@ -6,14 +6,15 @@ tags: [xeokit]
 ---
 
 import Admonition from '@theme/Admonition';
+import Term from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";
 
 # Building 3D Model Viewers with `@xeokit/xeokit-webcomponents`
 
-Integrating 3D models into web applications can be a complex task, often requiring extensive knowledge of WebGL, 3D rendering pipelines, and model loading formats. However, with the advent of Web Components, this process has become significantly simpler. `@xeokit/xeokit-webcomponents` leverages this power, providing a set of easy-to-use, framework-agnostic custom elements for displaying and interacting with 3D models, particularly useful for BIM and IFC data.
+Integrating 3D models into web applications can be a complex task, often requiring extensive knowledge of <Term reference="/docs/terms/webgl" popup="Web Graphics Library">WebGL</Term>, 3D rendering pipelines, and model loading formats. However, with the advent of Web Components, this process has become significantly simpler. `@xeokit/xeokit-webcomponents` leverages this power, providing a set of easy-to-use, framework-agnostic custom elements for displaying and interacting with 3D models, particularly useful for BIM and IFC data.
 
 In this blog post, we'll explore how to get started with `@xeokit/xeokit-webcomponents` and create a basic 3D model viewer.
 
-<!-- truncate -->
+{/* truncate */}
 
 ## What are Web Components?
 
@@ -309,6 +310,34 @@ viewer.scene.input.on("mouseclicked", (coords) => {
     }
   }
 });
+
+const containmentTreeView = document.getElementById("tree-view-1");
+containmentTreeView.addEventListener('tree-view-node-title-clicked', (event) => {
+  const entity = event.detail.viewer.scene.objects[event.detail.treeViewNode.objectId];
+  console.log('on tree-view-node-title-clicked:', { detail: event.detail, entity });
+});
+
+// Add custom events to viewer scene (https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/input/Input.js~Input.html)
+// viewer.scene.input.on("mouseclicked", (coords) => {
+//   const hit = viewer.scene.pick({
+//     canvasPos: coords
+//   });
+
+//   if (hit && hit.entity && hit.entity.isObject) {
+//     const entity = hit.entity;
+//     const metaObject = viewer.metaScene.metaObjects[entity.id];
+
+//     if (metaObject) {
+//       console.log("Custom Clicked entity:", {
+//         id: entity.id,
+//         name: metaObject.name,
+//         type: metaObject.type,
+//         volume: entity.volume,
+//         aabb: entity.aabb
+//       });
+//     }
+//   }
+// });
 ```
 
 ## Conclusion
@@ -318,9 +347,5 @@ viewer.scene.input.on("mouseclicked", (coords) => {
 Whether you're building a BIM viewer, a product configurator, or just want to display 3D assets on your website, this package can significantly reduce development time and complexity. Give it a try in your next project!
 
 For more advanced features and customization, refer to the official `@xeokit/xeokit-webcomponents` documentation and the underlying [xeokit-sdk documentation](https://xeokit.github.io/xeokit-sdk/docs/index.html).
-
-## Example
-
-<script src="https://cdn.jsdelivr.net/npm/@xeokit/xeokit-webcomponents/dist/index.js" type="module"></script>
 
 

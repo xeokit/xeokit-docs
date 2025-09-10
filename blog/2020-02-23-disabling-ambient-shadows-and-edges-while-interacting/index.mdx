@@ -1,0 +1,85 @@
+---
+slug: disabling-ambient-shadows-and-edges-while-interacting
+title: Disabling Ambient Shadows and Edges While Interacting
+authors: [xeokit]
+tags: [xeokit]
+---
+
+![SAO Edges Disabled on Camera Move](saoEdgesDisableonCameraMove.gif)
+
+---
+
+How to preserve interactivity when viewing large models with ambient shadows and enhanced edges.
+
+{/* truncate */}
+
+```js
+let timeoutDuration = 150; // Milliseconds
+let timer = timeoutDuration;
+let culling = false;
+
+myViewer.scene.camera.on("matrix", () => {
+    timer = timeoutDuration;
+    if (!culling) {
+
+        cullEntities({
+            minComplexity: 409,
+            maxSize: 14,
+        });
+
+        culling = true;
+    }
+});
+
+myViewer.scene.on("tick", (tickEvent) => {  // Milliseconds
+    if (!culling) {
+        return;
+    }
+    timer -= tickEvent.deltaTime;
+    if (timer <= 0) {
+        if (culling) {
+
+            uncullEntities();
+
+            culling = false;
+        }
+    }
+});
+
+function cullEntities( params) {
+    const objectIds = myViewer.scene.objectIds;
+    const entities = myViewer.scene.objects;
+
+    const minComplexity = params.minComplexity;
+    const maxSize = params.maxSize;
+
+    for (var i = 0, len = objectIds.length; i < len; i++) {
+        const objectId = objectIds[i];
+        const entity = entities[objectId];
+        if (entity) {
+            const entityComplexity = entity.numTriangles;
+            const entitySize = math.getAABB3Diag(entity.aabb);
+
+            const culled = (
+              (minComplexity <= entityComplexity) ||
+              (entitySize <= maxSize)
+            );
+
+            entity.culled = culled;
+        }
+    }
+}
+
+function uncullEntities() {
+    const objectIds = myViewer.scene.objectIds;
+    const entities = myViewer.scene.objects;
+
+    for (var i = 0, len = objectIds.length; i < len; i++) {
+        const objectId = objectIds[i];
+        const entity = entities[objectId];
+        if (entity) {
+            entity.culled = false;
+        }
+    }
+}
+```

@@ -74,7 +74,7 @@ const CompanyList: CompanyItem[] = [
   },
   {
     name: 'Augmenta',
-    logo: '/img/userLogosNew/augmenta-Logo.png',
+    logo: '/img/userLogosNew/augmenta.png',
     alt: 'Augmenta: automated building design',
   },
   {

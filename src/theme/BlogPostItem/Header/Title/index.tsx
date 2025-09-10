@@ -1,31 +1,37 @@
 import React, { type ReactNode } from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import { useBlogPost } from '@docusaurus/plugin-content-blog/client';
-import type { Props } from '@theme/BlogPostItem/Header/Title';
-
-import styles from './styles.module.css';
+import Title from '@theme-original/BlogPostItem/Header/Title';
+import type TitleType from '@theme/BlogPostItem/Header/Title';
+import type { WrapperProps } from '@docusaurus/types';
 import ShareWidget from '@site/src/components/ShareWidget';
-
 import BrowserOnly from "@docusaurus/BrowserOnly";
 
-export default function BlogPostItemHeaderTitle({ className }: Props): ReactNode {
-  const { metadata, isBlogPostPage } = useBlogPost();
-  const { permalink, title } = metadata;
-  const TitleHeading = isBlogPostPage ? 'h1' : 'h2';
+type Props = WrapperProps<typeof TitleType>;
+
+export default function TitleWrapper(props: Props): ReactNode {
+  const [isInBlogPost, setIsInBlogPost] = React.useState(false);
+  const [title, setTitle] = React.useState("");
+
+  React.useEffect(() => {
+    const pathname = window.location.pathname;
+    const blogPathPattern = /^\/blog\/(?!page\/\d+$)[^/]+/; // Matches /blog/anything but not just /blog and not /blog/page/{number}
+    setIsInBlogPost(blogPathPattern.test(pathname));
+
+    setTimeout(() => {
+      setTitle(document.title);
+    }, 300);
+  }, []);
 
   return (
     <>
-      <TitleHeading className={clsx(styles.title, className)}>
-        {isBlogPostPage ? title : <Link to={permalink}>{title}</Link>}
-      </TitleHeading>
+      <Title {...props} />
 
       <BrowserOnly>
         {() => {
-          const fullLink = `${window.location.origin}${permalink}`;
-          return <ShareWidget title={title} url={fullLink} />;
+          const fullLink = `${window.location.origin}${window.location.pathname}`;
+          return isInBlogPost && <ShareWidget title={title} url={fullLink} />;
         }}
       </BrowserOnly>
+
     </>
   );
 }

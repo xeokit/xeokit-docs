@@ -18,7 +18,6 @@ interface ShareWidgetProps {
 const ShareWidget: React.FC<ShareWidgetProps> = ({ url, title }) => {
   return (
     <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-
       <LinkedinShareButton url={url} title={title} summary={title} source={url}>
         <LinkedinIcon size={32} round />
       </LinkedinShareButton>

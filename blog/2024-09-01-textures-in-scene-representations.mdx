@@ -30,6 +30,8 @@ For our glTF model, we'll use an architectural model from Sketchfab. When that's
 
 This model contains 571 visible objects, with 139642 triangles and 14 textures, and a xeokit Viewer can usually load it over a good Internet connection in ~2 seconds.
 
+{/* truncate */}
+
 # Building VBOSceneModels Containing Textures
 
 A [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/model/VBOSceneModel.js~VBOSceneModel.html) that is configured with a [KTX2TextureTranscoder](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/utils/textureTranscoders/KTX2TextureTranscoder/KTX2TextureTranscoder.js~KTX2TextureTranscoder.html) will allow us to create textures within it from KTX2 data. In the next two examples, we’ll show how to use this component to programmatically build 3D scene content containing KTX2 textures.

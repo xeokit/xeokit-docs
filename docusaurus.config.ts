@@ -144,7 +144,7 @@ const config: Config = {
        */
       playgroundPosition: 'bottom',
     },
-    image: 'img/xeokit-social.jpg',
+    image: 'img/xeokit-social.png',
     navbar: {
       title: 'xeokit',
       logo: {

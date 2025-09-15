@@ -328,6 +328,11 @@ const config: Config = {
                 </a>`,
             },
             {
+              html: `<a href="https://www.facebook.com/xeokit" target="_blank" rel="noreferrer noopener" aria-label="Twitter" class="footer__link-item">
+                  <i class="fa-brands fa-facebook"></i> Facebook
+                </a>`,
+            },
+            {
               html: `<a href="https://creoox.com" target="_blank" rel="noreferrer noopener" aria-label="Creoox" class="footer__link-item">
                   Creoox AG
                 </a>`,
@@ -341,7 +346,7 @@ const config: Config = {
         href: 'https://xeokit.io',
 
       },
-      copyright: `Copyright © ${new Date().getFullYear()} xeolabs and Creoox AG. Build: %GIT_HASH%`,
+      copyright: `Copyright © ${new Date().getFullYear()} Creoox AG. Build: %GIT_HASH%`,
     },
     prism: {
       theme: prismThemes.github,

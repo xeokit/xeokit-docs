@@ -4,16 +4,14 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  display: flex;
+  justify-items: center;
+  align-items: center;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
   min-height: 600px;
-  max-height: 600px;
 
-  background: linear-gradient(to right,  rgba(0, 0, 0.8, 0.99), rgba(0,0, 0, 0.2) ), url('/img/RevitSamples.png') center center no-repeat scroll;
-  background-position:center center;
+  background: linear-gradient(to right, rgba(0, 0, 0.8, 0.99), rgba(0, 0, 0, 0.2)), url('/img/RevitSamples.png') center center no-repeat scroll;
+  background-position: center center;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -23,14 +21,16 @@
   color: var(--ifm-header-color);
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.buttons>a {
+  margin-top: 1rem;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 0;
+  }
+
+  .buttons>a {
+    font-size: 16px;
+  }
 }

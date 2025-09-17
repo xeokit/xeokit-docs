@@ -32,9 +32,9 @@ const faqItems: FAQItem[] = [
       <div>
         <p>A growing, international community of industry leaders, researchers and hackers.</p>
         <p>
-          <a href="https://www.notion.so/xeokit/Who-is-using-xeokit-4066f45365ee4959bc850896fc53a801" target="_blank" rel="noopener noreferrer">
+          {/* <a href="https://www.notion.so/xeokit/Who-is-using-xeokit-4066f45365ee4959bc850896fc53a801" target="_blank" rel="noopener noreferrer">
             Read more
-          </a> about what users have built with xeokit so far.
+          </a> about what users have built with xeokit so far. */}
         </p>
       </div>
     ),

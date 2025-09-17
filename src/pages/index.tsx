@@ -8,19 +8,21 @@ import Layout from '@theme/Layout';
 import Pricing from '@site/src/components/Pricing';
 import type { ReactNode } from 'react';
 import styles from './index.module.css';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import UsersSay from '@site/src/components/UsersSay';
 
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="" style={{ fontSize: '3rem' }}>
-          {siteConfig.title}
+          Build 3D BIM & AEC Web Apps with xeokit SDK
         </Heading>
-        <p className="" style={{ fontSize: '1.5rem' }}>{siteConfig.tagline}</p>
+
+        <p className="" style={{ fontSize: '1.5rem', maxWidth: '800px', textAlign: 'center', margin: '1rem auto 0 auto' }}>
+          Open-source WebGL toolkit for BIM and AEC. Trusted by industry leaders to visualize IFC, BCF, point clouds with speed and precision.
+        </p>
+
         <div className={styles.buttons}>
           <a
             className="button button--secondary button--lg margin-right--md"

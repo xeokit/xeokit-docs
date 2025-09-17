@@ -41,7 +41,7 @@ export default function HomepageFeaturesSection(): ReactNode {
                   Join our community of 3D Web programming experts and industry leaders. Share our tools and get support.</li>
                 <li><strong>Training resources</strong>.<br />
                   Including <a href="https://xeokit.github.io/xeokit-sdk/examples/">examples</a>, <a href="https://xeokit.github.io/xeokit-sdk/docs/">API docs</a> and <a href="https://www.notion.so/xeokit/xeokit-Documentation-4598591fcedb4889bf8896750651f74e">tutorials</a>.</li>
-                <li><strong>Tap into xeolabs' ongoing research and development</strong>.<br />
+                <li><strong>Tap into Creoox’s ongoing research and development</strong>.<br />
                   Get started quickly and lower your costs. Benefit from new features as xeokit continues to develop.</li>
               </ul>
             </div>

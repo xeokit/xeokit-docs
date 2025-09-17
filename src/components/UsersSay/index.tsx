@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     title: "Co-Founder & CEO",
     company: "bimspot.io",
     image: "/img/christoph-degendorfer.jpg",
-    quote: "We have been very impressed with the xeokit SDK's features. Of particular note is xeokit's highly efficient binary .XKT model format, which makes loading and rendering large models faster than ever before. With the wide-ranging feature set offered by the SDK, we have been able to meet most of our product goals so far.\n\nOur developers have also spoken about their positive experience. They noted the active development of the project and the quick and helpful responses from xeolabs whenever they had any issues.",
+    quote: "We have been very impressed with the xeokit SDK's features. Of particular note is xeokit's highly efficient binary .XKT model format, which makes loading and rendering large models faster than ever before. With the wide-ranging feature set offered by the SDK, we have been able to meet most of our product goals so far.\n\nOur developers have also spoken about their positive experience. They noted the active development of the project and the quick and helpful responses whenever they had any issues.",
     companyLogo: "/img/userLogos/bimspot.png",
     companyUrl: "https://bimspot.io",
   },

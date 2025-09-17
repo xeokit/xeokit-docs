@@ -43,11 +43,7 @@ const faqItems: FAQItem[] = [
     question: "Who are the people behind xeokit?",
     answer: (
       <div>
-        <p>The xeokit SDK is a partnership between:</p>
-        <ul>
-          <li><a href="https://xeolabs.com" target="_blank" rel="noopener noreferrer">xeolabs</a> - created xeokit in 2019, based on 10+ years experience visualizing 3D BIM and STEM in the browser.</li>
-          <li><a href="/blog/creoox-becomes-xeokit-sales-partner" target="_blank" rel="noopener noreferrer">Creoox AG</a> - xeokit's official and exclusive business partner, supporting with development, handling sales, marketing, CRM and business development.</li>
-        </ul>
+        <p>Behind xeokit you’ll find the team at <a href="https://creoox.com" target="_blank" rel="noopener noreferrer">Creoox AG</a> — experienced software graphics engineers, civil engineers and innovators dedicated to maintaining xeokit as a powerful and evolving tool for 3D visualization within AEC & BIM.</p>
       </div>
     ),
   },
@@ -72,9 +68,9 @@ const faqItems: FAQItem[] = [
         <p>XKT is xeokit's highly-optimized native geometry format, which allows xeokit to load hundreds of thousands of full-precision objects in seconds. XKT files are converted from various source formats using open-source CLI tools.</p>
         <p>Learn more:</p>
         <ul>
-          <li><a href="https://www.notion.so/xeokit/Viewing-an-IFC-Model-with-xeokit-c373e48bc4094ff5b6e5c5700ff580ee" target="_blank" rel="noopener noreferrer">Viewing an IFC Model with xeokit</a></li>
-          <li><a href="https://www.notion.so/xeokit/Viewing-a-Point-Cloud-with-xeokit-c45cdaae64514170be91c37d6827c9ca" target="_blank" rel="noopener noreferrer">Viewing a Point Cloud with xeokit</a></li>
-          <li><a href="https://www.notion.so/xeokit/Viewing-Multiple-Models-with-xeokit-71b73627d97840f7887275ea6ac4ed4a" target="_blank" rel="noopener noreferrer">Viewing Multiple Models with xeokit</a></li>
+          <li><a href="/blog/viewing-an-ifc-model-with-xktloaderplugin" target="_blank" rel="noopener noreferrer">Viewing an IFC Model with xeokit</a></li>
+          <li><a href="/blog/viewing-a-las-point-cloud-with-xktloaderplugin" target="_blank" rel="noopener noreferrer">Viewing a Point Cloud with xeokit</a></li>
+          <li><a href="/blog/viewing-multiple-models" target="_blank" rel="noopener noreferrer">Viewing Multiple Models with xeokit</a></li>
         </ul>
       </div>
     ),
@@ -87,7 +83,7 @@ const faqItems: FAQItem[] = [
         <p>The XKT format contains all the model's geometry and elements, along with some basic metadata to help navigate the IFC types. The format format greatly reduces the model size. As an example, the 49M IFC file for the Schependomlaan sample model converted into an 1.5M XKT file, which xeokit loads in around ~2-3 seconds over a good Internet connection.</p>
         <p>Learn more:</p>
         <ul>
-          <li><a href="https://www.notion.so/xeokit/Viewing-an-IFC-Model-with-xeokit-c373e48bc4094ff5b6e5c5700ff580ee" target="_blank" rel="noopener noreferrer">Viewing an IFC Model with xeokit</a></li>
+          <li><a href="/blog/viewing-an-ifc-model-with-xktloaderplugin" target="_blank" rel="noopener noreferrer">Viewing an IFC Model with xeokit</a></li>
           <li><a href="https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_Schependomlaan" target="_blank" rel="noopener noreferrer">View the Schependomlaan Model</a></li>
         </ul>
       </div>
@@ -102,7 +98,7 @@ const faqItems: FAQItem[] = [
         <p>Rather, xeokit's focus is efficient interaction with large models, which we pre-convert from IFC to a compact and fast-loading format that permits large models to fit in browser memory.</p>
         <p>Learn more:</p>
         <ul>
-          <li><a href="https://www.notion.so/xeokit/Viewing-an-IFC-Model-with-xeokit-c373e48bc4094ff5b6e5c5700ff580ee" target="_blank" rel="noopener noreferrer">Viewing an IFC Model with xeokit</a></li>
+          <li><a href="/blog/viewing-an-ifc-model-with-xktloaderplugin" target="_blank" rel="noopener noreferrer">Viewing an IFC Model with xeokit</a></li>
         </ul>
       </div>
     ),

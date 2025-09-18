@@ -152,12 +152,6 @@ const config: Config = {
         src: 'img/xeokit.svg',
       },
       items: [
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'productsSidebar',
-        //   position: 'left',
-        //   label: 'Products',
-        // },
         {
           type: 'dropdown',
           position: 'left',

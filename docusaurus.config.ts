@@ -152,20 +152,20 @@ const config: Config = {
         src: 'img/xeokit.svg',
       },
       items: [
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'productsSidebar',
-        //   position: 'left',
-        //   label: 'Products',
-        // },
         {
           type: 'dropdown',
           position: 'left',
           label: 'Developers',
           items: [
+            // We decided to open the examples site in a new tab, as iframe embedding was causing issues
+            // {
+            //   label: 'xeokit-sdk [Examples]',
+            //   href: '/sdk-v2/examples/xeokit-sdk',
+            // },
             {
-              label: 'xeokit-sdk [Examples]',
-              href: '/sdk-v2/examples/xeokit-sdk',
+              label: "xeokit-sdk [Examples]",
+              href: "https://xeokit.github.io/xeokit-sdk/examples/",
+              target: "_blank",
             },
             {
               label: 'xeokit-sdk [API]',

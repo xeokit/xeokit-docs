@@ -17,7 +17,7 @@ export default function HomepageFeaturesSection(): ReactNode {
         <div className="row margin-bottom--xl">
           <div className="col col--12 text--center">
             <div className={styles.videoContainer}>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/Q9pukZc-6eA?si=o74tCeGI9B0mncb7&amp;rel=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+              <iframe style={{ width: '100%', maxWidth: '600px', height: '315px' }} src="https://www.youtube.com/embed/Q9pukZc-6eA?si=o74tCeGI9B0mncb7&amp;rel=0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
           </div>
         </div>

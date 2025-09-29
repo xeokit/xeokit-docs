@@ -77,7 +77,7 @@
 
 /* Dark theme adjustments */
 [data-theme='dark'] .companyLogo {
-  background: var(--ifm-color-emphasis-200);
+  background: #ddd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 

@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
     company: "HOK Architects",
     image: "/img/chloe-sun.jpg",
     quote: "xeokit's rich features and detailed documentation allow us to create interactive and customizable web visualization experiences for large-scale BIM models. It also provides us with the possibilities to retrieve data from BIM model for further experiments and insights.",
-    companyLogo: "/img/userLogos/hok-logo.jpg",
+    companyLogo: "/img/user-logos/hok.png",
     companyUrl: "https://www.hok.com",
   },
   {
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
     company: "BIMData.io",
     image: "/img/hugo-duroux.jpg",
     quote: "xeokit's unmatched loading and rendering speed enables us to create interactive and customizable Web visualization experiences for large BIM models, even when loading many large models simultaneously. The code is clear and properly documented, the examples are sufficient to understand how everything works, and the API is explicit and complete. These qualities, in combination with xeokit's experienced and skilled community, make xeokit a viable alternative to larger engines such as AutoDesk Forge and Unity.",
-    companyLogo: "/img/userLogos/bimdata-logo.png",
+    companyLogo: "/img/user-logos/bimdata_transparent.png",
     companyUrl: "https://bimdata.io",
   },
   {
@@ -51,8 +51,8 @@ const testimonials: Testimonial[] = [
     title: "Co-Founder & CEO",
     company: "bimspot.io",
     image: "/img/christoph-degendorfer.jpg",
-    quote: "We have been very impressed with the xeokit SDK's features. Of particular note is xeokit's highly efficient binary .XKT model format, which makes loading and rendering large models faster than ever before. With the wide-ranging feature set offered by the SDK, we have been able to meet most of our product goals so far.\n\nOur developers have also spoken about their positive experience. They noted the active development of the project and the quick and helpful responses whenever they had any issues.",
-    companyLogo: "/img/userLogos/bimspot.png",
+    quote: "We have been very impressed with the xeokit SDK's features. Of particular note is xeokit's highly efficient binary .XKT model format, which makes loading and rendering large models faster than ever before. With the wide-ranging feature set offered by the SDK, we have been able to meet most of our product goals so far.\n\nOur developers have also spoken about their positive experience. They noted the active development of the project and the quick and helpful responses from xeolabs whenever they had any issues.",
+    companyLogo: "/img/user-logos/bimspot_transparent.png",
     companyUrl: "https://bimspot.io",
   },
 ];

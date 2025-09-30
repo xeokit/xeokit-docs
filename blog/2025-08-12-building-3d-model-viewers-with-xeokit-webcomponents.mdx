@@ -62,7 +62,7 @@ Now, within your `<body>`, you can define your 3D viewer using the `<xeo-viewer>
 
 <body>
   <div id="app">
-    <xeo-viewer id="my-viewer" transparent="true" edges="false" dtxEnabled="false" colorTextureEnabled="false">
+    <xeo-viewer id="my-viewer" transparent="true" show-edges="false" dtx-enabled="false" color-texture-enabled="false">
       <!-- Models and UI components will go here -->
     </xeo-viewer>
   </div>
@@ -79,7 +79,7 @@ In this example:
 *   `edges`: (Optional) Show edges (default false)
 *   `dtx-enabled`: (Optional) Whether data texture-based scene representation (DTX) is enabled (default false)
 *   `color-texture-enabled`: (Optional) Whether basic color texture rendering is enabled (default false)
-*   `nav-cube-enabled`: (Optional) Whether navcube plugin is enabled (default false)
+*   `nav-cube-enabled`: (Optional) Whether navcube plugin is enabled (default true)
 *   `nav-cube-position`: (Optional) Position of navcube (default bottom-left)
 
 ### 3. Load 3D Models
@@ -114,7 +114,7 @@ IFC will be automatically converted to xkt format in your browser by our WASM cx
 ```
 
 *   `src`: The URL to your 3D model.
-*.  `id`: Unique id of your model
+*   `id`: Unique id of your model
 *   `bounding-box`: (Optional) Displays the bounding box of the loaded model. This is useful for debugging or visualizing model extents. (Default: false)
 *   `show-edges`: (Optional) Whether or not to show edges (Default: false)
 *   `dtx-enabled`: (Optional) Whether data texture scene representation (DTX) is enabled (Default: false)

@@ -22,7 +22,7 @@ const testimonials: Testimonial[] = [
     company: "Tribia SA",
     image: "/img/toni-marti.jpg",
     quote: "xeokit is a success enabler for our customers. Incredibly fast load times and super high-performance rendering, even on mobile browsers. Built in a modular way that allowed us to easily customize its behaviour, while allowing us to create a differentiated navigation experience.\n\nClean code, with the ability to inspect its internals, was key to our development experience. Teams focused on simple things can start using it with less than ten lines of JavaScript, while more advanced users will find that xeokit can be adapted to meet their advanced use cases.",
-    companyLogo: "/img/userLogos/tribia-web.jpg",
+    companyLogo: "/img/user-logos/tribia_transparent.png",
     companyUrl: "https://www.tribia.com",
   },
   {

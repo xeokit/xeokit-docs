@@ -14,6 +14,11 @@
         force: true
         version: "{{ git_hash | mandatory }}"
 
+    - name: Pull Git LFS objects
+      ansible.builtin.command: git lfs pull
+      args:
+        chdir: "{{ xeokit_docs_location }}"
+
     - name: Prepare environment
       ansible.builtin.command: task docker:prepare-env TARGET=production
       args:

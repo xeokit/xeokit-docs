@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "catalog:docusaurus-base",
-    "@docusaurus/plugin-content-blog": "^3.8.1",
+    "@docusaurus/plugin-content-blog": "3.7.0",
     "@docusaurus/plugin-google-gtag": "^3.8.1",
     "@docusaurus/preset-classic": "catalog:docusaurus-base",
     "@docusaurus/theme-common": "^3.8.1",

@@ -27,3 +27,8 @@ success-story:
   label: Success Stories
   permalink: /success-stories
   description: Success stories of using xeokit
+
+picking:
+  label: Picking
+  permalink: /picking
+  description: Picking tag description

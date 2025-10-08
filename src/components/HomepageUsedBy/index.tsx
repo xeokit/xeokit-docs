@@ -153,9 +153,9 @@ const CompanyList: CompanyItem[] = [
     alt: 'Fonn Construction Project Management Software',
   },
   {
-    name: 'Tekhne',
-    logo: '/img/user-logos/tekhne_black_transparent.png',
-    alt: 'Tekhne',
+    name: 'Netprojet',
+    logo: '/img/user-logos/netproject-transparent.png',
+    alt: 'Netprojet',
   },
   {
     name: 'Open Experience GmbH',
@@ -173,9 +173,9 @@ const CompanyList: CompanyItem[] = [
     alt: 'Construmarket Brazil',
   },
   {
-    name: 'BlindSide',
-    logo: '/img/user-logos/blindside_transparent.png',
-    alt: 'BlindSide',
+    name: 'Dr Heinekamp',
+    logo: '/img/user-logos/heinekamp_transparent.png',
+    alt: 'Dr Heinekamp',
   },
   {
     name: 'TMM Group',

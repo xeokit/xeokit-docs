@@ -7,7 +7,7 @@ type CompanyItem = {
   name: string;
   logo: string;
   alt: string;
-  website?: string;
+  link?: string;
 };
 
 const CompanyList: CompanyItem[] = [
@@ -25,6 +25,7 @@ const CompanyList: CompanyItem[] = [
     name: 'Bexel Manager',
     logo: '/img/user-logos/bexel_transparent.png',
     alt: 'Bexel Consulting, Bexel Manager',
+    link: '/success-stories/revolutionizing-bim-visualization-through-high-performance-xeokit-sdk-implementation-in-bexel-manager',
   },
   {
     name: 'Libal CDE',
@@ -35,7 +36,6 @@ const CompanyList: CompanyItem[] = [
     name: 'OpenProject',
     logo: '/img/user-logos/open_project_transparent.png',
     alt: 'OpenProject - Open source project management software',
-    //website: 'https://www.openproject.org',
   },
   {
     name: 'SWG Service Works Global: CAFM Software',
@@ -226,6 +226,7 @@ const CompanyList: CompanyItem[] = [
     name: 'Stadt Zürich BIM',
     logo: '/img/user-logos/stadt_zurich_transparent.png',
     alt: 'Stadt Zürich BIM Tiefbauamt: City of Zurich BIM',
+    link: '/success-stories/how-zurich-enables-digital-civic-participation-through-a-3d-bim-viewer',
   },
   {
     name: 'Vollack Group',
@@ -274,22 +275,14 @@ const CompanyList: CompanyItem[] = [
   },
 ];
 
-function Company({ name, logo, alt, website }: CompanyItem) {
+function Company({ name, logo, alt, link }: CompanyItem) {
   const content = (
     <div className={clsx('col col--3', styles.company)}>
       <div className={styles.companyLogo}>
-        <img src={logo} alt={alt} />
+        {link ? <a href={link}><img src={logo} alt={alt} /></a> : <img src={logo} alt={alt} /> }
       </div>
     </div>
   );
-
-  if (website) {
-    return (
-      <a href={website} target="_blank" rel="noopener noreferrer" className={styles.companyLink}>
-        {content}
-      </a>
-    );
-  }
 
   return content;
 }

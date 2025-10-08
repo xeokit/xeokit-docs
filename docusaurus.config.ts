@@ -45,6 +45,7 @@ const config: Config = {
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
+          id: 'blog',
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -84,6 +85,57 @@ const config: Config = {
   ],
 
   plugins: [
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        id: 'success-stories',
+        path: './success-stories', // Path to data on filesystem, relative to site dir.
+        routeBasePath: 'success-stories', // URL route for the blog section of your site.
+        // Simple use-case: string editUrl
+        // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
+        // Advanced use-case: functional editUrl
+        // editUrl: ({ locale, blogDirPath, blogPath, permalink }) =>
+        //   `https://github.com/facebook/docusaurus/edit/main/website/${blogDirPath}/${blogPath}`,
+        editLocalizedFiles: false,
+        blogTitle: 'Success Stories',
+        blogDescription: 'Success Stories from our customers and community',
+        blogSidebarCount: 5,
+        blogSidebarTitle: 'All Success Stories',
+        include: ['**/*.{md,mdx}'],
+        exclude: [
+          '**/_*.{js,jsx,ts,tsx,md,mdx}',
+          '**/_*/**',
+          '**/*.test.{js,jsx,ts,tsx}',
+          '**/__tests__/**',
+        ],
+        postsPerPage: 10,
+        blogListComponent: '@theme/BlogListPage',
+        blogPostComponent: '@theme/BlogPostPage',
+        blogTagsListComponent: '@theme/BlogTagsListPage',
+        blogTagsPostsComponent: '@theme/BlogTagsPostsPage',
+        //remarkPlugins: [require('./my-remark-plugin')],
+        rehypePlugins: [],
+        beforeDefaultRemarkPlugins: [],
+        beforeDefaultRehypePlugins: [],
+        truncateMarker: /<!--\s*(truncate)\s*-->/,
+        showReadingTime: true,
+        // feedOptions: {
+        //   type: '',
+        //   title: '',
+        //   description: '',
+        //   copyright: '',
+        //   language: undefined,
+        //   createFeedItems: async (params) => {
+        //     const { blogPosts, defaultCreateFeedItems, ...rest } = params;
+        //     return defaultCreateFeedItems({
+        //       // keep only the 10 most recent blog posts in the feed
+        //       blogPosts: blogPosts.filter((item, index) => index < 10),
+        //       ...rest,
+        //     });
+        //   },
+        // },
+      },
+    ],
     // [
     //   'docusaurus-plugin-openapi-docs',
     //   {
@@ -236,15 +288,12 @@ const config: Config = {
           to: "/#faq",
         },
         { to: '/blog', label: 'Blog', position: 'right' },
+        { to: '/success-stories', label: 'Success Stories', position: 'right' },
         {
           label: 'Use Cases',
           position: 'right',
           type: "dropdown",
           items: [
-            // {
-            //   label: "Success Stories",
-            //   to: '/blog/tags/success-stories',
-            // },
             {
               label: "xeoVision",
               href: "https://xeo.vision",

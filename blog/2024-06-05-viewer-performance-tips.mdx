@@ -108,3 +108,55 @@ const model = xktLoader.load({
     src: "myHugeModel.xkt"
 });
 ```
+
+
+## Tip 3: Check if ViewCullPlugin improves FPS
+
+The [ViewCullPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/ViewCullPlugin/ViewCullPlugin.js~ViewCullPlugin.html) performs view frustum culling to accelerate rendering performance.
+For each Entity that represents an object, ViewCullPlugin automatically sets the `culled` property whenever it falls outside the field of view. When culled, an Entity is not processed by xeokit's renderer.
+
+The Trade-off: However, there's an associated cost for calculating whether an object is inside or outside the field of view.
+This means that if your users work mostly with full model views (where everything is visible), this option may actually degrade performance rather than help.
+
+**Our recommendation:** Test whether ViewCullPlugin helps in your specific use case rather than enabling it by default.
+
+Example Usage:
+```js
+const viewer = new Viewer({
+   canvasId: "myCanvas",
+   transparent: true
+});
+
+const viewCullPlugin = new ViewCullPlugin(viewer, {
+   maxTreeDepth: 20
+});
+
+const xktLoader = new XKTLoaderPlugin(viewer);
+
+const model = xktLoader.load({
+     id: "myModel",
+     src: "./models/xkt/OTCConferenceCenter.xkt"
+});
+```
+
+## Tip 4: Check if You compress buffers in xeokit-convert
+
+As of version v1.1.25, [xeokit-convert](https://github.com/xeokit/xeokit-convert) does not compress buffers by default.
+However, by adding the -b option when producing an XKT file, buffers are compressed:
+```bash
+node convert2xkt.js -a manifest.json -o model.xkt -b
+```
+Alternatively, we recommend using native webserver/browser compression (gzip), which should be more efficient.
+
+Why This Matters: Using compressed buffers significantly helps users on slower network connections load models faster.
+Even on faster networks, smaller file sizes usually translate to faster initial load times.
+
+Bottom line: If you're experiencing loading problems or want to optimize performance,
+make sure your XKT files are compressed—either through the -b flag or via webserver compression.
+
+## Tip 5: Make sure you are using the right GPU
+
+This one is for Windows users having a dedicated GPU.
+Make sure your browser (for instance Google Chrome) uses the correct (dedicated) GPU.
+If you have doubts - check this article - [Chrome To Use Specific GPU?](https://support.google.com/chrome/thread/77636044/chrome-to-use-specific-gpu?hl=en)
+

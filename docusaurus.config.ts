@@ -288,7 +288,6 @@ const config: Config = {
           to: "/#faq",
         },
         { to: '/blog', label: 'Blog', position: 'right' },
-        { to: '/success-stories', label: 'Success Stories', position: 'right' },
         {
           label: 'Use Cases',
           position: 'right',
@@ -306,6 +305,10 @@ const config: Config = {
             {
               label: "Testimonials",
               to: "/#testimonials",
+            },
+            {
+              label: 'Success Stories',
+              to: '/success-stories',
             },
           ],
         },

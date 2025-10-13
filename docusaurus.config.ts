@@ -307,6 +307,10 @@ const config: Config = {
               label: "Testimonials",
               to: "/#testimonials",
             },
+            {
+              label: 'Success Stories',
+              to: '/success-stories',
+            },
           ],
         },
 

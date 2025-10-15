@@ -103,9 +103,9 @@ const CompanyList: CompanyItem[] = [
     alt: 'HOK (Hellmuth, Obata + Kassabaum)',
   },
   {
-    name: 'Unizite',
-    logo: '/img/user-logos/unizite_transparent.png',
-    alt: 'Unizite (Tribia)',
+    name: 'Interaxo',
+    logo: '/img/user-logos/interaxo_transparent.png',
+    alt: 'Interaxo',
   },
   {
     name: 'Congrid',
@@ -313,7 +313,7 @@ export default function HomepageUsedBy(): ReactNode {
           <div className="col col--12 text--center">
             <a
               className="button button--secondary button--lg"
-              href="#testimonials">Read user stories »</a>
+              href="#testimonials">Read success stories »</a>
           </div>
         </div>
       </div>

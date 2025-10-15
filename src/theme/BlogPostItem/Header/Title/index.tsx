@@ -13,7 +13,7 @@ export default function TitleWrapper(props: Props): ReactNode {
 
   React.useEffect(() => {
     const pathname = window.location.pathname;
-    const blogPathPattern = /^\/blog\/(?!page\/\d+$)[^/]+/; // Matches /blog/anything but not just /blog and not /blog/page/{number}
+    const blogPathPattern = /^\/(blog|success-stories)\/(?!page\/\d+$)[^/]+/; // Matches /blog/anything but not just /blog and not /blog/page/{number}
     setIsInBlogPost(blogPathPattern.test(pathname));
 
     setTimeout(() => {

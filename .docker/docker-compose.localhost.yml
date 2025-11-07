@@ -112,6 +112,6 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=xd-net"
       - "traefik.http.routers.static-pages.entrypoints=websecure"
-      - "traefik.http.routers.static-pages.rule=Host(`${XD_STATIC_PAGES_SUBDOMAIN}.${XD_STACK_DOMAIN}`)"
+      - "traefik.http.routers.static-pages.rule=Host(`pages.${XD_STACK_DOMAIN}`)"
       - "traefik.http.routers.static-pages.tls=true"
       - "traefik.http.services.static-pages.loadbalancer.server.port=80"

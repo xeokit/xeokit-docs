@@ -97,3 +97,21 @@ services:
       - "traefik.http.routers.sdk-examples.tls=true"
       # - "traefik.http.routers.sdk-examples.tls.certresolver=xd"
       - "traefik.http.services.sdk-examples.loadbalancer.server.port=80"
+
+  creoox-static-pages:
+    container_name: pages
+    image: php:8.0-apache
+    restart: always
+    command: >
+      bash -c "a2enmod rewrite && apache2-foreground"
+    volumes:
+      - ./creoox-static-pages:/var/www/html/:ro
+    networks:
+      - xd-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=xd-net"
+      - "traefik.http.routers.static-pages.entrypoints=websecure"
+      - "traefik.http.routers.static-pages.rule=Host(`pages.${XD_STACK_DOMAIN}`)"
+      - "traefik.http.routers.static-pages.tls=true"
+      - "traefik.http.services.static-pages.loadbalancer.server.port=80"

@@ -313,7 +313,7 @@ export default function HomepageUsedBy(): ReactNode {
           <div className="col col--12 text--center">
             <a
               className="button button--secondary button--lg"
-              href="#testimonials">Read success stories »</a>
+              href="/success-stories">Read success stories »</a>
           </div>
         </div>
       </div>

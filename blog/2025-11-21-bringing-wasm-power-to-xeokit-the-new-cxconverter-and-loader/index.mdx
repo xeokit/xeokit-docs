@@ -1,0 +1,154 @@
+---
+slug: bringing-wasm-power-to-xeokit-the-new-cxconverter-and-loader
+title: "Bringing WASM Power to xeokit: The New cxConverter and Loader"
+authors: [dominik_szaradowski]
+tags: [xeokit]
+---
+
+![Bringing WASM Power to xeokit](bringing-wasm-power.png)
+
+In the ever-evolving landscape of web technologies, WebAssembly (WASM) has emerged as a powerful tool for enhancing performance and capabilities in web applications. At xeokit, we are excited to announce the integration of `cxConverter` and a new WASM loader into our ecosystem, aimed at improving the handling of large BIM and CAD models.
+
+## What is cxConverter?
+
+`cxConverter` is a program that can be used within the xeokit ecosystem, designed to quickly and securely convert large BIM and CAD models to XKT and GLTF formats. It significantly accelerates the conversion process while maintaining full compatibility with the original data.
+
+`cxConverter` acts as a bridge between different file formats, allowing users to easily transfer and visualize 3D models in xeokit-based applications. It also optimizes models for rendering performance in web browsers.
+
+By default, `cxConverter` is available as a terminal application. However, in response to growing demand for performance and flexibility, we have introduced a WebAssembly (WASM) version of cxConverter that can be directly integrated into xeokit projects.
+
+## What are the benefits of using WebAssembly (WASM) in xeokit?
+
+WebAssembly (WASM) allows you to run code written in languages such as C/C++ or Rust directly in the browser, achieving performance close to native. This enables `cxConverter` to operate much faster and more stably, which is crucial when working with large and complex 3D models, where data conversion can be time-consuming and computationally intensive.
+
+WASM also introduces strong runtime isolation, which increases the security of the entire process. The code runs in a controlled sandbox, without unauthorized access to the user's system, which is crucial for web applications processing external files.
+
+Additionally, thanks to WASM, it is possible to move more advanced operations to the client side, reducing server load and shortening application response times. As a result, integrating `cxConverter` with WASM paves the way for a faster, more responsive, and secure model processing pipeline in the xeokit ecosystem.
+
+## How to integrate cxConverter and WASM loader with xeokit project?
+
+Integrating `cxConverter` and WASM loader with xeokit project is relatively straightforward.
+There are two ways to do this. Here are the steps to follow:
+
+### Method 1: Use the built-in cxConverter with xeokit loader
+
+```javascript
+import { CxConverterIFCLoaderPlugin, Viewer, SceneModel } from "../../dist/xeokit-sdk.es.js";
+import * as CxConverter from "https://cdn.jsdelivr.net/npm/@creooxag/cxconverter@5.4.5-beta-2/dist/index.mjs";
+
+const viewer = new Viewer({
+  canvasId: "myCanvas",
+  transparent: true
+});
+
+const cxConverterIFCLoaderPlugin = new CxConverterIFCLoaderPlugin(viewer);
+cxConverterIFCLoaderPlugin.setCxConverterModule(CxConverter);
+
+const sceneModel = await cxConverterIFCLoaderPlugin.load({
+  src: "../../assets/models/ifc/Duplex.ifc",
+  progressCallback: (progress) => {},
+  progressTextCallback: (progressText) => {},
+});
+
+sceneModel.on("loaded", () => {
+  viewer.cameraFlight.flyTo();
+});
+```
+
+The full example can be found [here](https://github.com/xeokit/xeokit-sdk/blob/master/examples/buildings/cxConverterIFC_vbo_Duplex.html).
+
+### Method 2: Install cxConverter as an npm package
+
+#### Install the package
+
+```bash
+npm install @creooxag/cxconverter
+```
+
+#### Using cxConverter in JavaScript
+
+In this case, I recommend using web workers for better performance.
+
+```javascript
+import { IfcConverter } from '@creooxag/cxconverter';
+
+// Init IfcConverter instance with default options
+const ifcConverterLoadOptions = IfcConverter.getDefaultInputOptions();
+const ifcConverter = await IfcConverter.create(ifcConverterLoadOptions);
+
+ifcConverter.registerProgressCallback((progress) => {
+  // Logs progress value (0-100)
+});
+
+ifcConverter.registerProgressTextCallback((progressText) => {
+  // Logs progress text
+});
+
+ifcConverter.registerMetaDataCompleteCallback(async (metadata) => {
+  // Here you can access model metadata in JSON format
+});
+
+ifcConverter.registerGltfChunkDoneCallback(async (gltf) => {
+  // Here you can access generated glTF chunk in this case we always get only one chunk
+  // so we can directly use it to load the model in xeokit or what ever you need
+});
+
+// Load file data (for example from an input element)
+const file = document.getElementById('fileInput').files[0];
+const fileData = new TextDecoder().decode(await file.arrayBuffer());
+
+try {
+  await ifcConverter.loadModel(fileData, {
+    maxFileSizeInMegaBytes: 200,
+  });
+} catch (error) {
+  console.error(error);
+}
+```
+
+## Bonus - conversion to XKT format
+
+You can also convert the generated glTF chunk to XKT format using `xeokit-convert` package.
+`xeokit-convert` provides functions to parse glTF data into an XKT model and then write that model to an ArrayBuffer.
+After converting to XKT format, you can load it into xeokit as usual.
+
+```javascript
+import {
+  parseGLTFIntoXKTModel,
+  writeXKTModelToArrayBuffer,
+  XKTModel,
+} from '@xeokit/xeokit-convert/dist/xeokit-convert.es.js';
+
+
+async function convertToXkt(gltf: string, metadata?: { [key: string]: any }): Promise<Uint8Array> {
+  if (gltf !== undefined) {
+    const xktModel = new XKTModel();
+
+    await parseGLTFIntoXKTModel({
+      data: gltf,
+      xktModel: xktModel,
+      log: (msg: any) => {
+        console.log(`parseGLTFIntoXKTModel: ` + msg);
+      },
+    });
+
+    await xktModel.finalize();
+    return await writeXKTModelToArrayBuffer(xktModel, metadata, {}, {}, false);
+  }
+
+  throw new Error('gltf is undefined');
+}
+
+...
+
+// using convertToXkt inside gltf chunk done callback
+ifcConverter.registerGltfChunkDoneCallback(async (gltf) => {
+  const xktData = await convertToXkt(gltf);
+});
+```
+
+## Summary
+
+The introduction of `cxConverter` and WASM loader to the xeokit ecosystem opens up new possibilities for developers and users working with large 3D models. By leveraging WebAssembly technology, the conversion process becomes faster, more efficient, and secure. We encourage experimentation with these tools and their integration into your xeokit projects to fully harness the potential of modern 3D web applications. We also invite you to explore the `cxConverter` documentation and examples available on our website to better understand the capabilities and applications of this tool.
+
+Remember that `cxConverter` is licensed by **Creoox AG**. You can contact using the information available on [Creoox website](https://creoox.com/contact/).

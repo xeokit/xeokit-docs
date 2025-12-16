@@ -76,10 +76,6 @@ const config: Config = {
             return items.filter((item) => !item.url.includes('/page/'));
           },
         },
-        gtag: {
-          trackingID: 'G-9VRQEEM351',
-          anonymizeIP: true,
-        },
       } satisfies Preset.Options,
     ],
   ],
@@ -163,10 +159,6 @@ const config: Config = {
     //   },
     // ]
 
-    [
-      "@gracefullight/docusaurus-plugin-microsoft-clarity",
-      { projectId: "nml0pjdlbw" },
-    ],
     ['@lunaticmuch/docusaurus-terminology', {}],
   ],
 

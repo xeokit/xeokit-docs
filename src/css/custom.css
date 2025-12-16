@@ -59,3 +59,5 @@ a:not([href]) {
     -webkit-text-decoration: none;
     text-decoration: none;
   }
+
+@import "../components/CookieConsent/cookieconsent.css";

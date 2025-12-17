@@ -384,6 +384,21 @@ const config: Config = {
             },
           ],
         },
+        {
+          title: 'Legal',
+          items: [
+            {
+              html: `<a href="/docs/privacy-policy" rel="noreferrer noopener" aria-label="Privacy Policy" class="footer__link-item">
+                  Privacy Policy
+                </a>`,
+            },
+            {
+              html: `<a href="/docs/imprint" rel="noreferrer noopener" aria-label="Imprint" class="footer__link-item">
+                  Imprint
+                </a>`,
+            },
+          ],
+        },
       ],
       logo: {
         alt: 'xeokit Logo',

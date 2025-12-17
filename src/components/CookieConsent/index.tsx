@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import * as CookieConsent from "./cookieconsent.esm.js";
 import Clarity from './clarity';
 
@@ -6,6 +6,8 @@ const GOOGLE_ANALYTICS_ID = 'G-9VRQEEM351';
 const CLARITY_PROJECT_ID = 'nml0pjdlbw';
 
 declare const window: Window & { dataLayer: Record<string, unknown>[]; };
+
+(window as any).CookieConsent = CookieConsent;
 
 const updateCookieConsent = () => {
   CookieConsent.showPreferences();
@@ -79,7 +81,7 @@ const CookieConsentComponent = () => {
   const [loadScript, setLoadScript] = useState(false);
 
   useEffect(() => {
-    listenForConsent({setLoadScript});
+    listenForConsent({ setLoadScript });
 
     CookieConsent.run({
       mode: 'opt-out',
@@ -95,14 +97,14 @@ const CookieConsentComponent = () => {
       categories: {
         necessary: {
           enabled: true,
-          readOnly: true
+          readOnly: true,
         },
         functional: {},
         analytics: {
           autoClear: {
-              cookies: [{name: /^(_ga|_gid)/}
-              ]
-            }
+            cookies: [{ name: /^(_ga|_gid)/ },
+            ],
+          },
         },
         advertisement: {},
       },
@@ -115,7 +117,7 @@ const CookieConsentComponent = () => {
               description: `We use a few analytics cookies to make the site better. No ads, no tracking across websites.`,
               acceptAllBtn: 'Accept',
               acceptNecessaryBtn: 'Reject',
-              showPreferencesBtn: 'Manage preferences',
+              showPreferencesBtn: 'Manage Preferences',
             },
             preferencesModal: {
               title: 'Manage preferences',
@@ -132,40 +134,29 @@ const CookieConsentComponent = () => {
                 {
                   title: 'Necessary',
                   description: 'Necessary cookies are required to enable the basic features of this site, such as color theme selection or adjusting your consent preferences. These cookies do not store any personally identifiable data.',
-                  linkedCategory: 'necessary'
+                  linkedCategory: 'necessary',
                 },
                 {
-                  title: 'Functional',
-                  description: 'Functional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collecting feedback, and other third-party features.',
-                  linkedCategory: 'functional',
+                  title: 'Analytical',
+                  description: 'Analytics cookies help us understand how the site is used by enabling aggregated and anonymized measurement of usage and performance statistics (e.g. MS Clarity, GA4).',
+                  linkedCategory: 'analytics',
                 },
-                // {
-                //   title: 'Analytics',
-                //   description: 'Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc.',
-                //   linkedCategory: 'analytics',
-                // },
-                // {
-                //   title: 'Advertisement',
-                //   description: 'Advertisement cookies are used to provide visitors with customized advertisements based on the pages you visited previously and to analyze the effectiveness of the ad campaigns.',
-                //   linkedCategory: 'advertisement',
-                // },
                 {
                   title: 'More information',
-                  description: 'For any queries in relation to our policy on cookies and your choices, please read <a href="/docs/privacy-policy">privacy policy</a>.',
-                  // description: 'For any queries in relation to our policy on cookies and your choices, please contact us.'
-                }
-              ]
-            }
-          }
-        }
-      }
+                  description: 'For more information, please refer to our <a href="/docs/privacy-policy">Privacy Policy</a>.',
+                },
+              ],
+            },
+          },
+        },
+      },
     });
 
     function getCookie(cname: string): string {
-      let name = cname + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
-      for(let i = 0; i <ca.length; i++) {
+      const name = cname + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) == ' ') {
           c = c.substring(1);
@@ -195,15 +186,10 @@ const CookieConsentComponent = () => {
   }, []);
 
   return (
-      <>
-        {loadScript && (<script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}></script>)}
-        <div style={{ backgroundColor: '#303846', color: '#ffffff', padding: '10px', textAlign: 'center'}}>
-        <a href="#" onClick={updateCookieConsent} style={{ color: '#ffffff'}}>
-          Cookie Preferences
-        </a>
-      </div>
-      </>
+    <>
+      {loadScript && (<script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}></script>)}
+    </>
   );
-}
+};
 
 export { updateCookieConsent, resetCookieConsent, CookieConsentComponent }

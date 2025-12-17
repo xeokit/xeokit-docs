@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from "react";
 import * as CookieConsent from "./cookieconsent.esm.js";
 import Clarity from './clarity';
@@ -6,8 +8,6 @@ const GOOGLE_ANALYTICS_ID = 'G-9VRQEEM351';
 const CLARITY_PROJECT_ID = 'nml0pjdlbw';
 
 declare const window: Window & { dataLayer: Record<string, unknown>[]; };
-
-(window as any).CookieConsent = CookieConsent;
 
 const updateCookieConsent = () => {
   CookieConsent.showPreferences();

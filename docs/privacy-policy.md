@@ -2,7 +2,7 @@
 id: privacy-policy
 title: Privacy Policy
 ---
-import CookieConsent from '../src/components/CookieConsent';
+import * as CookieConsent from "../src/components/CookieConsent/cookieconsent.esm.js";
 
 **Last Updated: 04.12.2025**
 
@@ -47,7 +47,7 @@ When you first visit xeokit.io, you can choose whether to allow or reject analyt
 -	Essential cookies: required for the website to function (always active).
 -	Analytics cookies: used only if you choose “Accept.”
 
-You can withdraw or change your cookies preferences at any time via <a href="#" onClick={window.CookieConsent.showPreferences}>Cookie Preferences</a> or by adjusting your browser settings. We don’t use advertisement cookies or profiling features.
+You can withdraw or change your cookies preferences at any time via <a href="#" onClick={CookieConsent.showPreferences}>Cookie Preferences</a> or by adjusting your browser settings. We don’t use advertisement cookies or profiling features.
 
 ## 5.	When we process personal data
 We only receive personal data if you choose to contact us directly (e.g., by email). In such cases, we process your data solely for the purpose of handling your request. We do not share this data with third parties unless legally required.

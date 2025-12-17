@@ -123,7 +123,7 @@ const CookieConsentComponent = () => {
               title: 'Manage preferences',
               acceptAllBtn: 'Accept',
               acceptNecessaryBtn: 'Reject',
-              savePreferencesBtn: 'Accept current selection',
+              savePreferencesBtn: 'Save Preferences',
               closeIconLabel: 'Close modal',
               serviceCounterLabel: 'Service|Services',
               sections: [

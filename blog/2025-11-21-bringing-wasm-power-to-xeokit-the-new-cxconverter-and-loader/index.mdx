@@ -108,47 +108,6 @@ try {
 }
 ```
 
-## Bonus - conversion to XKT format
-
-You can also convert the generated glTF chunk to XKT format using `xeokit-convert` package.
-`xeokit-convert` provides functions to parse glTF data into an XKT model and then write that model to an ArrayBuffer.
-After converting to XKT format, you can load it into xeokit as usual.
-
-```javascript
-import {
-  parseGLTFIntoXKTModel,
-  writeXKTModelToArrayBuffer,
-  XKTModel,
-} from '@xeokit/xeokit-convert/dist/xeokit-convert.es.js';
-
-
-async function convertToXkt(gltf: string, metadata?: { [key: string]: any }): Promise<Uint8Array> {
-  if (gltf !== undefined) {
-    const xktModel = new XKTModel();
-
-    await parseGLTFIntoXKTModel({
-      data: gltf,
-      xktModel: xktModel,
-      log: (msg: any) => {
-        console.log(`parseGLTFIntoXKTModel: ` + msg);
-      },
-    });
-
-    await xktModel.finalize();
-    return await writeXKTModelToArrayBuffer(xktModel, metadata, {}, {}, false);
-  }
-
-  throw new Error('gltf is undefined');
-}
-
-...
-
-// using convertToXkt inside gltf chunk done callback
-ifcConverter.registerGltfChunkDoneCallback(async (gltf) => {
-  const xktData = await convertToXkt(gltf);
-});
-```
-
 ## Summary
 
 The introduction of `cxConverter` and WASM loader to the xeokit ecosystem opens up new possibilities for developers and users working with large 3D models. By leveraging WebAssembly during development, you can run the conversion process quickly, efficiently, and in a secure sandboxed environment — making development faster and safer. We encourage experimentation with these tools and their integration into your xeokit projects to fully harness the potential of modern 3D web applications. We also invite you to explore the `cxConverter` documentation and examples available on our website to better understand the capabilities and applications of this tool.

@@ -192,6 +192,3 @@ For that reason use `git merge origin/develop --ff-only`
 - Use [Conventional Commits](https://www.conventionalcommits.org/) format
 - Husky pre-commit hook validates messages against `commitlint.config.mjs`
 - Invalid commit messages will be rejected
-
-
-

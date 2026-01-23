@@ -7,7 +7,9 @@ import Clarity from './clarity';
 const GOOGLE_ANALYTICS_ID = 'G-9VRQEEM351';
 const CLARITY_PROJECT_ID = 'nml0pjdlbw';
 
-declare const window: Window & { dataLayer: Record<string, unknown>[]; };
+declare const window: Window & { dataLayer: Record<string, unknown>[];
+  _ccRun?: unknown
+};
 
 const updateCookieConsent = () => {
   CookieConsent.showPreferences();
@@ -17,11 +19,12 @@ const resetCookieConsent = () => {
   CookieConsent.reset(true);
 };
 
-const listenForConsent = (state: any) => {
-  if ((window as any)._ccRun) return;
+const listenForConsent = (state: unknown) => {
+  if (window._ccRun) return;
 
   window.dataLayer = window.dataLayer || [];
   function gtag(arg0: string, arg1: string | Date, arg2?: { [x: string]: string; }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).dataLayer.push(arg0, arg1, arg2);
   }
 
@@ -192,4 +195,4 @@ const CookieConsentComponent = () => {
   );
 };
 
-export { updateCookieConsent, resetCookieConsent, CookieConsentComponent }
+export { updateCookieConsent, resetCookieConsent, CookieConsentComponent };

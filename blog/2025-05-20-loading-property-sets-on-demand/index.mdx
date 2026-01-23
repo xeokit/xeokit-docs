@@ -11,15 +11,15 @@ tags: [ifc, xeoservices]
 
 **🔎 How to search IFC metadata without downloading gigabytes of data?**
 
-At xeoVision, we’ve developed an innovative approach to **on-demand property set loading**.  
-👉 Extracting metadata to JSON  
-👉 Converting it into lightweight SQLite databases  
+At xeoVision, we’ve developed an innovative approach to **on-demand property set loading**.
+👉 Extracting metadata to JSON
+👉 Converting it into lightweight SQLite databases
 👉 Remotely reading data _chunk by chunk_ from object storage
 
 This allows even very large IFC models to be searched quickly, efficiently, and without heavy network loads.
 
 📖 In the article, I explain the entire process — from cxconverter to remote VFS and data transfer optimization.
-<!-- truncate -->
+{/* truncate */}
 
 ## What are IFC files and their metadata?
 
@@ -88,7 +88,7 @@ Each SQLite database associated with a given IFC model is stored in object stora
 - **No need to maintain dedicated file servers or database servers.**
 - Object storage offers scalability, high availability, and relatively low data storage costs.
 - Files can be easily versioned and shared among different clients or teams.
-    
+
 ### Remote VFS mounting
 
 To enable data access without fully downloading the database, we use a **Virtual File System (VFS)**. This solution allows applications to open and search the SQLite database as if it were local, while in reality only selected portions of the file are read.
@@ -98,7 +98,7 @@ To enable data access without fully downloading the database, we use a **Virtual
 - Works transparently for applications — no changes required in how SQL queries are executed.
 - Allows dynamic data retrieval during application runtime, significantly speeding up operations.
 - Reduces transfer costs and network latency, since only the necessary parts of the file are downloaded.
-    
+
 ### Using `pragma_size` and chunked reading
 
 A key improvement is the use of **pragma_size**, which enables control over the size of data blocks (chunks) retrieved from object storage. As a result:
@@ -106,16 +106,16 @@ A key improvement is the use of **pragma_size**, which enables control over the 
 - When executing an SQL query, the client retrieves **only those parts of the database that contain the requested information**.
 - The total volume of data transferred over the network is reduced, which is critical when working with large models or under limited bandwidth conditions.
 - The system intelligently caches fetched blocks, minimizing the number of requests to remote storage during subsequent operations.
-    
+
 ### Advantages of the "on-demand" approach
 
 In summary, the on-demand metadata reading mechanism provides:
 
 - **Minimized data transfer** — users never download more than they need.
-- **Fast access to object properties** without time-consuming downloading and loading of entire databases. 
+- **Fast access to object properties** without time-consuming downloading and loading of entire databases.
 - **Scalability** — regardless of the size of the IFC file or the number of models handled by the system.
 - **Flexibility** — the solution works equally well for small teams and large organizations working in distributed environments.
-    
+
 As a result, users can smoothly search model properties, even when the models contain hundreds of thousands of objects and gigabytes of data, without worrying about performance or infrastructure overload.
 
 ## Why not store metadata in a single unified database on a remote server?

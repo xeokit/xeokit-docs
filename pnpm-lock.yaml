@@ -52,6 +52,9 @@ catalogs:
     '@easyops-cn/docusaurus-search-local':
       specifier: 0.51.1
       version: 0.51.1
+    docusaurus-plugin-image-zoom:
+      specifier: ^3.0.1
+      version: 3.0.1
     docusaurus-plugin-openapi-docs:
       specifier: ^4.3.7
       version: 4.3.7
@@ -152,6 +155,9 @@ importers:
       clsx:
         specifier: catalog:docusaurus-base
         version: 2.1.1
+      docusaurus-plugin-image-zoom:
+        specifier: catalog:docusaurus-extensions
+        version: 3.0.1(@docusaurus/theme-classic@3.7.0(@types/react@19.1.4)(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3))
       docusaurus-plugin-openapi-docs:
         specifier: catalog:docusaurus-extensions
         version: 4.3.7(@docusaurus/plugin-content-docs@3.7.0(@mdx-js/react@3.1.0(@types/react@19.1.4)(react@19.1.0))(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3))(@docusaurus/utils-validation@3.8.1(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@docusaurus/utils@3.8.1(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
@@ -3853,6 +3859,11 @@ packages:
     resolution: {integrity: sha512-l4gcSouhcgIKRvyy99RNVOgxXiicE+2jZoNmaNmZ6JXiGajBOJAesk1OBlJuM5k2c+eudGdLxDqXuPCKIj6kpw==}
     engines: {node: '>=6'}
 
+  docusaurus-plugin-image-zoom@3.0.1:
+    resolution: {integrity: sha512-mQrqA99VpoMQJNbi02qkWAMVNC4+kwc6zLLMNzraHAJlwn+HrlUmZSEDcTwgn+H4herYNxHKxveE2WsYy73eGw==}
+    peerDependencies:
+      '@docusaurus/theme-classic': '>=3.0.0'
+
   docusaurus-plugin-openapi-docs@4.3.7:
     resolution: {integrity: sha512-wCXuHniG108OGCj6qKtTOFLgyhnlztMegj63BbEyHC/OgM7PDL2Yj2VFkWsU3eCmJKI+czahanztFMhVLFD67w==}
     engines: {node: '>=14'}
@@ -5376,6 +5387,9 @@ packages:
     resolution: {integrity: sha512-aisnrDP4GNe06UcKFnV5bfMNPBUw4jsLGaWwWfnH3v02GnBuXX2MCVn5RbrWo0j3pczUilYblq7fQ7Nw2t5XKw==}
     engines: {node: '>= 0.8'}
 
+  medium-zoom@1.1.0:
+    resolution: {integrity: sha512-ewyDsp7k4InCUp3jRmwHBRFGyjBimKps/AJLjRSox+2q/2H4p/PNpQf+pwONWlJiOudkBXtbdmVbFjqyybfTmQ==}
+
   memfs@3.5.3:
     resolution: {integrity: sha512-UERzLsxzllchadvbPs5aolHh65ISpKpM+ccLbOJ8/vvpBKmAWf+la7dXFy7Mr0ySHbdHrFv5kGFCUHHe6GFEmw==}
     engines: {node: '>= 4.0.0'}
@@ -6027,6 +6041,14 @@ packages:
 
   path-parse@1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
+
+  path-root-regex@0.1.2:
+    resolution: {integrity: sha512-4GlJ6rZDhQZFE0DPVKh0e9jmZ5egZfxTkp7bcRDuPlJXbAwhxcl2dINPUAsjLdejqaLsCeg8axcLjIbvBjN4pQ==}
+    engines: {node: '>=0.10.0'}
+
+  path-root@0.1.1:
+    resolution: {integrity: sha512-QLcPegTHF11axjfojBIoDygmS2E3Lf+8+jI6wOVmNVenrKSo3mFdSGiIgdSHenczw3wPtlVMQaFVwGmM7BJdtg==}
+    engines: {node: '>=0.10.0'}
 
   path-scurry@1.11.1:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
@@ -6914,6 +6936,10 @@ packages:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
 
+  resolve-package-path@4.0.3:
+    resolution: {integrity: sha512-SRpNAPW4kewOaNUt8VPqhJ0UMxawMwzJD8V7m1cJfdSTK9ieZwS6K7Dabsm4bmLFM96Z5Y/UznrpG5kt1im8yA==}
+    engines: {node: '>= 12'}
+
   resolve-pathname@3.0.0:
     resolution: {integrity: sha512-C7rARubxI8bXFNB/hqcp/4iUeIXJhJZvFPFPiSPRnhU5UPxzMFIl+2E6yY6c4k9giDJAhtV+enfA+G89N6Csng==}
 
@@ -7690,6 +7716,10 @@ packages:
     resolution: {integrity: sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==}
     engines: {node: '>=8'}
     hasBin: true
+
+  validate-peer-dependencies@2.2.0:
+    resolution: {integrity: sha512-8X1OWlERjiUY6P6tdeU9E0EwO8RA3bahoOVG7ulOZT5MqgNDUO/BQoVjYiHPcNe+v8glsboZRIw9iToMAA2zAA==}
+    engines: {node: '>= 12'}
 
   validate.io-array@1.0.6:
     resolution: {integrity: sha512-DeOy7CnPEziggrOO5CZhVKJw6S3Yi7e9e65R1Nl/RTN1vTQKnzjfvks0/8kQ40FP/dsjRAOd4hxmJ7uLa6vxkg==}
@@ -13036,6 +13066,12 @@ snapshots:
     dependencies:
       '@leichtgewicht/ip-codec': 2.0.5
 
+  docusaurus-plugin-image-zoom@3.0.1(@docusaurus/theme-classic@3.7.0(@types/react@19.1.4)(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3)):
+    dependencies:
+      '@docusaurus/theme-classic': 3.7.0(@types/react@19.1.4)(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3)
+      medium-zoom: 1.1.0
+      validate-peer-dependencies: 2.2.0
+
   docusaurus-plugin-openapi-docs@4.3.7(@docusaurus/plugin-content-docs@3.7.0(@mdx-js/react@3.1.0(@types/react@19.1.4)(react@19.1.0))(acorn@8.15.0)(eslint@9.26.0(jiti@2.4.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.6.3))(@docusaurus/utils-validation@3.8.1(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@docusaurus/utils@3.8.1(acorn@8.15.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
     dependencies:
       '@apidevtools/json-schema-ref-parser': 11.9.3
@@ -14982,6 +15018,8 @@ snapshots:
 
   media-typer@1.1.0: {}
 
+  medium-zoom@1.1.0: {}
+
   memfs@3.5.3:
     dependencies:
       fs-monkey: 1.0.6
@@ -15913,6 +15951,12 @@ snapshots:
   path-key@3.1.1: {}
 
   path-parse@1.0.7: {}
+
+  path-root-regex@0.1.2: {}
+
+  path-root@0.1.1:
+    dependencies:
+      path-root-regex: 0.1.2
 
   path-scurry@1.11.1:
     dependencies:
@@ -16978,6 +17022,10 @@ snapshots:
 
   resolve-from@5.0.0: {}
 
+  resolve-package-path@4.0.3:
+    dependencies:
+      path-root: 0.1.1
+
   resolve-pathname@3.0.0: {}
 
   resolve-pkg-maps@1.0.0: {}
@@ -17816,6 +17864,11 @@ snapshots:
       diff: 5.2.0
       kleur: 4.1.5
       sade: 1.8.1
+
+  validate-peer-dependencies@2.2.0:
+    dependencies:
+      resolve-package-path: 4.0.3
+      semver: 7.7.1
 
   validate.io-array@1.0.6: {}
 

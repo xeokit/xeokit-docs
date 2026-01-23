@@ -33,6 +33,7 @@
     "@lunaticmuch/docusaurus-terminology": "^1.5.0",
     "@mdx-js/react": "catalog:docusaurus-base",
     "clsx": "catalog:docusaurus-base",
+    "docusaurus-plugin-image-zoom": "catalog:docusaurus-extensions",
     "docusaurus-plugin-openapi-docs": "catalog:docusaurus-extensions",
     "docusaurus-plugin-typedoc": "catalog:docusaurus-extensions",
     "docusaurus-theme-openapi-docs": "catalog:docusaurus-extensions",

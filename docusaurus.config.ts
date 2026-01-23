@@ -158,7 +158,7 @@ const config: Config = {
     //     tsconfig: 'demo-typedoc/tsconfig.json',
     //   },
     // ]
-
+    'docusaurus-plugin-image-zoom',
     ['@lunaticmuch/docusaurus-terminology', {}],
   ],
 
@@ -181,6 +181,16 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
+    zoom: {
+      selector: '.markdown :not(em) > img',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      },
+      config: {
+        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+      },
+    },
     liveCodeBlock: {
       /**
        * The position of the live playground, above or under the editor

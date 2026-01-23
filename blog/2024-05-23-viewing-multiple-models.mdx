@@ -7,12 +7,8 @@ tags: [xeokit]
 
 # Viewing Multiple Models
 
-- [Introduction](#introduction)
-- [Loading Three Models](#loading-three-models)
-- [Finding Models and Objects by ID](#finding-models-and-objects-by-id)
-- [Unloading the Models](#unloading-the-models)
 
-# **Introduction**
+## **Introduction**
 
 xeokit-sdk can load multiple models from a variety of file formats into the same 3D scene.
 
@@ -22,7 +18,7 @@ In this tutorial, you'll load several models from different formats into the sam
 
 {/* truncate */}
 
-# Loading Three Models
+## Loading Three Models
 
 In this guide below, we'll use an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html) to load the Schependomlaan house model, an [OBJLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/OBJLoaderPlugin/OBJLoaderPlugin.js~OBJLoaderPlugin.html) to load a model of a car, and an [STLLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/STLLoaderPlugin/STLLoaderPlugin.js~STLLoaderPlugin.html) to load a model of a spur gear. We'll also add a scene graph [Mesh](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/mesh/Mesh.js~Mesh.html) to represent the green ground plane, which gets a plane shaped [Geometry](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/geometry/Geometry.js~Geometry.html), which we'll create using a [buildPlaneGeometry](https://xeokit.github.io/xeokit-sdk/docs/function/index.html#static-function-buildPlaneGeometry) builder function.
 
@@ -91,7 +87,7 @@ const ground =  new Mesh(viewer.scene, {
 });
 ```
 
-# **Finding Models and Objects by ID**
+## **Finding Models and Objects by ID**
 
 [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html), [OBJLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/OBJLoaderPlugin/OBJLoaderPlugin.js~OBJLoaderPlugin.html) and [STLLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/STLLoaderPlugin/STLLoaderPlugin.js~STLLoaderPlugin.html) each created [Entities](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html) within the Viewer's [Scene](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/scene/Scene.js~Scene.html) to represent the models and their objects.
 
@@ -127,7 +123,7 @@ Let's fly the camera to look at the window:
 viewer.cameraFlight.flyTo(window);
 ```
 
-# **Unloading the Models**
+## **Unloading the Models**
 
 To unload the model, just destroy the Entity components that represent them:
 

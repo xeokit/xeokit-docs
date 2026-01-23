@@ -18,19 +18,10 @@ In this tutorial, we'll use a combination of the closed-source `ifc2gltfcxconver
 
 {/* truncate */}
 
-- [Introduction](#introduction)
--   [What's IFC?](#whats-ifc)
--   [What's XKT?](#whats-xkt)
-- [1\. Install File Conversion Tools](#1-install-file-conversion-tools)
--   [ifc2gltf](#ifc2gltf)
--   [convert2xkt](#convert2xkt)
-- [2\. Convert IFC to GLB and Metadata JSON](#2-convert-ifc-to-glb-and-metadata-json)
-- [3\. Convert GLB and Metadata JSON to XKT](#3-convert-glb-and-metadata-json-to-xkt)
-- [4\. View the Model](#4-view-the-model)
 
-# Introduction
+## Introduction
 
-## What's IFC?
+### What's IFC?
 
 The Industry Foundation Classes (IFC) data model is used to describe architectural, building and construction industry data.
 
@@ -40,7 +31,7 @@ The data model is developed by [buildingSMART](https://www.buildingsmart.org/) t
 
 An IFC file is usually provided as an IFC-SPF file ("STEP-file") , which is a text format in which each line represents an entity that instantiates a class within the data model.
 
-## What's XKT?
+### What's XKT?
 
 XKT is xeokit's native 3D model format, which compresses IFC models (and other formats) into a compact binary payload from which we can load large numbers of objects over the Web in seconds, at full geometric precision.
 
@@ -65,14 +56,14 @@ For our IFC file, we'll use the Holter Tower example from the [Open IFC Reposito
 
 ![image-20240531-092806.png](./attachments/image-20240531-092806.png)
 
-# 1\. Install File Conversion Tools
+## 1\. Install File Conversion Tools
 
 Let's get started. We'll use the following proprietary and open source CLI tools to transform the IFC file into an XKT geometry file and a JSON metadata file:
 
 - `ifc2gltfcxconverter` to convert IFC into a glTF geometry file and a JSON metadata file, and
 - `convert2xkt` (from package [xeokit/xeokit-convert](https://xeokit.github.io/xeokit-convert/docs/)) to convert the glTF and JSON files into an XKT file.
 
-### ifc2gltf
+#### ifc2gltf
 
 The `ifc2gltfcxconverter` tool converts IFC 2x3 and 4 directly into a glTF file and a JSON file. `ifc2gltf` is a closed-source product from [Creoox AG](https://creoox.com/en/contact/), who provide executables for Windows and Linux. This tool performs the same steps as the IfcConvert and COLLADA2GLTF tools used in the [Converting IFC Models to XKT using Open Source Tools](https://www.notion.so/c373e48bc4094ff5b6e5c5700ff580ee?pvs=21) pipeline, but with the following advantages:
 
@@ -82,7 +73,7 @@ The `ifc2gltfcxconverter` tool converts IFC 2x3 and 4 directly into a glTF file 
 - No intermediate file formats within the IFC→glTF conversion step (ie. DAE)
 - Better geometry reuse
 
-### convert2xkt
+#### convert2xkt
 
 The `convert2xkt` tool is a NodeJS-based CLI tool from [xeolabs](https://xeolabs.com) which is open source and bundled with the xeokit SDK. This tool converts a bunch of different source file formats into XKT. In this tutorial, we’ll use it to convert the glTF and JSON files output by `ifc2gltfcxconverter` into an XKT file.
 
@@ -95,7 +86,7 @@ The diagram below shows how the tools fit together to form our IFC →XKT data p
 
 > Please not that the recommended format to use is the **binary** glTF → GLB
 
-# 2\. Convert IFC to GLB and Metadata JSON
+## 2\. Convert IFC to GLB and Metadata JSON
 
 Convert the IFC file into a binary glTF file and a JSON file, as shown below. Recall that the glTF will contain the model geometry, while the JSON will contain the IFC metadata.
 
@@ -110,7 +101,7 @@ num indices accessors: 162, reused: 108362
  done in 55 seconds
 ```
 
-# 3\. Convert GLB and Metadata JSON to XKT
+## 3\. Convert GLB and Metadata JSON to XKT
 
 Now convert the binary glTF and JSON-encoded IFC metadata into an `XKT` file:
 
@@ -139,7 +130,7 @@ node convert2xkt.js -s HolterTower.glb -m HolterTower.json -o HolterTower.xkt
 
 Now we have our model in a compact format that can be loaded efficiently into xeokit.
 
-# 4\. View the Model
+## 4\. View the Model
 
 Finally, let's view our model on the Web. We have two options:
 

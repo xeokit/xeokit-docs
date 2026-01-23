@@ -7,12 +7,8 @@ tags: [xeokit]
 
 # Viewing a CityJSON Model with XKTLoaderPlugin
 
-- [Introduction](#introduction)
-- [1\. Install convert2xkt](#1-install-convert2xkt)
-- [2\. Convert CityJSON to XKT](#2-convert-cityjson-to-xkt)
-- [3\. View the XKT in the Browser](#3-view-the-xkt-in-the-browser)
 
-# Introduction
+## Introduction
 
 In this mini-tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a [CityJSON](https://www.cityjson.org/) model into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
 
@@ -28,7 +24,7 @@ For our CityJSON file, we'll use a LoD-3 model of a railway line, which is one o
 
 ![image-20240605-154807.png](./attachments/image-20240605-154807.png)
 
-# 1\. Install convert2xkt
+## 1\. Install convert2xkt
 
 Using git and npm, clone and install our `xeokit-convert` repository, which contains the `convert2xkt` tool that we'll use to convert our CityJSON into XKT.
 
@@ -40,7 +36,7 @@ cd xeokit-convert
 npm install
 ```
 
-# 2\. Convert CityJSON to XKT
+## 2\. Convert CityJSON to XKT
 
 Now convert the CityJSON into an `XKT` file:
 
@@ -65,7 +61,7 @@ node convert2xkt.js -s LoD3_Railway.json -o LoD3_Railway.json.xkt -l
 
 Now we have the CityJSON/CityGML model in a compact format that can be loaded quickly into xeokit.
 
-# 3\. View the XKT in the Browser
+## 3\. View the XKT in the Browser
 
 Finally, let's view our model in the browser using xeokit. We'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) attached to an HTML canvas, install an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html), and use that to load our XKT model. Find the full example [here](https://xeokit.github.io/xeokit-sdk/examples/#loading_CityJSON_Railway).
 

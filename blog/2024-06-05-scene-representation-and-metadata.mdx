@@ -15,21 +15,8 @@ In this guide, we'll use [convert2xkt](https://github.com/xeokit/xeokit-convert)
 
 > [Run this example](https://xeokit.io/demo.html?projectId=Duplex)
 
-- [Introduction](#introduction)
-- [Scene Representation](#scene-representation)
-- [Metadata Representation](#metadata-representation)
-- [Using Scene Entities and Metadata](#using-scene-entities-and-metadata)
--   [Converting an IFC Model to XKT](#converting-an-ifc-model-to-xkt)
--   [Loading XKT into a Viewer](#loading-xkt-into-a-viewer)
--   [Accessing the MetaModel](#accessing-the-metamodel)
--   [Accessing MetaObjects](#accessing-metaobjects)
--   [Accessing Scene Entities](#accessing-scene-entities)
--   [Accessing PropertySets](#accessing-propertysets)
-- [How we use Metadata in xeokit](#how-we-use-metadata-in-xeokit)
--   [TreeViewPlugin](#treeviewplugin)
--   [StoreyViewsPlugin](#storeyviewsplugin)
 
-# Introduction
+## Introduction
 
 The xeokit SDK's core Viewer is built for viewing large AEC and BIM models. These models are often complex assembles, with metadata that classifies the objects and attaches domain-specific information to them. In this guide, we'll describe how the xeokit Viewer represents scene objects and metadata, and how we can access that metadata from JavaScript. As we go, we'll refer to the UML diagram below, which shows the main components we'll be discussing.
 
@@ -39,7 +26,7 @@ Although we're using IFC in this guide, the core xeokit Viewer is not bound to I
 
 ![image-20240605-164025.png](./attachments/image-20240605-164025.png)
 
-# Scene Representation
+## Scene Representation
 
 The xeokit SDK's Viewer class supports two scene representations:
 
@@ -52,15 +39,15 @@ We use (2) for high-detail engineering models loaded from XKT format using [XKTL
 
 Scene objects in both these representations implement the common abstract Entity interface. Via that interface, we can attach metadata to each object, update its visual state etc, regardless of how its represented within the scene.
 
-# Metadata Representation
+## Metadata Representation
 
 To attach information to a model, the Viewer usually also loads a metadata structure alongside the model's scene representation. The metadata structure works with both of the scene representations described above.
 
-# Using Scene Entities and Metadata
+## Using Scene Entities and Metadata
 
 Let's take a look at how we can find Entities and MetaObjects in our models.
 
-## Converting an IFC Model to XKT
+### Converting an IFC Model to XKT
 
 We'll use xeokit's [convert2xkt](https://github.com/xeokit/xeokit-convert) tool to convert a sample IFC model from AutoDesk into an XKT model:
 
@@ -71,7 +58,7 @@ convert2xkt.js -s rac_sample_project.ifc -o rac_sample_project.ifc.xkt
 
 > See also: [Converting Models to XKT with convert2xkt](/blog/converting-models-to-xkt-with-convert2xkt)
 
-## Loading XKT into a Viewer
+### Loading XKT into a Viewer
 
 Next, we'll create a Viewer to view our model in the browser. We'll install an XKTLoaderPlugin into the Viewer, which we'll use to load our XKT file.
 
@@ -97,7 +84,7 @@ When the model has loaded, it looks like this:
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_RevitSamples_RAC)
 
-## Accessing the MetaModel
+### Accessing the MetaModel
 
 Now we can access our model's objects and metadata. We'll start by getting the [MetaModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/metadata/MetaModel.js~MetaModel.html) that represents our model.
 
@@ -125,7 +112,7 @@ viewer.scene.camera.up = [-0.06, 0.99, -0.09];
 
 ![image-20240605-164338.png](./attachments/image-20240605-164338.png)
 
-## Accessing MetaObjects
+### Accessing MetaObjects
 
 Now we'll get the [MetaObject](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/metadata/MetaObject.js~MetaObject.html) that represents the stairway, and log some of its properties.
 
@@ -173,7 +160,7 @@ console.log(railingMetaObject.parent); // "09H8bZdNrFqAgGbw11nlyy"
 
 Note that the sub-object's parent is our stairway object.
 
-## Accessing Scene Entities
+### Accessing Scene Entities
 
 Each leaf MetaObject has a corresponding Scene [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html) with the same ID.
 
@@ -187,7 +174,7 @@ railingEntity.highlighted = true;
 
 ![image-20240605-164521.png](./attachments/image-20240605-164521.png)
 
-## Accessing PropertySets
+### Accessing PropertySets
 
 Each MetaObject can be attached to one or more [PropertySets](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/metadata/PropertySet.js~PropertySet.html).
 
@@ -208,11 +195,11 @@ console.log(property0.value); // "900mm Pipe"
 console.log(property0.valueType); // 4
 ```
 
-# How we use Metadata in xeokit
+## How we use Metadata in xeokit
 
 We designed xeokit's metadata to be abstract and not dependent on on model that is abstracted away from any particular data model, such as IFC.
 
-## TreeViewPlugin
+### TreeViewPlugin
 
 [TreeViewPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/TreeViewPlugin/TreeViewPlugin.js~TreeViewPlugin.html) is a Viewer plugin that provides an HTML tree view to navigate the IFC elements in models. The tree has various hierarchy modes, including one which groups IFC elements by their IfcBuildingStorey parents.
 
@@ -240,7 +227,7 @@ const model = xktLoader.load({
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#TreeViewPlugin_Storeys)
 
-## StoreyViewsPlugin
+### StoreyViewsPlugin
 
 [StoreyViewsplugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html) is a Viewer plugin that provides a bunch of flexible methods for isolated views of of IfcBuildingStoreys.
 

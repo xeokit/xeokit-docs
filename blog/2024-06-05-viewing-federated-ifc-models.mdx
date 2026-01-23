@@ -18,21 +18,8 @@ Additionally, this tutorial shows how these tools can automatically split each m
 
 {/* truncate */}
 
-- [Introduction](#introduction)
--   [What's IFC?](#whats-ifc)
--   [What's XKT?](#whats-xkt)
-- [1\. Install File Conversion Tools](#1-install-file-conversion-tools)
--   [ifc2gltfcxconverter](#ifc2gltfcxconverter)
--   [convert2xkt](#convert2xkt)
-- [2\. Convert IFC to glTF and JSON Files](#2-convert-ifc-to-gltf-and-json-files)
-- [3\. Convert glTF and JSON Files to XKT](#3-convert-gltf-and-json-files-to-xkt)
-- [4\. Viewing the XKT with a xeokit Viewer and TreeViewPlugin](#4-viewing-the-xkt-with-a-xeokit-viewer-and-treeviewplugin)
--   [Viewing the XKT Model with xeokit BIMViewer](#viewing-the-xkt-model-with-xeokit-bimviewer)
-- [Model Conversion Tests Page](#model-conversion-tests-page)
--   [Clinic Plumbing Model Test Results](#clinic-plumbing-model-test-results)
--   [Test Script Source](#test-script-source)
 
-# Introduction
+## Introduction
 
 ## What's IFC?
 
@@ -72,7 +59,7 @@ We periodically run our AEC test files through all pipelines to statically gener
 
 [https://xeokit.github.io/xeokit-model-conversion-tests/viewer.html?batchId=buildingSMART\_IFC2.3&modelId=Clinic\_Plumbing](https://xeokit.github.io/xeokit-model-conversion-tests/viewer.html?batchId=buildingSMART_IFC2.3&modelId=Clinic_Plumbing)
 
-# 1\. Install File Conversion Tools
+## 1\. Install File Conversion Tools
 
 Let's get started!
 
@@ -81,7 +68,7 @@ We will use these CLI tools:
 - [ifc2gltfcxconverter](https://creoox.com/en/contact/) to convert an IFC file into glTF geometry and JSON metadata files.
 - [convert2xkt](https://xeokit.github.io/xeokit-convert/docs/) to convert the glTF and JSON files into XKT files.
 
-## ifc2gltfcxconverter
+### ifc2gltfcxconverter
 
 The [ifc2gltfcxconverter](https://creoox.com/en/contact/) tool converts IFC 2x3 and 4 files directly into glTF files and JSON metadata files. This tool is from [Creoox AG](https://creoox.com/en/contact/), who provide versions for Windows and Linux. This tool performs the same steps as the IfcConvert and COLLADA2GLTF tools used in the [Converting IFC Models to XKT using Open Source Tools](https://www.notion.so/c373e48bc4094ff5b6e5c5700ff580ee?pvs=21) pipeline, but with the following advantages:
 
@@ -90,13 +77,13 @@ The [ifc2gltfcxconverter](https://creoox.com/en/contact/) tool converts IFC 2x3 
 - Full IFC metadata support
 - Splits output into multiple sets of output files (which we’ll demonstrate here)
 
-## convert2xkt
+### convert2xkt
 
 The [convert2xkt](https://xeokit.github.io/xeokit-convert/docs/) tool is an open-source NodeJS-based CLI tool from [xeolabs](https://xeolabs.com/). This tool converts a variety of different source file formats into XKT. In this tutorial, we will use it to convert the glTF and JSON files output by `ifc2gltfcxconverter` into an XKT file.
 
 Make sure to obtain the latest versions of these two tools, along with the latest version of the xeokit-sdk. We will assume that the tools are installed relative to the current working directory.
 
-# 2\. Convert IFC to glTF and JSON Files
+## 2\. Convert IFC to glTF and JSON Files
 
 Convert the Clinic Plumbing IFC file into a set of glTF and metadata files using the following command:
 
@@ -147,7 +134,7 @@ The contents of `model.glb.manifest.json` are shown below. Each chunk of our Cli
 }
 ```
 
-# 3\. Convert glTF and JSON Files to XKT
+## 3\. Convert glTF and JSON Files to XKT
 
 We will now convert the four pairs of glTF and JSON files into four XKT files:
 
@@ -278,7 +265,7 @@ model_2.glb.xkt
 model_3.glb.xkt
 ```
 
-# 4\. Viewing the XKT with a xeokit Viewer and TreeViewPlugin
+## 4\. Viewing the XKT with a xeokit Viewer and TreeViewPlugin
 
 Finally, let's view our Clinic Plumbing model’s XKT files on the web.
 
@@ -342,23 +329,23 @@ Once all `XKT` files have loaded, we will position the `Viewer's` `Camera` to vi
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_Federated_Clinic)
 
-## Viewing the XKT Model with xeokit BIMViewer
+### Viewing the XKT Model with xeokit BIMViewer
 
 ![image-20240605-153812.png](./attachments/image-20240605-153812.png)
 
-# Model Conversion Tests Page
+## Model Conversion Tests Page
 
 Periodically, we run our AEC test files through all the pipelines. That statically-generates the [Model Conversion Tests](https://xeokit.github.io/xeokit-model-conversion-tests/tests.html) page, where you can check if the latest pipelines are converting our test models correctly. Find the source code for the tests on GitHub:
 
 [https://github.com/xeokit/xeokit-model-conversion-tests](https://github.com/xeokit/xeokit-model-conversion-tests)
 
-## Clinic Plumbing Model Test Results
+### Clinic Plumbing Model Test Results
 
 The conversion results for the Clinic Plumbing model can be viewed live in our model conversion tests results page:
 
 [https://xeokit.github.io/xeokit-model-conversion-tests/viewer.html?batchId=buildingSMART\_IFC2.3&modelId=Clinic\_Plumbing](https://xeokit.github.io/xeokit-model-conversion-tests/viewer.html?batchId=buildingSMART_IFC2.3&modelId=Clinic_Plumbing)
 
-## Test Script Source
+### Test Script Source
 
 This script can give insights into how to use the convert tools in NodeJS:
 

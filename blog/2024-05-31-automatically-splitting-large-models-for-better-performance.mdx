@@ -15,14 +15,8 @@ In this tutorial, we’ll show how to use this new feature with our conversion a
 
 {/* truncate */}
 
-- [How Splitting Helps](#how-splitting-helps)
--   [Splitting prevents NodeJS from crashing](#splitting-prevents-nodejs-from-crashing)
-- [Splitting Models with ifc2gltf](#splitting-models-with-ifc2gltf)
-- [Converting Split Models with convert2xkt](#converting-split-models-with-convert2xkt)
-- [Viewing Split Models with the SDK](#viewing-split-models-with-the-sdk)
-- [Viewing Split Models with BIMViewer](#viewing-split-models-with-bimviewer)
 
-# How Splitting Helps
+## How Splitting Helps
 
 ### Splitting prevents NodeJS from crashing
 
@@ -49,7 +43,7 @@ node convert2xkt.js -s myModel.glb -m myModel.json -o myModel.xkt -l
 Trace/breakpoint trap (core dumped)
 ```
 
-# Splitting Models with `ifc2gltf`
+## Splitting Models with `ifc2gltf`
 
 We use the `ifc2gltfcxconverter` tool to convert IFC files into glTF geometry and JSON metadata files.
 
@@ -130,7 +124,7 @@ The `model.glb.manifest.json` manifest looks like this:
 }
 ```
 
-# Converting Split Models with `convert2xkt`
+## Converting Split Models with `convert2xkt`
 
 We use the `convert2xkt` tool to convert glTF+JSON files into XKT files for fast loading into xeokit.
 
@@ -183,7 +177,7 @@ The `model.xkt.manifest.json` manifest looks like this:
 }
 ```
 
-# Viewing Split Models with the SDK
+## Viewing Split Models with the SDK
 
 To integrate with the new `ifc2gltfcxconverter` splitting and `convert2xkt` batching-conversion options just mentioned, the `XKTLoaderPlugin` also now has the option to batch-load all XKT files listed in a manifest into a xeokit `Viewer` in one shot, combining them into a single `SceneModel` and a single `MetaModel`.
 
@@ -223,7 +217,7 @@ Shown below is the result. Notice how [TreeViewPlugin](https://xeokit.github.io/
 
 ![image-20240531-151215.png](./attachments/image-20240531-151215.png)
 
-# Viewing Split Models with BIMViewer
+## Viewing Split Models with BIMViewer
 
 `BIMViewer` is a browser-based BIM model viewing application bundled withe the xeokit SDK.
 

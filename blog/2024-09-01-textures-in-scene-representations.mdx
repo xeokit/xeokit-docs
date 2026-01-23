@@ -9,12 +9,8 @@ tags: [xeokit]
 
 > See also: [Textures in XKT Model Format](/blog/textures-in-xkt-model-format)
 
-- [Introduction](#introduction)
-- [Building VBOSceneModels Containing Textures](#building-vboscenemodels-containing-textures)
--   [Loading KTX2 files into a VBOSceneModel](#loading-ktx2-files-into-a-vboscenemodel)
--   [Loading KTX2 ArrayBuffers into a VBOSceneModel](#loading-ktx2-arraybuffers-into-a-vboscenemodel)
 
-# Introduction
+## Introduction
 
 In this tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a binary glTF model with textures into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
 
@@ -32,11 +28,11 @@ This model contains 571 visible objects, with 139642 triangles and 14 textures, 
 
 {/* truncate */}
 
-# Building VBOSceneModels Containing Textures
+## Building VBOSceneModels Containing Textures
 
 A [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/model/VBOSceneModel.js~VBOSceneModel.html) that is configured with a [KTX2TextureTranscoder](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/utils/textureTranscoders/KTX2TextureTranscoder/KTX2TextureTranscoder.js~KTX2TextureTranscoder.html) will allow us to create textures within it from KTX2 data. In the next two examples, we’ll show how to use this component to programmatically build 3D scene content containing KTX2 textures.
 
-## Loading KTX2 files into a VBOSceneModel
+### Loading KTX2 files into a VBOSceneModel
 
 In the example below, we'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html), containing a [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/model/VBOSceneModel.js~VBOSceneModel.html) configured with a KTX2TextureTranscoder.
 
@@ -101,7 +97,7 @@ vboSceneModel.createEntity({
 vboSceneModel.finalize();
 ```
 
-## Loading KTX2 ArrayBuffers into a VBOSceneModel
+### Loading KTX2 ArrayBuffers into a VBOSceneModel
 
 A [VBOSceneModel](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/models/VBOSceneModel/VBOSceneModel.js~VBOSceneModel.html) that is configured with a [KTX2TextureTranscoder](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/utils/textureTranscoders/KTX2TextureTranscoder/KTX2TextureTranscoder.js~KTX2TextureTranscoder.html) will also allow us to load textures into it from KTX2 ArrayBuffers.
 

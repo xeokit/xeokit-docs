@@ -7,14 +7,7 @@ tags: [xeokit]
 
 # Backfaces in xeokit
 
-- [Introduction](#introduction)
-- [xeokit-xkt-utils](#xeokit-xkt-utils)
-- [xeokit-gltf-to-xkt](#xeokit-gltf-to-xkt)
-- [xeokit-sdk](#xeokit-sdk)
--   [PerformanceModel](#performancemodel)
--   [XKTLoaderPlugin](#xktloaderplugin)
-
-# Introduction
+## Introduction
 
 On a triangle mesh geometry, backfaces are those faces which are oriented away from the viewpoint. Whenever possible, the xeokit viewer tries to avoid drawing backfaces, in order to reduce work done by the graphics hardware and speed up interactivity.
 
@@ -28,19 +21,19 @@ The way that xeokit handles backfaces can be summarized as follows:
 
 The sections below describe how specific xeokit components manage backfaces.
 
-# xeokit-xkt-utils
+## xeokit-xkt-utils
 
 [xeokit-xkt-utils](https://www.npmjs.com/package/@xeokit/xeokit-xkt-utils) is a library of JavaScript tools for building XKT files in memory, which may then be exported to disk and loaded into a xeokit viewer. This library is wrapped by xeokit-gltf-to-xkt.
 
 Since 1.0.0, xeokit-xkt-utils automatically detects watertight meshes and flags them in the XKT output. Watertight meshes are triangle meshes that form closed solids, without holes.
 
-# xeokit-gltf-to-xkt
+## xeokit-gltf-to-xkt
 
 [xeokit-gltf-to-xkt](https://www.npmjs.com/package/@xeokit/xeokit-gltf-to-xkt) is a command-line tool that converts a glTF file into an XKT file. This tool wraps xeokit-xkt-utils, which does the actual conversion.
 
 Since 1.0.0, xeokit-gltf-to-xkt automatically detects watertight meshes in the glTF and flags them in the XKT output.
 
-# xeokit-sdk
+## xeokit-sdk
 
 [xeokit-sdk](https://www.npmjs.com/package/@xeokit/xeokit-sdk) implements the viewer and 3D engine at the heart of the xeokit SDK, along with various bundled plugins and utilities.
 

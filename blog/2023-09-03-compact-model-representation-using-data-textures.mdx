@@ -18,7 +18,7 @@ Note that this feature requires a reasonably good GPU and may not work well on l
 - [Faster Model Loading](#faster-model-loading)
 - [Faster Object Updates](#faster-object-updates)
 
-# How to Use Data Textures in xeokit
+## How to Use Data Textures in xeokit
 
 To utilize data textures, create a `Viewer` that is enabled to support them. By default, the `Viewer` component does not enable data textures and instead uses conventional Vertex Buffer Objects (VBOs) as a fallback. We’ll enable data textures by configuring our `Viewer` with `dtxEnabled: true`.
 
@@ -56,7 +56,7 @@ const sceneModel = xktLoader.load({
 
 ![image-20240531-154019.png](./attachments/image-20240531-154019.png)
 
-# How Data Textures Work
+## How Data Textures Work
 
 Our data texture model representation was developed by one of our core xeokit SDK developers, [Toni Marti](https://github.com/tmarti). This technique stores model geometry and attributes in a set of textures in GPU memory.
 
@@ -73,7 +73,7 @@ To learn more about Toni's data texture technique and its implementation, check 
 
 Video of Toni Marti’s presentation of his data texture contribution to xeokit SDK, for the 2022 WebGL+WebGPU Meetup.
 
-# Faster Model Loading
+## Faster Model Loading
 
 The xeokit viewer can load model geometry and materials into data textures with less effort than loading them into VBOs. This results in faster model loading times, especially on computers with powerful graphics hardware.
 
@@ -88,7 +88,7 @@ In the video below, you can see the loading of the seven federated models that m
   Your browser does not support the video tag.
 </video>
 
-# Faster Object Updates
+## Faster Object Updates
 
 Data textures provide a more compact representation to avoid duplicating data such as colors and transform matrices for objects. As a result, there is less data that needs to be updated when changing object colors or positions. This makes operations like highlighting, X-raying, colorizing, and moving objects much more efficient within xeokit.
 

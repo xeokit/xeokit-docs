@@ -11,10 +11,7 @@ In this guide, we'll introduce how to localize xeokit, so that we can dynamicall
 
 {/* truncate */}
 
-- [Localizing a Viewer](#localizing-a-viewer)
-- [Localizing a BIMViewer](#localizing-a-bimviewer)
-
-# Localizing a Viewer
+## Localizing a Viewer
 
 In this example, we'll use JavaScript to create a simple localized Viewer component that's configured with translation files for English, Māori, French and Japanese. We'll add a [NavCube](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/NavCubePlugin/NavCubePlugin.js~NavCubePlugin.html) to the Viewer, which will show localized text on its faces (see below). After loading a BIM model, we'll dynamically switch the Viewer between our locales, to see the NavCube labels switch between languages.
 
@@ -125,7 +122,7 @@ In our simple Viewer, the only component that shows any text is the NavCube. As 
 
 Note that, if we were to add any other components to our Viewer that support localization, we'd need to ensure that our translation files contain any translation strings that are required by those components.
 
-# Localizing a BIMViewer
+## Localizing a BIMViewer
 
 In this section, we'll briefly show how to set up a BIMViewer with localization translations. BIMViewer is xeokit's bundled BIM viewer application, which is provided in [xeokit-bim-viewer](https://github.com/xeokit/xeokit-bim-viewer). It's a complete BIM viewer built on xeokit, which serves as both a quick start MVP to get your models on the Web, and as demonstration of some of xeokit's features.
 

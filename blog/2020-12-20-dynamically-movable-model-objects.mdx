@@ -6,25 +6,15 @@ tags: [xeokit]
 ---
 
 # Dynamically Movable Model Objects
-
-- [Introduction](#introduction)
-- [New SDK Components](#new-sdk-components)
--   [SceneModelMesh](#scenemodelmesh)
--   [SceneModelTransform](#scenemodeltransform)
-- [Considerations](#considerations)
--   [Creating transforms for moving objects](#creating-transforms-for-moving-objects)
--   [Precision limits](#precision-limits)
-- [Usage](#usage)
-
-# Introduction
+## Introduction
 
 This new feature enhances xeokit's high-performance `SceneModel` model representation by introducing dynamic transform hierarchies.
 
 {/* truncate */}
 
-# New SDK Components
+## New SDK Components
 
-## SceneModelMesh
+### SceneModelMesh
 
 - Binds a geometry and transform to a single `SceneModelEntity`.
 - A `SceneModelEntity` can have multiple `SceneModelMeshes`.
@@ -32,7 +22,7 @@ This new feature enhances xeokit's high-performance `SceneModel` model represent
 - Stored in `SceneModel#meshes`.
 - Referenced by `SceneModelEntity#meshes`.
 
-## SceneModelTransform
+### SceneModelTransform
 
 - Dynamic transform that can be animated.
 - Can be connected into hierarchies.
@@ -40,9 +30,9 @@ This new feature enhances xeokit's high-performance `SceneModel` model represent
 - Stored in `SceneModel#transforms`.
 - Referenced by `SceneModelMesh#transform`.
 
-# Considerations
+## Considerations
 
-## Creating transforms for moving objects
+### Creating transforms for moving objects
 
 xeokit prioritizes high performance for large models, which involves maximizing the number of objects that can fit into memory. Transforms are components that allow objects to be dynamically movable. However, xeokit does not automatically create dynamic transforms unless explicitly specified to avoid unnecessary memory usage.
 
@@ -50,13 +40,13 @@ To make objects dynamically movable, you need to manually create Transforms for 
 
 Currently, xeokit does not automatically create Transforms for objects loaded from model files. However, this feature will be added in future releases.
 
-## Precision limits
+### Precision limits
 
 When a `SceneModelMesh` has an `origin`, the `position` of its `SceneModelTransform` will be relative to that `origin`. To ensure coordinate accuracy, the translation distance of the `position` must be within the maximum magnitude that can be expressed by a single-precision floating-point number. If the translation is too large, rounding jitter may occur during rendering.
 
 If you need to move a `SceneModel` over long distances within xeokit's World coordinate system, use the `SceneModel.position` property. This property can handle double-precision magnitudes.
 
-# Usage
+## Usage
 
 The following example demonstrates how to create a `SceneModel` that enables dynamic animation of object position, size, and orientation.
 

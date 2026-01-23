@@ -113,7 +113,7 @@ const config: Config = {
         rehypePlugins: [],
         beforeDefaultRemarkPlugins: [],
         beforeDefaultRehypePlugins: [],
-        truncateMarker: /<!--\s*(truncate)\s*-->/,
+        // truncateMarker: /<!--\s*(truncate)\s*-->/,
         showReadingTime: true,
         // feedOptions: {
         //   type: '',

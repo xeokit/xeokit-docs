@@ -119,3 +119,7 @@ Some time ago there was created yet another way of conversion, which is fully op
 ### What about other formats to XKT?
 
 xeokit-convert (https://github.com/xeokit/xeokit-convert) can convert also other file formats into the XKT. But depending on the size of the format, the format itself, sometimes it's not worth converting and you will be good with direct loaders instead. The rule of thumb is that if the model is small, then you can try if using the loader is enough first.
+
+## Summary
+
+You can load different file formats into the Xeokit using loaders and/or by converting into XKT. For huge models we recommend converting it into XKT file using one of the mentioned pipelines. For IFC into XKT conversion we recommend using CxConverter + convert2xkt.

@@ -11,30 +11,12 @@ In xeokit v2.4, we have introduced a new feature that allows users to measure di
 
 This innovative technique was developed by one of our core xeokit SDK developers, [Toni Marti](https://github.com/tmarti). It relies almost entirely on the GPU to find the nearest vertex or edge. Compared to traditional nearest-neighbor spatial search techniques used in other graphics libraries, this technique performs much faster. Additionally, its performance scales smoothly to work with the largest models that we can view with xeokit.
 
-<!-- truncate -->
+{/* truncate */}
 
 You can read more about Toni's technique and its implementation on his [graphics research blog](https://github.com/tmarti/graphics-research/blob/main/articles/webgl2-gpu-based-snapping.mdx).
 
-- [BIMViewer Measurements with Snapping](#bimviewer-measurements-with-snapping)
--   [How to Use the BIMViewer Distance Measurement Tool](#how-to-use-the-bimviewer-distance-measurement-tool)
 
-  -   [Activate Tool](#activate-tool)
-
-  -   [Create Measurement](#create-measurement)
-
-  -   [Delete or Customize a Measurement](#delete-or-customize-a-measurement)
--   [How to Use the BIMViewer Angle Measurement Tool](#how-to-use-the-bimviewer-angle-measurement-tool)
-
-  -   [Activate Tool](#activate-tool)
-
-  -   [Create Measurement](#create-measurement)
-
-  -   [Delete or Customize Measurement](#delete-or-customize-measurement)
-- [SDK Distance Measurement with Snapping](#sdk-distance-measurement-with-snapping)
-- [SDK Angle Measurement with Snapping](#sdk-angle-measurement-with-snapping)
-- [Smooth Performance with Large Models](#smooth-performance-with-large-models)
-
-# BIMViewer Measurements with Snapping
+## BIMViewer Measurements with Snapping
 
 In addition to the SDK, xeokit's bundled `BIMViewer` application includes distance and angle measurement tools, complete with snapping functionality. To activate these tools, simply click on the corresponding buttons in the toolbar. You can then create measurements using mouse input. Support for touch input will be added in a future release. The various context menus provide options to delete measurements, enable or disable snapping, show or hide labels and axis wires, and more. We’ll find a better icon for the angle measurements tool soon - a simple “right angle” icon will suffice for this release.
 
@@ -47,47 +29,47 @@ In addition to the SDK, xeokit's bundled `BIMViewer` application includes distan
   Your browser does not support the video tag.
 </video>
 
-## How to Use the BIMViewer Distance Measurement Tool
+### How to Use the BIMViewer Distance Measurement Tool
 
-### Activate Tool
+#### Activate Tool
 
 To activate the distance measurements tool in the `BIMViewer`, click on the ruler icon in the toolbar.
 
 ![image-20240605-181018.png](./attachments/image-20240605-181018.png)
 
-### Create Measurement
+#### Create Measurement
 
 Make a measurement by clicking on the start and end points. The pointer will automatically snap to the nearest vertex or edge.
 
 ![image-20240605-181056.png](./attachments/image-20240605-181056.png)
 
-### Delete or Customize a Measurement
+#### Delete or Customize a Measurement
 
 To delete or customize a measurement, simply right-click or long-tap on it to bring up a context menu.
 
 ![image-20240605-181134.png](./attachments/image-20240605-181134.png)
 
-## How to Use the BIMViewer Angle Measurement Tool
+### How to Use the BIMViewer Angle Measurement Tool
 
-### Activate Tool
+#### Activate Tool
 
 To activate the angle measurements tool in the `BIMViewer`, click on the angle icon in the toolbar.
 
 ![image-20240605-181233.png](./attachments/image-20240605-181233.png)
 
-### Create Measurement
+#### Create Measurement
 
 To create an angle measurement, click on three positions on the model’s objects. The pointer will automatically snap to the nearest vertex or edge for each position.
 
 ![image-20240605-181252.png](./attachments/image-20240605-181252.png)
 
-### Delete or Customize Measurement
+#### Delete or Customize Measurement
 
 To delete or customize an angle measurement, right-click or long-tap on the measurement.
 
 ![image-20240605-181312.png](./attachments/image-20240605-181312.png)
 
-# SDK Distance Measurement with Snapping
+## SDK Distance Measurement with Snapping
 
 In the example below, we use the mouse to create point-to-point distance measurements on our IFC4 Duplex test model. Notice how the cursor snaps to the nearest vertex or edge as we set the endpoints of each measurement.
 
@@ -195,7 +177,7 @@ angleMeasurementsMouseControl.activate();
   Your browser does not support the video tag.
 </video>
 
-# Smooth Performance with Large Models
+## Smooth Performance with Large Models
 
 To demonstrate how well snapping performance scales up with model size, we created point-to-point distance measurements in our Lyon city model. This model, which contains 73,203 objects, was imported from a LOD-3 CityGML model. If we were using the standard nearest-neighbor search technique instead of our GPU-based approach, the performance would be too slow.
 

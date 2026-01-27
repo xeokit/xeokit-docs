@@ -7,12 +7,8 @@ tags: [xeokit]
 
 # Viewing an IFC Model with XKTLoaderPlugin
 
-- [Introduction](#introduction)
-- [Install convert2xkt](#install-convert2xkt)
-- [Convert IFC to XKT](#convert-ifc-to-xkt)
-- [View the XKT in the Browser](#view-the-xkt-in-the-browser)
 
-# Introduction
+## Introduction
 
 In this mini-tutorial, we'll use xeokit's `[convert2xkt](<https://xeokit.github.io/xeokit-convert/docs/>)` CLI tool to convert an IFC 4.3 model into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
 
@@ -22,13 +18,13 @@ For our IFC model, we'll use an architectural model from the [Revit Sample Proje
 
 This model contains 5512 visible objects, with 283238 triangles, and a xeokit Viewer can usually load it over a good Internet connection in ~2 seconds.
 
-<!-- truncate -->
+{/* truncate */}
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_RevitSamples_RAC)
 
 ![image-20240523-115400.png](./attachments/image-20240523-115400.png)
 
-# Install convert2xkt
+## Install convert2xkt
 
 Using git and npm, clone and install our `xeokit-convert` repository, which contains the `convert2xkt` tool that we'll use to convert our IFC into XKT.
 
@@ -40,7 +36,7 @@ cd xeokit-convert
 npm install
 ```
 
-# Convert IFC to XKT
+## Convert IFC to XKT
 
 Let's convert our IFC model.
 
@@ -80,7 +76,7 @@ Compression ratio: 21.62
 Conversion time: 54.41 s
 ```
 
-# View the XKT in the Browser
+## View the XKT in the Browser
 
 Now we've got our XKT model - it's compressed 21x and took 54 seconds to convert.
 

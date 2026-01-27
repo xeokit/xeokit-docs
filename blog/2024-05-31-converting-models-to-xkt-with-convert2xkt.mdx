@@ -15,21 +15,12 @@ We provide `convert2xkt` as an additional conversion option for your models, alo
 
 Note that the pipeline in this tutorial only converts IFC element structure, and does not convert property sets. For property sets, we recommend [Converting IFC Models to XKT using ifc2gltf](/blog/converting-ifc-to-xkt-using-ifc2gltfcxconverter).
 
-<!-- truncate -->
+{/* truncate */}
 
-- [Introduction](#introduction)
--   [What's IFC?](#whats-ifc)
--   [What's XKT?](#whats-xkt)
-- [convert2xkt](#convert2xkt)
--   [Features](#features)
--   [Resources](#resources)
-- [Installing convert2xkt](#installing-convert2xkt)
-- [Converting Models on the CLI](#converting-models-on-the-cli)
-- [Converting Models in JavaScript](#converting-models-in-javascript)
 
-# Introduction
+## Introduction
 
-## What's IFC?
+### What's IFC?
 
 The Industry Foundation Classes (IFC) data model is used to describe architectural, building and construction industry data.
 
@@ -39,7 +30,7 @@ The data model is developed by [buildingSMART](https://www.buildingsmart.org/) t
 
 An IFC file is usually provided as an IFC-SPF file ("STEP-file") , which is a text format in which each line represents an entity that instantiates a class within the data model.
 
-## What's XKT?
+### What's XKT?
 
 XKT is xeokit's native 3D model format, which compresses IFC and CAD models into a compact binary payload from which we can load large numbers of objects over the Web in seconds, at full geometric precision.
 
@@ -61,7 +52,7 @@ In this tutorial, we'll use `convert2xkt` to convert an IFC 4 model into an XKT 
 
 ![image-20240531-152428.png](./attachments/image-20240531-152428.png)
 
-# convert2xkt
+## convert2xkt
 
 ### Features
 
@@ -77,7 +68,7 @@ In this tutorial, we'll use `convert2xkt` to convert an IFC 4 model into an XKT 
 - Benchmarks: [https://xeokit.github.io/xeokit-convert/perfTests/](https://xeokit.github.io/xeokit-convert/perfTests/)
 - XKT specification: [https://github.com/xeokit/xeokit-convert/tree/master/specs](https://github.com/xeokit/xeokit-convert/tree/master/specs)
 
-# Installing convert2xkt
+## Installing convert2xkt
 
 Using git and npm, clone and install our `xeokit-convert` repository, which contains the `convert2xkt` tool that we'll use to convert our models into XKT. Be sure to use the latest versions of both `xeokit-convert` and `xeokit-sdk`.
 
@@ -87,7 +78,7 @@ cd xeokit-convert
 npm install
 ```
 
-# Converting Models on the CLI
+## Converting Models on the CLI
 
 To get started with `convert2xkt` , let's convert an IFC model at the command line.
 
@@ -154,7 +145,7 @@ const modelNode = xktLoader.load({
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#BIMOffline_XKT_RevitSamples_RAC)
 
-# Converting Models in JavaScript
+## Converting Models in JavaScript
 
 Let's use `convert2xkt` from within a Node.js script to convert several different models to XKT. We'll convert models from CityJSON, IFC, LAZ and glTF.
 

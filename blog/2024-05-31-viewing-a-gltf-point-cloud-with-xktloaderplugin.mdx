@@ -7,12 +7,7 @@ tags: [xeokit]
 
 # Viewing a glTF Point Cloud with XKTLoaderPlugin
 
-- [Introduction](#introduction)
-- [1\. Install convert2xkt](#1-install-convert2xkt)
-- [2\. Convert glTF to XKT](#2-convert-gltf-to-xkt)
-- [3\. View the XKT in the Browser](#3-view-the-xkt-in-the-browser)
-
-# Introduction
+## Introduction
 
 In this mini-tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a point cloud model from LAS/LAZ into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
 
@@ -20,13 +15,13 @@ The XKT format compresses models into a compact payload from which xeokit can lo
 
 For our glTF file, we'll use a point cloud capture of an apartment in Lyon, France, which was provided by [BIMData](https://bimdata.io). When that's converted and loaded, it will look like the example below. This model contains 2.6 million points, and xeokit can usually load it over a good Internet connection in around ~5 seconds.
 
-<!-- truncate -->
+{/* truncate */}
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#loading_XKT_MAP_pointCloud)
 
 ![image-20240531-153702.png](./attachments/image-20240531-153702.png)
 
-# 1\. Install convert2xkt
+## 1\. Install convert2xkt
 
 Using git and npm, clone and install our `xeokit-convert` repository, which contains the `convert2xkt` tool that we'll use to convert our glTF into XKT.
 
@@ -38,7 +33,7 @@ cd xeokit-convert
 npm install
 ```
 
-# 2\. Convert glTF to XKT
+## 2\. Convert glTF to XKT
 
 Now convert the glTF into an `XKT` file:
 
@@ -61,7 +56,7 @@ node convert2xkt.js -s MAP-pointcloud.gltf -o MAP-pointcloud.xkt -l
 
 Now we have the point cloud model geometry in a compact format that can be loaded efficiently into xeokit.
 
-# 3\. View the XKT in the Browser
+## 3\. View the XKT in the Browser
 
 Finally, let's view our model on the Web using xeokit. We'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) attached to an HTML canvas, install an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html), and use that to load our XKT model. Find the full example [here](https://xeokit.github.io/xeokit-sdk/examples/#loading_LAZ_Autzen).
 

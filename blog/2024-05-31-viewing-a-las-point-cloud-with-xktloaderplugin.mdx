@@ -7,12 +7,7 @@ tags: [xeokit]
 
 # Viewing a LAS Point Cloud with XKTLoaderPlugin
 
-- [Introduction](#introduction)
-- [1\. Install convert2xkt](#1-install-convert2xkt)
-- [2\. Convert LAS to XKT](#2-convert-las-to-xkt)
-- [3\. View the XKT](#3-view-the-xkt)
-
-# Introduction
+## Introduction
 
 In this mini-tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a point cloud model from LAS format into xeokit's compact XKT native model format, which we'll then view in the browser using a xeokit Viewer.
 
@@ -22,13 +17,13 @@ The XKT format compresses models into a compact payload from which xeokit can lo
 
 For our point cloud file, we'll use an LAS point cloud capture of the Autzen Stadium in Oregon, provided by [http://loaders.gl](http://loaders.gl) . When that's converted and loaded, it will look like the example below. This model contains 31 million points, and xeokit can usually load it over a good Internet connection in around ~15 seconds.
 
-<!-- truncate -->
+{/* truncate */}
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#loading_LAZ_Autzen)
 
 ![image-20240531-153350.png](./attachments/image-20240531-153350.png)
 
-# 1\. Install convert2xkt
+## 1\. Install convert2xkt
 
 Using git and npm, clone and install our `xeokit-convert` repository, which contains the `convert2xkt` tool that we'll use to convert our LAS into XKT.
 
@@ -40,7 +35,7 @@ cd xeokit-convert
 npm install
 ```
 
-# 2\. Convert LAS to XKT
+## 2\. Convert LAS to XKT
 
 Now convert the LAS into an `XKT` file:
 
@@ -48,7 +43,7 @@ Now convert the LAS into an `XKT` file:
 node ./convert2xkt.js -s autzen.laz -o autzen.xkt
 ```
 
-# 3\. View the XKT
+## 3\. View the XKT
 
 Let's view our model in the browser using xeokit. We'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) attached to an HTML canvas, install an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html), and use that to load our XKT model. Find the full example [here](https://xeokit.github.io/xeokit-sdk/examples/#loading_LAZ_Autzen).
 

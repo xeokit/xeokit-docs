@@ -10,16 +10,12 @@ tags: [xeokit]
 
 > See also: [Textures in Scene Representations](/blog/textures-in-scene-representations)
 
-- [Introduction](#introduction)
--   [Work to do](#work-to-do)
-- [Creating an XKT File Containing Textures](#creating-an-xkt-file-containing-textures)
-- [Loading an XKT File Containing Textures](#loading-an-xkt-file-containing-textures)
 
-# Introduction
+## Introduction
 
 In this tutorial, we'll use xeokit's `convert2xkt` CLI tool to convert a binary glTF model with textures into xeokit's native XKT geometry format, which we'll then view in the browser using a xeokit Viewer.
 
-<!-- truncate -->
+{/* truncate */}
 
 The XKT format compresses models into a compact payload from which xeokit can load large numbers of objects over the Web in seconds, at full geometric precision.
 
@@ -43,7 +39,7 @@ This model contains 571 visible objects, with 139642 triangles and 14 textures, 
 
 ![image-20240605-162449.png](./attachments/image-20240605-162449.png)
 
-# Creating an XKT File Containing Textures
+## Creating an XKT File Containing Textures
 
 We’ll now use xeokit’s `convert2xkt` CLI tool to convert our binary glTF file with textures into an XKT file. We’ll make sure we install the latest version of [**@xeokit/xeokit-convert**](https://www.npmjs.com/package/@xeokit/xeokit-convert):
 
@@ -109,7 +105,7 @@ node convert2xkt.js -s HousePlan.glb -o HousePlan.textures.glb.xkt -l
 
 Looking at the tools’s log output, you’ll note that our XKT file is actually larger than original glTF file. That’s because each texture’s pixel data is stored in the [UASTC Transmission Format](https://github.com/BinomialLLC/basis_universal/wiki/UASTC-Texture-Specification), which XKTLoaderPlugin will transcode to the GPU’s optimal compressed format using its Basis Transcoder. In other words, we get the benefits of faster loading and lower GPU texture footprint for the penalties of a larger XKT file and the extra time the `convert2xkt` tool takes to create its textures.
 
-# Loading an XKT File Containing Textures
+## Loading an XKT File Containing Textures
 
 [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html) uses a [KTX2TextureTranscoder](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/utils/textureTranscoders/KTX2TextureTranscoder/KTX2TextureTranscoder.js~KTX2TextureTranscoder.html) to load textures in XKT files (XKT v10+). An XKTLoaderPlugin has its own default KTX2TextureTranscoder, configured to load the Basis Codec from the CDN.
 

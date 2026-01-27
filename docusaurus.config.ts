@@ -76,10 +76,6 @@ const config: Config = {
             return items.filter((item) => !item.url.includes('/page/'));
           },
         },
-        gtag: {
-          trackingID: 'G-9VRQEEM351',
-          anonymizeIP: true,
-        },
       } satisfies Preset.Options,
     ],
   ],
@@ -117,7 +113,7 @@ const config: Config = {
         rehypePlugins: [],
         beforeDefaultRemarkPlugins: [],
         beforeDefaultRehypePlugins: [],
-        truncateMarker: /<!--\s*(truncate)\s*-->/,
+        // truncateMarker: /<!--\s*(truncate)\s*-->/,
         showReadingTime: true,
         // feedOptions: {
         //   type: '',
@@ -162,11 +158,7 @@ const config: Config = {
     //     tsconfig: 'demo-typedoc/tsconfig.json',
     //   },
     // ]
-
-    [
-      "@gracefullight/docusaurus-plugin-microsoft-clarity",
-      { projectId: "nml0pjdlbw" },
-    ],
+    'docusaurus-plugin-image-zoom',
     ['@lunaticmuch/docusaurus-terminology', {}],
   ],
 
@@ -189,6 +181,16 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
+    zoom: {
+      selector: '.markdown :not(em) > img',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      },
+      config: {
+        // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+      },
+    },
     liveCodeBlock: {
       /**
        * The position of the live playground, above or under the editor
@@ -388,6 +390,21 @@ const config: Config = {
             {
               html: `<a href="https://creoox.com" target="_blank" rel="noreferrer noopener" aria-label="Creoox" class="footer__link-item">
                   Creoox AG
+                </a>`,
+            },
+          ],
+        },
+        {
+          title: 'Legal',
+          items: [
+            {
+              html: `<a href="/docs/privacy-policy" rel="noreferrer noopener" aria-label="Privacy Policy" class="footer__link-item">
+                  Privacy Policy
+                </a>`,
+            },
+            {
+              html: `<a href="/docs/imprint" rel="noreferrer noopener" aria-label="Imprint" class="footer__link-item">
+                  Imprint
                 </a>`,
             },
           ],

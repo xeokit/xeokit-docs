@@ -7,24 +7,20 @@ tags: [xeokit, picking]
 
 # SDK Components for Picking Objects with a Marquee Box
 
-- [Introduction](#introduction)
-- [New Components](#new-components)
-- [Usage](#usage)
-- [Design Notes](#design-notes)
 
-# Introduction
+## Introduction
 
 In xeokit-sdk v2.4.2, we have added components that enable interactive picking of a `Viewer's` `Entities` using a 2D box drawn on the canvas with mouse input.
 
-<!-- truncate -->
+{/* truncate */}
 
-# New Components
+## New Components
 
 - `ObjectsKdTree3` - Automatically indexes a `Viewer`'s `Entities` in a 3D k-d tree to support fast collision detection with 3D World-space axis-aligned boundaries (AABBs) and frustums.
 - `MarqueePicker` - Picks a `Viewer`'s `Entities` with a canvas-space 2D marquee box.
 - `MarqueePickerMouseControl` - Controls a `MarqueePicker` with mouse input.
 
-# Usage
+## Usage
 
 In the example below, we:
 
@@ -89,7 +85,7 @@ marqueePicker.on("picked", (objectIds) => {
 marqueePickerMouseControl.setActive(true);
 ```
 
-# Design Notes
+## Design Notes
 
 - The `ObjectsKdTree3` can be shared with any other components that want to use it to spatially search for `Entities`.
 - The `MarqueePickerMouseControl` can be replaced with other types of controllers (i.e. touch), or used alongside them.

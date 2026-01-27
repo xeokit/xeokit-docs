@@ -7,10 +7,7 @@ tags: [xeokit]
 
 # Smoother Navigation with FastNavPlugin
 
-- [Introduction](#introduction)
-- [Usage Example](#usage-example)
-
-# Introduction
+## Introduction
 
 [FastNavPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/FastNavPlugin/FastNavPlugin.js~FastNavPlugin.html) is a xeokit [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) plugin that makes interaction feel smoother for large models.
 
@@ -20,9 +17,9 @@ Depending on how we configure FastNavPlugin, we essentially switch to a smooth-r
 
 Down-scaling the canvas resolution gives particularly good results. For example, scaling by `0.5` causes the Viewer to render 75% less pixels, which can make it feel noticeably lighter with big models, at the cost of a slightly blurry canvas while interacting.
 
-<!-- truncate -->
+{/* truncate */}
 
-# Usage Example
+## Usage Example
 
 In the example below, we'll create a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html), add a [FastNavPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/FastNavPlugin/FastNavPlugin.js~FastNavPlugin.html), then use an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html) to load a BIM model. Whenever we move the Camera or resize the canvas, the FastNavPlugin will then:
 

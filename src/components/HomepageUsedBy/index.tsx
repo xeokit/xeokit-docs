@@ -275,7 +275,7 @@ const CompanyList: CompanyItem[] = [
   },
 ];
 
-function Company({ name, logo, alt, link }: CompanyItem) {
+function Company({ logo, alt, link }: CompanyItem) {
   const content = (
     <div className={clsx('col col--3', styles.company)}>
       <div className={styles.companyLogo}>

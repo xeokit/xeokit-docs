@@ -11,7 +11,7 @@ In xeokit v2.4, we have added the ability to dynamically reposition a model with
 
 A model can be dynamically translated and rotated, but cannot be scaled. Disallowing scaling of models is necessary for this mechanism to work efficiently within xeokit’s double-precision coordinate system.
 
-<!-- truncate -->
+{/* truncate */}
 
 The example below demonstrates the usefulness of this feature. We are loading a BIM model of an apartment building and a point cloud that contains a LiDAR scan of the building. The BIM model is already positioned at its original site placement of `[-1842009.4968455553, -9.685518291306686, 5173295.851503017]`, while the point cloud is positioned at `[0,0,0]`. To align the two models, we therefore translate the point cloud by `[-1842009.4968455553, -9.685518291306686, 5173295.851503017]`.
 

@@ -9,17 +9,10 @@ tags: [xeokit]
 
 A xeokit viewer can exchange BCF viewpoints with other BIM software, allowing us to use the viewer to report and view issues in BIM models. In this tutorial, we'll demonstrate this capability by creating a BCF viewpoint with a xeokit viewer, which we'll then import it into a second xeokit viewer.
 
-<!-- truncate -->
+{/* truncate */}
 
-- [Introduction](#introduction)
-- [Saving a BCF Viewpoint](#saving-a-bcf-viewpoint)
-- [The BCF Viewpoint Data](#the-bcf-viewpoint-data)
-- [Saving View Setup Hints](#saving-view-setup-hints)
-- [Loading the BCF Viewpoint](#loading-the-bcf-viewpoint)
-- [Special Cases](#special-cases)
--   [Dealing With Pre-Loaded Models That Are Not in the Viewpoint](#dealing-with-pre-loaded-models-that-are-not-in-the-viewpoint)
 
-# **Introduction**
+## **Introduction**
 
 BCF is an open standard that enables workflow communications between BIM software tools. An XML schema, called Building Collaboration Format (BCF), encodes messages that inform one BIM tool of issues found by another.
 
@@ -27,7 +20,7 @@ A BCF viewpoint captures a viewpoint of a model that highlights an issue. The vi
 
 The xeokit-sdk provides a `BCFViewpointsPlugin` component, which saves and loads JSON-encoded viewpoints that conform to the [BCF Version 2.1](https://github.com/buildingSMART/BCF-API) specification. In this guide, we'll take a look at how to use that functionality.
 
-# Saving a BCF Viewpoint
+## Saving a BCF Viewpoint
 
 In the example below, we'll create a `Viewer`, then add an `XKTLoaderPlugin`, which we'll use to load the Schependomlaan house model, a `SectionPlanesPlugin` to slice the model in half, and a `BCFViewpointsPlugin` to capture our BCF viewpoint.
 
@@ -127,7 +120,7 @@ modelNode.on("loaded", () => {
 });
 ```
 
-# The **BCF Viewpoint Data**
+## The **BCF Viewpoint Data**
 
 Our `BCFViewpointsPlugin` has saved the viewpoint as the JSON shown below.
 
@@ -189,7 +182,7 @@ The viewpoint JSON contains:
 }
 ```
 
-# **Saving View Setup Hints**
+## **Saving View Setup Hints**
 
 When saving a viewpoint, we can give some hints about what we want to save. To show what hints are supported, let's save the viewpoint again, this time providing a value for each hint:
 
@@ -207,7 +200,7 @@ const viewpoint = bcfViewpoints.getViewpoint({ // Options
 });
 ```
 
-# **Loading the BCF Viewpoint**
+## **Loading the BCF Viewpoint**
 
 Now let's load our BCF viewpoint. We'll set up another `Viewer` with a  `XKTLoaderPlugin` and a `BCFViewpointsPlugin`, and load the same Schependomlaan house model into it as before.
 
@@ -245,7 +238,7 @@ And voilà - our viewer is restored to the state captured in the BCF viewpoint.
 
 ![image-20240605-190813.png](./attachments/image-20240605-190813.png)
 
-# Special Cases
+## Special Cases
 
 ### Dealing With Pre-Loaded Models That Are Not in the Viewpoint
 

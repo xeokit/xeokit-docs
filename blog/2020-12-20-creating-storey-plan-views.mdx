@@ -9,19 +9,12 @@ tags: [xeokit]
 
 The xeokit SDK gives you flexible tools to create a variety of custom browser-based experiences for navigating the building storeys in your IFC building models. Using these tools, you can create a 2D plan view "mini-map" to help you navigate the 3D view, or just use certain functions to isolate storey objects in the 3D view, highlight them, fit them in view, and so on.
 
-- [Introduction](#introduction)
-- [Usage](#usage)
-- [Finding Storeys](#finding-storeys)
-- [Isolating a Storey](#isolating-a-storey)
-- [Arranging the Camera for a Storey Plan View](#arranging-the-camera-for-a-storey-plan-view)
-- [Creating a 2D StoreyMap](#creating-a-2d-storeymap)
-- [Navigating with a 2D StoreyMap](#navigating-with-a-2d-storeymap)
 
-<!-- truncate -->
+{/* truncate */}
 
 > [Run this example](https://xeokit.github.io/xeokit-sdk/examples/#storeyViews_StoreyViewsPlugin_recipe2)
 
-# Introduction
+## Introduction
 
 The [StoreyViewsPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html) provides a set of simple but flexible methods that lets us visualize building storeys in a variety of ways.
 
@@ -35,7 +28,7 @@ The other two methods are for creating 2D mini-map images of storeys:
 - [createStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-createStoreyMap) - generates a plan view mini-map image of a givenn storey, and
 - [pickStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-pickStoreyMap) - picks the 3D [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html) at the given 2D pixel coordinates within a plan view image.
 
-# Usage
+## Usage
 
 Let's start by creating a [Viewer](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/Viewer.js~Viewer.html) with a [StoreyViewsPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html) and an [XKTLoaderPlugin](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/XKTLoaderPlugin/XKTLoaderPlugin.js~XKTLoaderPlugin.html). Then we'll load a BIM building model from an `.xkt` file.
 
@@ -70,7 +63,7 @@ const model = xktLoader.load({
 });
 ```
 
-# Finding Storeys
+## Finding Storeys
 
 Having loaded our model, we can now get information on a given storey:
 
@@ -91,7 +84,7 @@ storeyViewsPlugin.on("storeys", ()=> {
 });
 ```
 
-# Isolating a Storey
+## Isolating a Storey
 
 Let's show the [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html)s within our storey:
 
@@ -140,7 +133,7 @@ storeyViewsPlugin.showStoreyObjects("2SWZMQPyD9pfT9q87pgXa1", {
 objectsMemento.restoreObjects(viewer.scene);
 ```
 
-# Arranging the Camera for a Storey Plan View
+## Arranging the Camera for a Storey Plan View
 
 The [StoreyViewsPlugin#gotoStoreyCamera](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-gotoStoreyCamera) method positions the [Camera](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/camera/Camera.js~Camera.html) for a plan view of the [Entity](https://xeokit.github.io/xeokit-sdk/docs/class/src/viewer/scene/Entity.js~Entity.html)s within the given storey.
 
@@ -184,7 +177,7 @@ storeyViewsPlugin.gotoStoreyCamera("2SWZMQPyD9pfT9q87pgXa1", {
 cameraMemento.restoreCamera(viewer.scene);
 ```
 
-# Creating a 2D StoreyMap
+## Creating a 2D StoreyMap
 
 The [StoreyViewsPlugin#createStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-createStoreyMap) method creates a 2D orthographic plan image of the given storey, which we can use as a mini-map to help us navigate within the 3D view.
 
@@ -227,7 +220,7 @@ We can also specify a `height` for the plan image, as an alternative to `widt
 });
 ```
 
-# Navigating with a 2D StoreyMap
+## Navigating with a 2D StoreyMap
 
 We can use [StoreyViewsPlugin#pickStoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyViewsPlugin.js~StoreyViewsPlugin.html#instance-method-pickStoreyMap) to pick Entities in our building storey, using 2D coordinates from mouse or touch events on our [StoreyMap](https://xeokit.github.io/xeokit-sdk/docs/class/src/plugins/StoreyViewsPlugin/StoreyMap.js~StoreyMap.html)'s 2D plan image.
 

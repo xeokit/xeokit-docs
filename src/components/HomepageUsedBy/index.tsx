@@ -83,11 +83,6 @@ const CompanyList: CompanyItem[] = [
     alt: 'Versatile.ai: non-intrusive solution for collecting valuable jobsite production data',
   },
   {
-    name: 'Bimspot',
-    logo: '/img/user-logos/bimspot_transparent.png',
-    alt: 'Bimspot',
-  },
-  {
     name: 'D-Studio',
     logo: '/img/user-logos/d-studio_transparent.png',
     alt: 'D-Studio',
@@ -106,11 +101,6 @@ const CompanyList: CompanyItem[] = [
     name: 'Interaxo',
     logo: '/img/user-logos/interaxo_transparent.png',
     alt: 'Interaxo',
-  },
-  {
-    name: 'Congrid',
-    logo: '/img/user-logos/congrid_transparent.png',
-    alt: 'Congrid',
   },
   {
     name: 'DBI Digital Building Industries',
@@ -272,6 +262,41 @@ const CompanyList: CompanyItem[] = [
     name: 'Stadt Hamburg',
     logo: '/img/user-logos/hamburg_transparent.png',
     alt: 'Stadt Hamburg',
+  },
+  {
+    name: 'Taldis',
+    logo: '/img/user-logos/taldis_logo_transparent.png',
+    alt: 'Taldis',
+  },
+  {
+    name: 'm2ing',
+    logo: '/img/user-logos/m2ing_logo_transparent.png',
+    alt: 'm2ing',
+  },
+  {
+    name: 'eurotronic',
+    logo: '/img/user-logos/eurotronic_logo_transparent.png',
+    alt: 'eurotronic',
+  },
+  {
+    name: 'maticmind',
+    logo: '/img/user-logos/maticmind_logo_transparent.png',
+    alt: 'maticmind',
+  },
+  {
+    name: 'upmesh',
+    logo: '/img/user-logos/upmesh_logo_transparent.png',
+    alt: 'upmesh',
+  },
+  {
+    name: 'DSO',
+    logo: '/img/user-logos/dso_logo_transparent.png',
+    alt: 'DSO',
+  },
+  {
+    name: 'Namirial',
+    logo: '/img/user-logos/namirial_logo_transparent.png',
+    alt: 'Namirial',
   },
 ];
 

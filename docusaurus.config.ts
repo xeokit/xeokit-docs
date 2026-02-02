@@ -290,6 +290,17 @@ const config: Config = {
           to: "/#faq",
         },
         { to: '/blog', label: 'Blog', position: 'right' },
+        {
+          label: 'Community',
+          position: 'right',
+          type: "dropdown",
+          items: [
+            {
+              label: 'Google Summer of Code',
+              to: '/community/google-summer-of-code',
+            },
+          ],
+        },
         { to: '/success-stories', label: 'Success Stories', position: 'right' },
         {
           label: 'Use Cases',

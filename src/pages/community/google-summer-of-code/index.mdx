@@ -1,0 +1,265 @@
+---
+slug: google-summer-of-code
+title: Google Summer of Code
+---
+
+# Google Summer of Code 2026 with xeokit
+
+![Google Summer of Code](GSoC-Horizontal.png)
+
+Welcome! We are excited to welcome motivated contributors to work with us during [Google Summer of Code 2026](https://summerofcode.withgoogle.com/)! If you are passionate about combining graphics, web engineering, and open source, xeokit is a great place to contribute.
+
+👉 Check out the full Ideas List and application details below.
+
+{/* truncate */}
+
+We value proactive contributors who want to work on impactful open-source projects in:
+
+* high-performance 3D rendering on the web
+* BIM / IFC engineering workflows
+* developer tooling and documentation
+* experimental testing approaches for graphics libraries
+* modern JavaScript and TypeScript infrastructure
+
+## What is xeokit?
+
+**xeokit SDK** is a powerful open-source toolkit for interactive 3D BIM visualization in the browser.
+
+It is designed for real-world construction and engineering use cases and already widely used within such applications ([see who uses xeokit](https://xeokit.io/#used-by)). xeokit enables developers to render and interact with:
+
+* massive and large-scale 3D models
+* complex BIM metadata
+* high performance and full precision 3D scenes with support for real-world coordinates
+* practical BIM workflows (selection, navigation, measurement, inspection)
+
+Unlike many 3D engines focused on entertainment, xeokit prioritizes:
+* speed with precision at scale
+* professional BIM workflows
+* open and extensible architecture
+* real-world adoption
+
+If you are passionate about combining:
+
+**computer graphics + web engineering + open source**
+xeokit is a great place to contribute.
+
+## GSoC 2026 Ideas Page
+
+Below is the official Project Ideas List of xeokit SDK in **Google Summer of Code 2026**.
+
+### 💡IDEA 1: Renovate documentation and examples for xeokit-sdk
+
+A great library deserves great documentation. As xeokit-sdk has evolved, our documentation and examples infrastructure has not kept pace. This project aims to modernize both, improving the developer experience and lowering the barrier to entry for new users.
+
+**Scope of work:**
+
+- **Migrate to a modern documentation generator**
+
+Our current API documentation relies on an outdated generator that struggles with modern JavaScript syntax and patterns. We want to migrate to a contemporary solution that properly handles ES modules, JSDoc annotations, and provides a better reading experience.
+- **Revamp the examples collection**
+
+We have an extensive set of examples, but many have become outdated or broken over time. This project will audit, fix, and reorganize them. We also want to improve navigation and discoverability so users can quickly find relevant examples for their use case.
+- **Decouple examples from the build system**
+
+Currently, running examples requires going through the build pipeline, which adds friction during development and experimentation. We aim to restructure examples to depend only on source code, allowing xeokit-sdk to be consumed directly from the repository without npm bundles. This aligns with our broader effort to make xeokit-sdk a zero-dependency library.
+- **Enable portable, embeddable examples**
+
+Our examples currently assume a specific hosting setup. We want to make them self-contained and portable, enabling publication on platforms like CodePen, JSFiddle, or StackBlitz - making it easier for users to experiment and share.
+
+**🎯Expected outcomes:**
+
+* Modern, searchable API documentation generated from source
+* A curated, working set of examples with improved navigation
+* Build-free example workflow for faster experimentation
+* Portable example format compatible with popular code playgrounds
+
+**✅List prerequisites:**
+
+* Participants should have a working knowledge of JavaScript, HTML and CSS
+* Knowledge of JavaScript bundlers (Webpack, Rollup, Vite, etc.) and npm ecosystem
+* Knowledge of 3D graphics / WebGL and xeokit-sdk is a plus
+
+
+**Estimated work:**
+
+As xeokit-sdk contains many examples and some outdated documentation (some of which may require restructuring), we consider this a large project (~300 hours).
+
+### 💡IDEA 2: Agentic Testing for xeokit-sdk: An Experimental Approach
+
+Testing a complex 3D rendering library like xeokit-sdk presents unique challenges. Traditional approaches - unit tests, automated visual regression tests - while valuable, struggle to cover the vast combination of rendering settings, scene configurations, browser environments, and edge cases that users encounter in the real world.
+
+We hypothesize that AI agents could offer a promising new paradigm for testing 3D graphics software. Rather than scripting every test scenario manually, an AI agent could be equipped with skills and tools to explore the library more comprehensively and adaptively. **This project aims to build a proof-of-concept and evaluate whether this approach delivers tangible benefits over traditional testing methods.**
+
+**What we want to explore:**
+
+- **Can AI agents effectively navigate testing complexity?**
+
+We want to investigate whether an agent can dynamically generate meaningful test scenarios and adapt its approach based on findings, rather than relying on rigid, pre-defined scripts.
+
+- **Is browser-based autonomous data gathering practical?**
+
+We plan to experiment with an agent that runs tests in the browser, collects metrics via the Chrome DevTools Protocol, and interprets the results. The question is: can it surface insights that would otherwise require significant manual effort?
+
+- **Does user-guided prompting add value?**
+
+We want to test whether developers can effectively steer the agent by describing recent changes, risk areas, or features to focus on and whether this produces more relevant test coverage than traditional approaches.
+
+- **What are the limitations?**
+
+Equally important is understanding where this approach falls short. We aim to document cases where agentic testing struggles compared to conventional methods.
+
+**🎯Expected outcomes:**
+
+* A working proof-of-concept agent workflow integrated with xeokit-sdk
+* A comparative analysis of agentic vs. traditional testing effectiveness
+* Documentation of lessons learned, best practices, and limitations
+
+Recommendations for whether and how to incorporate agentic testing into the xeokit-sdk development workflow
+
+**✅List prerequisites:**
+
+* Participants should have a working knowledge of JavaScript
+* Practical knowledge of AI coding tools like codex, claude code, Google's Gemini CLI and Copilot.
+
+**Estimated work:**
+
+We consider this a large project (~250-300 hours).
+
+
+### 💡IDEA 3: Infinite world-space ground grid for xeokit Viewer
+
+Large BIM and engineering models often span vast coordinate ranges, making spatial orientation and scale difficult - especially when using techniques such as Relative-to-Center (RTC) rendering to maintain floating-point precision. Developers and users benefit greatly from visual reference aids that make world-space positioning intuitive.
+
+This project proposes implementing an infinite ground plane grid for the xeokit Viewer that visually extends without bounds, scrolls seamlessly with camera movement, and displays world-space coordinate labels at grid intersections. The grid must integrate cleanly with xeokit’s tiled RTC coordinate system, maintaining visual stability and numeric correctness across large scenes.
+
+**Scope of work:**
+
+- **Infinite scrolling grid rendering**
+
+Implement a grid that appears infinite by dynamically repositioning or re-tiling geometry relative to the camera, without visible seams or jitter.
+
+- **World-space coordinate labeling**
+
+Render coordinate values at grid line intersections, updating dynamically as the camera moves, and ensuring labels reflect true world-space positions even under RTC transformations.
+
+- **RTC compatibility**
+
+Integrate the grid with xeokit’s tiled Relative-to-Center coordinate system so that precision is preserved for large coordinates and the grid remains stable at any scale.
+
+- **Level-of-detail and performance control**
+
+Adapt grid density, line thickness, and label frequency based on zoom level and camera distance to maintain performance and visual clarity.
+
+- **Viewer integration and configuration**
+
+Expose configuration options (grid spacing, units, label format, visibility toggles) and integrate the feature cleanly into the xeokit Viewer API.
+
+**🎯Expected outcomes:**
+
+* An infinite, visually stable ground grid for the xeokit Viewer
+* Accurate world-space coordinate labels at grid intersections
+* Seamless operation with xeokit’s RTC rendering system
+* Configurable grid appearance and behavior
+* Documentation and examples demonstrating usage in large-scale scenes
+
+**✅List prerequisites:**
+
+* Strong working knowledge of JavaScript
+* Solid understanding of 3D math (coordinate spaces, transforms)
+* Familiarity with WebGL rendering concepts
+* Interest in large-scale 3D visualization and BIM workflows
+
+**Estimated project length:** This is considered a medium project (~175–225 hours), depending on the complexity of labelling, level-of-detail behavior, and degree of Viewer integration.
+
+### 💡IDEA 4: Zero-dependency glTF loader for xeokit
+
+glTF has become the standard format for efficient transmission and loading of 3D assets on the web. While xeokit focuses primarily on BIM and AEC workflows, glTF is increasingly used as an interchange and delivery format for visualization pipelines.
+
+This project aims to design and implement a zero-dependency glTF loader for xeokit-sdk. The loader should rely only on browser APIs and xeokit’s internal infrastructure, avoiding external libraries and complex dependency chains. This aligns with xeokit’s broader goal of remaining lightweight, modular, and easy to embed.
+
+**Scope of work:**
+
+- **Implement core glTF parsing**
+
+Support parsing of glTF 2.0 JSON and binary (.glb) formats, including scenes, nodes, meshes, buffers, buffer views, and accessors.
+
+- **Geometry and scene integration**
+
+Map glTF primitives, node hierarchies, and transforms into xeokit’s scene graph and geometry abstractions while preserving correctness and performance.
+
+- **Material and texture support**
+
+Implement support for basic PBR materials, textures, and images using standard browser APIs, with a clearly documented supported feature set.
+
+- **Zero-dependency architecture**
+
+Ensure the loader has no runtime dependencies beyond xeokit and standard browser APIs, with clean, maintainable code suitable for long-term use.
+
+- **Examples and validation**
+
+Provide example applications demonstrating glTF loading in xeokit, and validate performance and memory usage on representative models.
+
+**🎯Expected outcomes:**
+
+* A zero-dependency glTF loader integrated into xeokit-sdk
+* Support for a well-defined subset of the glTF 2.0 specification
+* Working examples demonstrating glTF assets rendered in xeokit
+* Clear documentation of supported features and limitations
+* Validation that the loader meets xeokit’s performance and footprint goals
+
+**✅List prerequisites:**
+
+* Strong working knowledge of JavaScript (ES6+)
+* Understanding of 3D graphics concepts (meshes, transforms, materials)
+* Familiarity with WebGL fundamentals
+* Experience working with structured and binary data formats
+
+**Estimated project length:** This is considered a medium to large project (~200–300 hours) depending on the depth of glTF feature support and level of integration with xeokit’s rendering pipeline.
+
+## GSoC Contributor Guidance
+
+We welcome motivated contributors who are excited to work with us during Google Summer of Code. To help you prepare a strong application, please carefully read the guidance below.
+
+📌GSoC Application Checklist
+
+1.	**Check [Eligibility](https://summerofcode.withgoogle.com/):** Ensure you meet Google's participant requirements.
+2.	**Timeline:** Familiarize yourself with the **GSoC 2026** [Timeline](https://developers.google.com/open-source/gsoc/timeline). Deadlines are strict and cannot be extended.
+3.	**Pick a Project:** Browse our Project Ideas List
+4.	**Join the Discussion:** Talk to mentors before you apply, we highly recommend to get in touch with the mentors before submitting your proposal.
+5.	**Read and follow:** [The DOs and DON’Ts of Google Summer of Code](https://opensource.googleblog.com/2011/03/dos-and-donts-of-google-summer-of-code.html)
+6.	**Submit Proposal:**
+- Upload your PDF to the official GSoC website before the deadline.
+- Please include a brief CV in your application and contact details (email/GitHub/Discord)
+- In addition, your proposal must answer the following questions:
+  1.	What interests you most about our project?
+  2.	As mentors and project coordinators, how can we get the best out of you?
+  3.	Will you be studying or working on anything else during the program?
+  4.	What techniques or tools do you use to stay organized?
+  5.	Once you have selected a project from the Ideas Page, please include your proposed milestones and deliverables.
+
+
+**📬Communication and Contact**
+
+The best way to reach out is through one of our communication channels — [LinkedIn](https://www.linkedin.com/showcase/xeokit/), [email](mailto:contact@creoox.com), or any of the mentors’ or admins’ email addresses.
+Do not hesitate to ask questions early - we value proactive and engaged contributors.
+
+**xeokit Community**
+
+If you want to dive deeper into the world of xeokit and expand your knowledge of this technology, we invite you to join our xeoMeetup — community meetups where we share insights, explore best practices, discuss the latest updates, and uncover the full potential of xeokit together. It’s a great place to connect with others and stay up to date, so make sure to subscribe to our xeoMeetup newsletter to receive invitations to upcoming sessions and the newest announcements.
+
+👉 Subscribe to [xeoMeetup newsletter](https://forms.office.com/e/emBZer74PF)
+
+## Why join xeokit in GSoC?
+As a **GSoC** contributor, you will gain:
+
+* hands-on experience in an advanced 3D open-source project
+* mentorship from experienced engineers
+* opportunities to work on features used by real AECO & BIM professionals
+* portfolio-quality contributions in modern JavaScript ecosystems
+* exposure through official xeokit blog posts and channels
+
+We value contributors who communicate clearly, work iteratively, and enjoy learning through collaboration.
+
+**We’d love to hear from you!**
+
+xeokit Team

@@ -296,8 +296,8 @@ const config: Config = {
           type: "dropdown",
           items: [
             {
-              label: 'Google Summer of Code',
-              to: '/community/google-summer-of-code',
+              label: 'Google Summer of Code 2026',
+              to: '/community/google-summer-of-code-2026',
             },
           ],
         },

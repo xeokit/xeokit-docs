@@ -23,9 +23,9 @@ const listenForConsent = (state: unknown) => {
   if (window._ccRun) return;
 
   window.dataLayer = window.dataLayer || [];
-  function gtag(arg0: string, arg1: string | Date, arg2?: { [x: string]: string; }) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).dataLayer.push(arg0, arg1, arg2);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-rest-params
+  function gtag(..._args: any[]) {
+    (window as any).dataLayer.push(arguments);
   }
 
   gtag('consent', 'default', {

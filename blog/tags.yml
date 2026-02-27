@@ -1,27 +1,32 @@
 ifc:
   label: IFC
   permalink: /ifc
-  description: IFC tag description
+  description: IFC related
 
 creoox:
   label: Creoox
   permalink: /creoox
-  description: Creoox tag description
+  description: Creoox related
 
 xeokit:
   label: xeokit
   permalink: /xeokit
-  description: Xeokit tag description
+  description: xeokit related
 
 xeovision:
-  label: xeovision
+  label: xeoVision
   permalink: /xeovision
-  description: Xeovision tag description
+  description: xeoVision
 
 xeoservices:
   label: xeoServices
   permalink: /xeoservices
-  description: Xeoservices tag description
+  description: xeoServices
+
+xeomeetup:
+  label: xeoMeetup
+  permalink: /xeomeetup
+  description: xeoServices related
 
 success-story:
   label: Success Stories
@@ -31,4 +36,4 @@ success-story:
 picking:
   label: Picking
   permalink: /picking
-  description: Picking tag description
+  description: Picking

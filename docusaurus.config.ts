@@ -296,8 +296,8 @@ const config: Config = {
           type: "dropdown",
           items: [
             {
-              label: 'Google Summer of Code 2026',
-              to: '/community/google-summer-of-code-2026',
+              label: 'xeoMeetup',
+              to: '/blog/xeomeetup-connecting-the-xeokit-community',
             },
           ],
         },

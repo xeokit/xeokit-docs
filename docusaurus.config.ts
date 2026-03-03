@@ -289,7 +289,6 @@ const config: Config = {
           position: "right",
           to: "/#faq",
         },
-        { to: '/blog', label: 'Blog', position: 'right' },
         {
           label: 'Community',
           position: 'right',
@@ -299,9 +298,16 @@ const config: Config = {
               label: 'xeoMeetup',
               to: '/blog/xeomeetup-connecting-the-xeokit-community',
             },
+            {
+              label: 'Success Stories',
+              to: '/success-stories',
+            },
+            {
+              label: 'Blog',
+              to: '/blog',
+            },
           ],
         },
-        { to: '/success-stories', label: 'Success Stories', position: 'right' },
         {
           label: 'Use Cases',
           position: 'right',

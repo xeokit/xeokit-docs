@@ -69,6 +69,7 @@ The deployment consists of:
    ```bash
    git clone <repository-url>
    cd xeokit-docs
+   git lfs install
    git lfs pull # fetch LFS files if needed
    git submodule update --init --recursive
    ```

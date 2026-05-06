@@ -24,9 +24,7 @@ const listenForConsent = (state: unknown) => {
 
   window.dataLayer = window.dataLayer || [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, prefer-rest-params
-  function gtag(..._args: any[]) {
-    (window as any).dataLayer.push(arguments);
-  }
+  function gtag(..._args: any[]) { (window as any).dataLayer.push(arguments); }
 
   gtag('consent', 'default', {
     'ad_storage': 'denied',

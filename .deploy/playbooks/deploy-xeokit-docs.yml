@@ -13,6 +13,7 @@
         dest: "{{ xeokit_docs_location }}"
         force: true
         version: "{{ git_hash | mandatory }}"
+        recursive: true
 
     - name: Pull Git LFS objects
       ansible.builtin.command: git lfs pull

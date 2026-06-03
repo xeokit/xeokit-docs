@@ -1,13 +1,58 @@
+import { useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 
 interface XeoIframeProps {
   src: string;
+  syncUrl?: 'path' | 'hash' | false;
 }
 
-export default function XeoIframe({ src }: XeoIframeProps): ReactNode {
+function toDocusaurusUrl(raw: string): string {
+  const m = raw.match(/^\/examples\/([^/]+)\/(?:index\.html\/)?([^/]+)\.html$/);
+  return m ? `/sdk-v2/examples/${m[1]}#${m[2]}` : raw;
+}
+
+export default function XeoIframe({ src, syncUrl = false }: XeoIframeProps): ReactNode {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (!syncUrl) return;
+
+    const id = setInterval(() => {
+      try {
+        const outerWin = iframeRef.current?.contentWindow;
+        if (!outerWin) return;
+
+        if (syncUrl === 'path') {
+          const viewer = outerWin.document.getElementById('viewer') as HTMLIFrameElement | null;
+          if (viewer) {
+            const raw = viewer.contentWindow?.location?.pathname;
+            if (raw && !raw.endsWith('default.html')) {
+              const next = toDocusaurusUrl(raw);
+              if (next !== window.location.pathname + window.location.hash) {
+                history.replaceState(null, '', next);
+              }
+            }
+          }
+        } else {
+          const path = outerWin.location.pathname;
+          const filename = path.split('/').pop()?.replace('.html', '');
+          if (filename) {
+            const next = window.location.pathname + '#' + filename;
+            if (next !== window.location.pathname + window.location.hash) {
+              history.replaceState(null, '', next);
+            }
+          }
+        }
+      } catch {
+        // cross-origin guard
+      }
+    }, 300);
+
+    return () => clearInterval(id);
+  }, [syncUrl]);
+
   return (
     <div>
-
       <div style={{
         width: '100%',
         height: 'calc(100vh - var(--ifm-navbar-height))',
@@ -16,6 +61,7 @@ export default function XeoIframe({ src }: XeoIframeProps): ReactNode {
         padding: '5px',
       }}>
         <iframe
+          ref={iframeRef}
           src={src}
           style={{
             width: '100%',
@@ -31,6 +77,5 @@ export default function XeoIframe({ src }: XeoIframeProps): ReactNode {
         }
       `}</style>
     </div>
-
   );
 }

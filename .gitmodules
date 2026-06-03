@@ -1,11 +1,3 @@
-[submodule "sdk"]
-	path = _submodules/sdk
-	url = ../sdk.git
-	branch = develop
-[submodule "xeokit-sdk"]
-	path = _submodules/xeokit-sdk
-	url = ../xeokit-sdk.git
-	branch = master
-[submodule "example_submodule"]
-	path = _submodules/example_submodule
-	url = https://github.com/Creoox/example-submodule
+[submodule "examples"]
+	path = static/examples
+	url = https://github.com/xeokit/examples.git

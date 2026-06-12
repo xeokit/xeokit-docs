@@ -37,6 +37,7 @@
     "docusaurus-plugin-openapi-docs": "catalog:docusaurus-extensions",
     "docusaurus-plugin-typedoc": "catalog:docusaurus-extensions",
     "docusaurus-theme-openapi-docs": "catalog:docusaurus-extensions",
+    "jsvectormap": "^1.7.0",
     "prism-react-renderer": "catalog:docusaurus-base",
     "react": "catalog:docusaurus-base",
     "react-dom": "catalog:docusaurus-base",

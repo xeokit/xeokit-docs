@@ -9,7 +9,6 @@ import Pricing from '@site/src/components/Pricing';
 import type { ReactNode } from 'react';
 import styles from './index.module.css';
 import UsersSay from '@site/src/components/UsersSay';
-import HomepageMap from '@site/src/components/HomepageMap';
 
 function HomepageHeader() {
   return (
@@ -44,7 +43,6 @@ export default function Home(): ReactNode {
       <main>
         <HomepageFeatures />
         <HomepageUsedBy />
-        <HomepageMap />
         <HomepageFeaturesSection />
         <UsersSay />
         <Pricing />

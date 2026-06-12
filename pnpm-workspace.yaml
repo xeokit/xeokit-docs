@@ -6,7 +6,9 @@ allowBuilds:
   core-js: true
   core-js-pure: true
   esbuild: true
-  postman-code-generators: true
+  # postman-code-generators' postinstall (deepinstall.js) crashes under
+  # corepack/yarn — skip it; it was never built in past successful deploys.
+  postman-code-generators: false
 
 catalogs:
   docusaurus-base:

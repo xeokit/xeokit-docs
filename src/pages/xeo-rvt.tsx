@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 
 import type { ReactNode } from 'react';
-import styles from './xeorvt.module.css';
+import styles from './xeo-rvt.module.css';
 
 const FORM_URL = 'https://2fvgt6.share-eu1.hsforms.com/2_jWf18TcTsCOZIUM6e1nmw';
 const XEOVISION_URL = 'https://xeo.vision/';
@@ -20,7 +20,7 @@ export default function XeoRvt(): ReactNode {
           <div className={clsx(styles.wrap, styles.heroInner)}>
             <div className={styles.heroCopy}>
               <span className={styles.badge}><span className={styles.bdot} />xeokit Data Engine</span>
-              <h1>Turn Revit® data into <span className={styles.accent}>open, web-ready outputs.</span><span className={styles.accentYellow}> Independently</span></h1>
+              <h1 style={{ maxWidth: '560px' }}>Turn Revit® data into <span className={styles.accent}>open, web-ready outputs.</span><span className={styles.accentYellow}> Independently</span></h1>
               <p className={styles.heroSub}>xeoRVT transforms your BIM data from <strong>Revit® (RVT/RFA)</strong> into JSON, GLB and XKT — ready for your AI, internal knowledgebase, web apps, automation and other workflows.</p>
               <div className={styles.heroActions}>
                 <a href={FORM_URL} target='_blank' rel='noopener noreferrer' className={clsx(styles.btn, styles.btnPrimary)}>Request Evaluation Access <span className={styles.arrow}>→</span></a>
@@ -37,7 +37,7 @@ export default function XeoRvt(): ReactNode {
         {/* OUTPUTS */}
         <section>
           <div className={styles.wrap}>
-            <div className={styles.sectionHead} style={{ maxWidth: '980px' }}>
+            <div className={styles.sectionHead}>
               <h2>xeokit Data Engine — for Revit®</h2>
               <p>xeokit Data Engine takes your Revit® file (RVT/RFA) and transforms it into open, web-ready outputs. The current pipeline produces these outputs:</p>
             </div>

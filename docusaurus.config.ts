@@ -275,6 +275,26 @@ const config: Config = {
         //   ],
         // },
         {
+          type: 'dropdown',
+          position: 'right',
+          label: 'Data Engine',
+          to: '/data-engine',
+          items: [
+            {
+              label: 'xeoRVT',
+              to: '/xeorvt',
+            },
+            // {
+            //   label: 'xeoIFC',
+            //   to: '/xeoifc',
+            // },
+            // {
+            //   label: 'xeoSTEP',
+            //   to: '/xeostep',
+            // },
+          ],
+        },
+        {
           label: "Features",
           position: "right",
           to: "/#features",
@@ -417,6 +437,11 @@ const config: Config = {
             {
               html: `<a href="/docs/privacy-policy" rel="noreferrer noopener" aria-label="Privacy Policy" class="footer__link-item">
                   Privacy Policy
+                </a>`,
+            },
+            {
+              html: `<a href="/terms-of-use" rel="noreferrer noopener" aria-label="Terms of Use" class="footer__link-item">
+                  Terms of Use
                 </a>`,
             },
             {

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 87 800 750" font-family="&#39;Segoe UI&#39;, Arial, sans-serif">
+    
+  <g id="input">
+    <rect x="280" y="110" width="200" height="104" rx="16" fill="#FFFFFF" stroke="#0780D4" stroke-width="3"></rect>
+    <path d="M450 110 L480 140 L450 140 Z" fill="#E4F2FB"></path>
+    <text x="380" y="174" fill="#0780D4" font-size="30" font-weight="700" text-anchor="middle">RVT / RFA</text>
+  </g>
+
+  
+  <g fill="#39A0E0">
+    <path d="M373 224 L387 224 L387 248 L399 248 L380 264 L361 248 L373 248 Z"></path>
+  </g>
+
+  
+  <g id="engine">
+    <rect x="245" y="274" width="270" height="160" rx="24" fill="#060729"></rect>
+    <rect x="245" y="274" width="270" height="160" rx="24" fill="none" stroke="#39A0E0" stroke-width="3" opacity="0.6"></rect>
+    <g transform="translate(330,290) scale(0.7)">
+      <path fill="#7a7a7a" d="M36.11,67.88L0,0,29.4,17.41l19.93,1.07,18.55-9.54,32.22,19.55,14.74-5.65,17.87,26.65-23.13,12.06-10.15,19.85-34.66,14.89-10.84-26.34-17.79-2.06h-.03Z"/>
+      <path fill="#ffffff" d="M125.65,47.88l-12.26-18.56-.98,.34h0l-13.16,4.53-31.56-19-15.79,8.36-22.41-.67L14.77,13.53h0l-4.33-2.78,27.28,50.94,.79,1.32,18.72,2.57,9.69,23.62,15.49-6.87,13.85-5.54,9.18-19.29,20.2-9.62h.01Zm-41.85-2.54l18.92,11.67-7.37,15.48s-11.55-27.15-11.55-27.15Zm-18.36-2.69l12.35,.55-20.09,19.76-15.47-2.14,12.73-18.89,10.44,.71m15.52-.66h0v.02h0v-.02Zm40.8,4.82l-17.2,8.19-20.51-12.65,28.13-9.75,.16-.05,9.42,14.27h0Zm-40.99-6.16l-13.77-.61,1.91-21.01,27.13,16.32-15.27,5.3Zm-16.26-2.73l-10.2-12.61,11.92-6.32-1.72,18.92h0Zm-12.92-11.69l10.97,13.55-7.82-.53-21.07-13.55s17.92,.53,17.92,.53Zm-33.91-7.64l34.76,22.36-12.69,18.84L17.66,18.57h-.02Zm63.72,61.31l-13.02,5.78-8.61-20.96,20.71-20.37,13.05,30.69-12.14,4.86h0Z"/>
+    </g>
+    <text x="380" y="395" fill="#FFFFFF" font-size="36" font-weight="700" text-anchor="middle">xeoRVT</text>
+    <text x="380" y="420" fill="#8FD0F5" font-size="18" text-anchor="middle">xeokit Data Engine</text>
+  </g>
+
+  
+  <g fill="#39A0E0">
+    <path d="M373 444 L387 444 L387 468 L399 468 L380 484 L361 468 L373 468 Z"></path>
+  </g>
+
+  
+  
+  <g id="out-json">
+    <rect x="190" y="500" width="410" height="74" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"></rect>
+    <circle cx="240" cy="537" r="26" fill="#E4F2FB"></circle>
+    <text x="240" y="545" fill="#0780D4" font-size="20" font-weight="700" text-anchor="middle">{ }</text>
+    <text x="285" y="547" fill="#060729" font-size="26" font-weight="700">JSON</text>
+    <text x="378" y="547" fill="#94A3B8" font-size="18">properties &amp; metadata</text>
+  </g>
+  
+  <g id="out-glb">
+    <rect x="190" y="590" width="410" height="74" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"></rect>
+    <circle cx="240" cy="627" r="26" fill="#E4F2FB"></circle>
+    <g transform="translate(240,627)" stroke="#0780D4" stroke-width="3.5" fill="none" stroke-linejoin="round">
+      <path d="M0 -15 L13 -7.5 L13 7.5 L0 15 L-13 7.5 L-13 -7.5 Z"></path>
+      <path d="M0 -15 L0 0 L13 -7.5 M0 0 L-13 -7.5"></path>
+    </g>
+    <text x="285" y="637" fill="#060729" font-size="26" font-weight="700">GLB</text>
+    <text x="378" y="637" fill="#94A3B8" font-size="18">geometry (glTF binary)</text>
+  </g>
+  
+  <g id="out-xkt">
+    <rect x="190" y="680" width="410" height="74" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"></rect>
+    <circle cx="240" cy="717" r="26" fill="#E4F2FB"></circle>
+    <g transform="translate(240,717)" stroke="#0780D4" stroke-width="3.5" fill="none" stroke-linejoin="round">
+      <path d="M0 -14 L15 -6 L0 2 L-15 -6 Z"></path>
+      <path d="M-15 2 L0 10 L15 2"></path>
+      <path d="M-15 10 L0 18 L15 10"></path>
+    </g>
+    <text x="285" y="727" fill="#060729" font-size="26" font-weight="700">XKT</text>
+    <text x="378" y="727" fill="#94A3B8" font-size="18">optimized for performance</text>
+  </g>
+
+  
+  <text x="380" y="800" fill="#94A3B8" font-size="16" text-anchor="middle">Runs independently from Autodesk®. Revit® and Autodesk® are registered trademarks of Autodesk®, Inc.</text>
+  <text x="380" y="822" fill="#94A3B8" font-size="16" text-anchor="middle">xeokit and Creoox are not affiliated with Autodesk.</text>
+</svg>

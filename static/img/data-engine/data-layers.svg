@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="340" viewBox="7 20 500 340" role="img" aria-label="xeokit Data Engine concept" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'">
+  <title>xeokit Data Engine</title>
+  <rect x="0" y="0" width="500" height="340" rx="14" fill="#ffffff"></rect>
+
+  <g stroke="#060729" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round">
+    <polygon points="310.6,110 250,145 250,155 310.6,120" fill="#d8e8f5" opacity="0.6" stroke="none"></polygon>
+    <polygon points="250,145 189.4,110 189.4,120 250,155" fill="#c9def0" opacity="0.6" stroke="none"></polygon>
+    <polygon points="250,75 310.6,110 250,145 189.4,110" fill="#e9f3fb" opacity="0.85"></polygon>
+    <path d="M310.6,110 L310.6,120 M250,145 L250,155 M189.4,110 L189.4,120" fill="none"></path>
+    <path d="M310.6,120 L250,155 L189.4,120" fill="none"></path>
+
+    <polygon points="310.6,210 250,245 250,255 310.6,220" fill="#d8e8f5" opacity="0.6" stroke="none"></polygon>
+    <polygon points="250,245 189.4,210 189.4,220 250,255" fill="#c9def0" opacity="0.6" stroke="none"></polygon>
+    <polygon points="250,175 310.6,210 250,245 189.4,210" fill="#e9f3fb" opacity="0.85"></polygon>
+    <path d="M310.6,210 L310.6,220 M250,245 L250,255 M189.4,210 L189.4,220" fill="none"></path>
+    <path d="M310.6,220 L250,255 L189.4,220" fill="none"></path>
+
+    <polygon points="310.6,310 250,345 250,355 310.6,320" fill="#d8e8f5" opacity="0.6" stroke="none"></polygon>
+    <polygon points="250,345 189.4,310 189.4,320 250,355" fill="#c9def0" opacity="0.6" stroke="none"></polygon>
+    <polygon points="250,275 310.6,310 250,345 189.4,310" fill="#e9f3fb" opacity="0.85"></polygon>
+    <path d="M310.6,310 L310.6,320 M250,345 L250,355 M189.4,310 L189.4,320" fill="none"></path>
+    <path d="M310.6,320 L250,355 L189.4,320" fill="none"></path>
+  </g>
+
+  <g fill="#f1db11">
+    <circle cx="250" cy="110" r="5"></circle>
+    <circle cx="250" cy="210" r="5"></circle>
+    <circle cx="250" cy="310" r="5"></circle>
+  </g>
+
+  <g text-anchor="end">
+	<text x="134" y="48" font-size="18" letter-spacing="1" fill="#555555">DATA LAYERS</text>
+    <text x="134" y="112" font-weight="700" font-size="18" fill="#060729">Geometry</text>
+    <text x="134" y="212" font-weight="700" font-size="18" fill="#060729">Properties</text>
+    <text x="134" y="312" font-weight="700" font-size="18" fill="#060729">Relationships</text>
+  </g>
+  <g text-anchor="start">
+    <text x="366" y="48" font-size="18" letter-spacing="1" fill="#555555">OPEN OUTPUTS</text>
+    <text x="366" y="112" font-weight="700" font-size="18" fill="#060729">glTF / GLB</text>
+    <text x="366" y="212" font-weight="700" font-size="18" fill="#060729">JSON</text>
+	<text x="366" y="312" font-weight="700" font-size="18" fill="#060729">XKT</text>
+  </g>
+</svg>

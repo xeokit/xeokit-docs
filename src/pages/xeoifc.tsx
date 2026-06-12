@@ -9,21 +9,19 @@ import Pricing from '@site/src/components/Pricing';
 import type { ReactNode } from 'react';
 import styles from './index.module.css';
 import UsersSay from '@site/src/components/UsersSay';
-//import HomepageMap from '@site/src/components/HomepageMap';
+import HomepageMap from '@site/src/components/HomepageMap';
 
 function HomepageHeader() {
   return (
     <header className={clsx('', styles.heroBanner)}>
       <div className="container">
-        <Heading as="h1" className="" style={{ fontSize: '3rem' }}>
-          Build 3D BIM & AEC Web Apps with xeokit SDK
-        </Heading>
+        
 
         <p className="" style={{ fontSize: '1.5rem', maxWidth: '800px', textAlign: 'center', margin: '1rem auto 0 auto' }}>
-          Open-source WebGL toolkit for BIM and AEC. Trusted by industry leaders to visualize IFC, BCF, point clouds with speed and precision.
+          xeoIFC
         </p>
 
-        <div className={styles.buttons}>
+        {/* <div className={styles.buttons}>
           <a
             className="button button--secondary button--lg margin-right--md"
             href="/sdk-v2/examples/xeokit-bim-viewer">Run a Demo »</a>
@@ -31,7 +29,7 @@ function HomepageHeader() {
           <a
             className="button button--secondary button--lg"
             href="https://xeo.vision/">View Your Models with xeoVision »</a>
-        </div>
+        </div> */}
       </div>
     </header>
   );
@@ -46,7 +44,7 @@ export default function Home(): ReactNode {
       <main>
         <HomepageFeatures />
         <HomepageUsedBy />
-        {/* <HomepageMap /> */}
+        <HomepageMap />
         <HomepageFeaturesSection />
         <UsersSay />
         <Pricing />

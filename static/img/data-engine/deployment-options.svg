@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 150 1680 800" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- ============================================================
+       xeokit Data Engine — deployment models (editable vector)
+       Three options:  Managed Web Service | Dedicated Server | On-Premises
+       Two overlapping zones:
+         zone A  "Fully managed by Creoox AG"   covers options 1 + 2
+         zone B  "Your own environment"          covers options 2 + 3
+       Palette (same as data-engine-diagram.svg):
+         brand blue   #2563EB
+         deep navy    #0F1B33
+         accent blue  #3B82F6
+         pale blue    #EFF6FF
+         soft bg      #F4F7FB
+         card border  #E2E8F0
+         text grey    #64748B
+       ============================================================ -->
+
+  <!-- background -->
+  <rect width="1680" height="900" fill="#F4F7FB"/>
+
+  <!-- ===================== ZONES (overlapping) ===================== -->
+  <!-- zone A: fully managed by Creoox AG (options 1 + 2) -->
+  <g id="zone-creoox">
+    <rect x="100" y="210" width="980" height="470" rx="30" fill="#0F1B33" opacity="0.06"/>
+    <rect x="100" y="210" width="980" height="470" rx="30" fill="none" stroke="#0F1B33" stroke-width="2.5" stroke-dasharray="8 8" opacity="0.45"/>
+    <text x="140" y="660" fill="#0F1B33" font-size="21" font-weight="700" letter-spacing="0.5">FULLY MANAGED BY CREOOX AG</text>
+  </g>
+  <!-- zone B: your own environment (options 2 + 3) -->
+  <g id="zone-own">
+    <rect x="600" y="190" width="980" height="470" rx="30" fill="#2563EB" opacity="0.07"/>
+    <rect x="600" y="190" width="980" height="470" rx="30" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="8 8" opacity="0.55"/>
+    <text x="1540" y="236" fill="#2563EB" font-size="21" font-weight="700" letter-spacing="0.5" text-anchor="end">YOUR OWN ENVIRONMENT</text>
+  </g>
+
+  <!-- ===================== OPTION CARDS ===================== -->
+  <!-- 1. Managed Web Service -->
+  <g id="opt-managed">
+    <rect x="160" y="280" width="360" height="320" rx="20" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="340" cy="365" r="44" fill="#EFF6FF"/>
+    <g transform="translate(340,368)" stroke="#2563EB" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M-22 8 a17 17 0 0 1 5 -33 a22 22 0 0 1 40 7 a13 13 0 0 1 -2 26 Z"/>
+    </g>
+    <text x="340" y="455" fill="#0F1B33" font-size="27" font-weight="700" text-anchor="middle">Managed Web Service</text>
+    <text x="340" y="495" fill="#64748B" font-size="19" text-anchor="middle">Shared infrastructure,</text>
+    <text x="340" y="522" fill="#64748B" font-size="19" text-anchor="middle">fully managed SaaS —</text>
+    <text x="340" y="549" fill="#64748B" font-size="19" text-anchor="middle">just send your request via API.</text>
+  </g>
+
+  <!-- 2. Dedicated Server (in the overlap) -->
+  <g id="opt-dedicated">
+    <rect x="660" y="280" width="360" height="320" rx="20" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="840" cy="365" r="44" fill="#EFF6FF"/>
+    <g transform="translate(818,338)" stroke="#2563EB" stroke-width="4" fill="none" stroke-linejoin="round">
+      <rect x="0" y="0" width="44" height="22" rx="4"/>
+      <rect x="0" y="30" width="44" height="22" rx="4"/>
+      <circle cx="11" cy="11" r="2" fill="#2563EB"/>
+      <circle cx="11" cy="41" r="2" fill="#2563EB"/>
+    </g>
+    <text x="840" y="455" fill="#0F1B33" font-size="27" font-weight="700" text-anchor="middle">Dedicated Server</text>
+    <text x="840" y="495" fill="#64748B" font-size="19" text-anchor="middle">Exclusive infrastructure —</text>
+    <text x="840" y="522" fill="#64748B" font-size="19" text-anchor="middle">operated by Creoox AG</text>
+    <text x="840" y="549" fill="#64748B" font-size="19" text-anchor="middle">or by your own team.</text>
+  </g>
+
+  <!-- 3. On-Premises -->
+  <g id="opt-onprem">
+    <rect x="1160" y="280" width="360" height="320" rx="20" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="1340" cy="365" r="44" fill="#EFF6FF"/>
+    <g transform="translate(1340,365)" stroke="#2563EB" stroke-width="4" fill="none" stroke-linejoin="round">
+      <rect x="-22" y="-2" width="44" height="28" rx="3"/>
+      <path d="M-14 -2 L-14 -12 a14 14 0 0 1 28 0 L14 -2"/>
+      <circle cx="0" cy="12" r="4" fill="#2563EB" stroke="none"/>
+    </g>
+    <text x="1340" y="455" fill="#0F1B33" font-size="27" font-weight="700" text-anchor="middle">On-Premises</text>
+    <text x="1340" y="495" fill="#64748B" font-size="19" text-anchor="middle">Fully inside your environment,</text>
+    <text x="1340" y="522" fill="#64748B" font-size="19" text-anchor="middle">air-gapped if needed —</text>
+    <text x="1340" y="549" fill="#64748B" font-size="19" text-anchor="middle">even as a standalone binary.</text>
+  </g>
+
+  <!-- ===================== SPECTRUM AXIS ===================== -->
+  <g id="spectrum">
+    <line x1="200" y1="730" x2="1480" y2="730" stroke="#94A3B8" stroke-width="2.5"/>
+    <path d="M200 730 L222 720 L222 740 Z" fill="#94A3B8"/>
+    <path d="M1480 730 L1458 720 L1458 740 Z" fill="#94A3B8"/>
+    <text x="240" y="770" fill="#64748B" font-size="22" font-weight="600">Maximum convenience</text>
+    <text x="1440" y="770" fill="#64748B" font-size="22" font-weight="600" text-anchor="end">Maximum control</text>
+  </g>
+
+  <!-- ===================== PLATFORM BADGES ===================== -->
+  <g id="platforms" font-size="17" font-weight="600">
+    <text x="840" y="828" fill="#94A3B8" font-size="18" text-anchor="middle">AVAILABLE FOR</text>
+    <g>
+      <rect x="555" y="845" width="180" height="38" rx="19" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="645" y="870" fill="#475569" text-anchor="middle">Windows · AMD64</text>
+    </g>
+    <g>
+      <rect x="755" y="845" width="160" height="38" rx="19" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="835" y="870" fill="#475569" text-anchor="middle">Linux · AMD64</text>
+    </g>
+    <g>
+      <rect x="935" y="845" width="160" height="38" rx="19" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+      <text x="1015" y="870" fill="#475569" text-anchor="middle">Linux · ARM64</text>
+    </g>
+  </g>
+</svg>

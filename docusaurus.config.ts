@@ -282,7 +282,7 @@ const config: Config = {
           items: [
             {
               label: 'xeoRVT',
-              to: '/xeorvt',
+              to: '/xeo-rvt',
             },
             // {
             //   label: 'xeoIFC',

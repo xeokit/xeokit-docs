@@ -224,7 +224,7 @@
 .heroSub {
   font-size: 19px;
   color: #b9bccd;
-  max-width: 540px;
+  max-width: 640px;
   line-height: 1.6;
 }
 
@@ -263,7 +263,6 @@
 }
 
 .sectionHead {
-  max-width: 720px;
   margin-bottom: 56px;
 }
 
@@ -336,7 +335,6 @@
 }
 
 .outputsNote {
-  max-width: 980px;
   margin-top: 36px;
   font-size: 17px;
   color: #50526a;
